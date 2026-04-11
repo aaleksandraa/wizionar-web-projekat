@@ -1,0 +1,449 @@
+@import '@fontsource/dm-sans/400.css';
+@import '@fontsource/dm-sans/500.css';
+@import '@fontsource/dm-sans/600.css';
+@import '@fontsource/dm-sans/700.css';
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    /* Light theme - Wizionar main brand with Orange accent */
+    --background: 0, 0%, 100%;
+    --foreground: 0, 0%, 9%;
+
+    --card: 0, 0%, 100%;
+    --card-foreground: 0, 0%, 9%;
+
+    --popover: 0, 0%, 100%;
+    --popover-foreground: 0, 0%, 9%;
+
+    /* Wizionar Orange - from logo */
+    --primary: 14, 89%, 55%;
+    --primary-foreground: 0, 0%, 100%;
+
+    /* Light gray secondary */
+    --secondary: 0, 0%, 96%;
+    --secondary-foreground: 0, 0%, 9%;
+
+    --muted: 0, 0%, 96%;
+    --muted-foreground: 0, 0%, 45%;
+
+    /* Orange accent */
+    --accent: 14, 89%, 55%;
+    --accent-foreground: 0, 0%, 100%;
+
+    --destructive: 0, 84%, 60%;
+    --destructive-foreground: 0, 0%, 100%;
+
+    --border: 0, 0%, 90%;
+    --input: 0, 0%, 90%;
+    --ring: 14, 89%, 55%;
+
+    --radius: 0.75rem;
+
+    /* Custom tokens - Wizionar Orange Theme */
+    --orange: 14, 89%, 55%;
+    --orange-light: 14, 89%, 95%;
+    --orange-dark: 14, 89%, 45%;
+    --orange-glow: 14, 89%, 65%;
+    --slate-50: 0, 0%, 98%;
+    --slate-100: 0, 0%, 96%;
+    --slate-200: 0, 0%, 90%;
+    --slate-400: 0, 0%, 60%;
+    --slate-600: 0, 0%, 45%;
+    --slate-800: 0, 0%, 15%;
+    --slate-900: 0, 0%, 9%;
+    
+    /* WizFlussi dark theme tokens */
+    --wf-background: 222, 47%, 6%;
+    --wf-foreground: 210, 40%, 98%;
+    --wf-card: 222, 47%, 8%;
+    --wf-secondary: 217, 33%, 17%;
+    --wf-muted: 217, 33%, 12%;
+    --wf-muted-foreground: 215, 20%, 55%;
+    --wf-border: 217, 33%, 17%;
+    --emerald: 160, 84%, 39%;
+    --emerald-glow: 160, 84%, 50%;
+    --navy-deep: 222, 47%, 4%;
+    --navy-light: 217, 33%, 20%;
+    --gold: 45, 93%, 47%;
+    
+    /* WizMedikReports medical cyan theme tokens */
+    --wmr-background: 200, 30%, 6%;
+    --wmr-foreground: 200, 20%, 98%;
+    --wmr-card: 200, 30%, 8%;
+    --wmr-secondary: 200, 25%, 15%;
+    --wmr-muted: 200, 25%, 12%;
+    --wmr-muted-foreground: 200, 15%, 55%;
+    --wmr-border: 200, 25%, 17%;
+    --cyan: 185, 80%, 45%;
+    --cyan-glow: 185, 80%, 55%;
+    --cyan-light: 185, 80%, 35%;
+    --teal-deep: 200, 30%, 4%;
+    --teal-light: 195, 30%, 20%;
+    
+    /* WizMedik teal theme tokens - rgb(8, 145, 178) = HSL 192 91% 36% */
+    --wm-background: 192, 30%, 6%;
+    --wm-foreground: 192, 20%, 98%;
+    --wm-card: 192, 30%, 8%;
+    --wm-secondary: 192, 25%, 15%;
+    --wm-muted: 192, 25%, 12%;
+    --wm-muted-foreground: 192, 15%, 55%;
+    --wm-border: 192, 25%, 17%;
+    --teal: 192, 91%, 36%;
+    --teal-glow: 192, 91%, 46%;
+    
+    /* Chatko violet/AI theme tokens */
+    --ck-background: 260, 30%, 6%;
+    --ck-foreground: 260, 20%, 98%;
+    --ck-card: 260, 30%, 8%;
+    --ck-secondary: 260, 25%, 15%;
+    --ck-muted: 260, 25%, 12%;
+    --ck-muted-foreground: 260, 15%, 55%;
+    --ck-border: 260, 25%, 17%;
+    --violet: 260, 70%, 58%;
+    --violet-glow: 260, 70%, 68%;
+    
+    /* Frizerino rose/pink theme tokens */
+    --friz-background: 340, 30%, 6%;
+    --friz-foreground: 340, 20%, 98%;
+    --friz-card: 340, 30%, 8%;
+    --friz-secondary: 340, 25%, 15%;
+    --friz-muted: 340, 25%, 12%;
+    --friz-muted-foreground: 340, 15%, 55%;
+    --friz-border: 340, 25%, 17%;
+    --rose: 340, 75%, 55%;
+    --rose-glow: 340, 75%, 65%;
+    
+    /* Gradients */
+    --gradient-hero: linear-gradient(180deg, hsl(0, 0%, 100%) 0%, hsla(14, 89%, 55%, 0.03) 50%, hsl(0, 0%, 100%) 100%);
+    --gradient-card: linear-gradient(180deg, hsl(0, 0%, 100%) 0%, hsl(0, 0%, 98%) 100%);
+    --gradient-accent: linear-gradient(135deg, hsl(14, 89%, 55%) 0%, hsl(14, 89%, 65%) 100%);
+    --gradient-orange-glow: radial-gradient(ellipse at center, hsla(14, 89%, 55%, 0.15) 0%, transparent 70%);
+    --gradient-dark-hero: linear-gradient(135deg, hsl(222, 47%, 6%) 0%, hsl(217, 33%, 12%) 50%, hsl(222, 47%, 8%) 100%);
+    --gradient-dark-card: linear-gradient(180deg, hsl(217, 33%, 12%) 0%, hsl(222, 47%, 8%) 100%);
+    --gradient-emerald: linear-gradient(135deg, hsl(160, 84%, 39%) 0%, hsl(160, 60%, 45%) 100%);
+    --gradient-cyan: linear-gradient(135deg, hsl(185, 80%, 45%) 0%, hsl(185, 60%, 55%) 100%);
+    --gradient-cyan-hero: linear-gradient(135deg, hsl(200, 30%, 6%) 0%, hsl(200, 25%, 12%) 50%, hsl(200, 30%, 8%) 100%);
+    --gradient-cyan-card: linear-gradient(180deg, hsl(200, 25%, 12%) 0%, hsl(200, 30%, 8%) 100%);
+    --gradient-teal: linear-gradient(135deg, hsl(192, 91%, 36%) 0%, hsl(192, 80%, 46%) 100%);
+    --gradient-teal-hero: linear-gradient(135deg, hsl(192, 30%, 6%) 0%, hsl(192, 25%, 12%) 50%, hsl(192, 30%, 8%) 100%);
+    --gradient-rose: linear-gradient(135deg, hsl(340, 75%, 55%) 0%, hsl(340, 65%, 65%) 100%);
+    --gradient-rose-hero: linear-gradient(135deg, hsl(340, 30%, 6%) 0%, hsl(340, 25%, 12%) 50%, hsl(340, 30%, 8%) 100%);
+    --gradient-violet: linear-gradient(135deg, hsl(260, 70%, 58%) 0%, hsl(260, 60%, 68%) 100%);
+    --gradient-violet-hero: linear-gradient(135deg, hsl(260, 30%, 6%) 0%, hsl(260, 25%, 12%) 50%, hsl(260, 30%, 8%) 100%);
+    
+    /* Shadows */
+    --shadow-sm: 0 1px 2px hsla(0, 0%, 0%, 0.04);
+    --shadow-md: 0 4px 16px hsla(0, 0%, 0%, 0.08);
+    --shadow-lg: 0 12px 40px hsla(0, 0%, 0%, 0.12);
+    --shadow-glow: 0 0 60px hsla(14, 89%, 55%, 0.25);
+    --shadow-orange: 0 8px 32px hsla(14, 89%, 55%, 0.3);
+    --shadow-emerald-glow: 0 0 40px hsla(160, 84%, 39%, 0.2);
+    --shadow-cyan-glow: 0 0 40px hsla(185, 80%, 45%, 0.2);
+    --shadow-teal-glow: 0 0 40px hsla(192, 91%, 36%, 0.2);
+    --shadow-rose-glow: 0 0 40px hsla(340, 75%, 55%, 0.2);
+    --shadow-violet-glow: 0 0 40px hsla(260, 70%, 58%, 0.2);
+
+    --sidebar-background: 0, 0%, 100%;
+    --sidebar-foreground: 0, 0%, 9%;
+    --sidebar-primary: 14, 89%, 55%;
+    --sidebar-primary-foreground: 0, 0%, 100%;
+    --sidebar-accent: 0, 0%, 96%;
+    --sidebar-accent-foreground: 0, 0%, 9%;
+    --sidebar-border: 0, 0%, 90%;
+    --sidebar-ring: 14, 89%, 55%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  html {
+    min-height: 100%;
+    scroll-behavior: smooth;
+    scroll-padding-top: 6rem;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body, #root {
+    min-height: 100%;
+  }
+
+  body {
+    @apply bg-background text-foreground antialiased;
+    font-family: 'DM Sans', system-ui, -apple-system, sans-serif;
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'DM Sans', system-ui, -apple-system, sans-serif;
+    @apply tracking-tight;
+  }
+
+  img, picture, video, canvas, svg {
+    display: block;
+    max-width: 100%;
+  }
+
+  button, input, textarea, select {
+    font: inherit;
+  }
+
+  a, button, [role="button"] {
+    touch-action: manipulation;
+  }
+
+  [id] {
+    scroll-margin-top: 6rem;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+
+    *, *::before, *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
+
+  @supports (-webkit-touch-callout: none) {
+    html {
+      height: -webkit-fill-available;
+    }
+
+    body, #root {
+      min-height: -webkit-fill-available;
+    }
+  }
+}
+
+@layer utilities {
+  .grid-pattern-border {
+    background-image:
+      linear-gradient(to right, hsla(var(--border), 1) 1px, transparent 1px),
+      linear-gradient(to bottom, hsla(var(--border), 1) 1px, transparent 1px);
+    background-size: 4rem 4rem;
+  }
+
+  .grid-pattern-light {
+    background-image:
+      linear-gradient(to right, rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+    background-size: 4rem 4rem;
+  }
+
+  .backdrop-blur-sm {
+    -webkit-backdrop-filter: blur(4px);
+  }
+
+  .backdrop-blur-md {
+    -webkit-backdrop-filter: blur(12px);
+  }
+
+  .backdrop-blur-xl {
+    -webkit-backdrop-filter: blur(24px);
+  }
+
+  @supports not ((-webkit-backdrop-filter: blur(0)) or (backdrop-filter: blur(0))) {
+    .backdrop-blur-sm,
+    .backdrop-blur-md,
+    .backdrop-blur-xl {
+      -webkit-backdrop-filter: none !important;
+      backdrop-filter: none !important;
+    }
+  }
+
+  @supports (-webkit-touch-callout: none) {
+    .min-h-screen {
+      min-height: -webkit-fill-available;
+    }
+
+    .h-screen {
+      height: -webkit-fill-available;
+    }
+  }
+
+  .text-gradient {
+    @apply bg-clip-text text-transparent;
+    background-image: var(--gradient-accent);
+  }
+
+  .text-gradient-emerald {
+    @apply bg-clip-text text-transparent;
+    background-image: var(--gradient-emerald);
+  }
+
+  .text-gradient-cyan {
+    @apply bg-clip-text text-transparent;
+    background-image: var(--gradient-cyan);
+  }
+
+  .bg-gradient-hero {
+    background: var(--gradient-hero);
+  }
+
+  .bg-gradient-card {
+    background: var(--gradient-card);
+  }
+
+  .bg-gradient-dark-hero {
+    background: var(--gradient-dark-hero);
+  }
+
+  .bg-gradient-dark-card {
+    background: var(--gradient-dark-card);
+  }
+
+  .shadow-glow {
+    box-shadow: var(--shadow-glow);
+  }
+
+  .shadow-orange {
+    box-shadow: var(--shadow-orange);
+  }
+
+  .shadow-emerald-glow {
+    box-shadow: var(--shadow-emerald-glow);
+  }
+
+  .shadow-cyan-glow {
+    box-shadow: var(--shadow-cyan-glow);
+  }
+
+  .bg-gradient-cyan-hero {
+    background: var(--gradient-cyan-hero);
+  }
+
+  .bg-gradient-cyan-card {
+    background: var(--gradient-cyan-card);
+  }
+
+  /* WizFlussi dark theme utility classes */
+  .wizflussi-theme {
+    --background: var(--wf-background);
+    --foreground: var(--wf-foreground);
+    --card: var(--wf-card);
+    --card-foreground: var(--wf-foreground);
+    --secondary: var(--wf-secondary);
+    --muted: var(--wf-muted);
+    --muted-foreground: var(--wf-muted-foreground);
+    --border: var(--wf-border);
+    --accent: var(--emerald);
+    --accent-foreground: var(--wf-background);
+    --primary: 217, 91%, 60%;
+    --primary-foreground: var(--wf-background);
+  }
+
+  /* WizMedikReports cyan theme utility classes */
+  .wizmedik-reports-theme {
+    --background: var(--wmr-background);
+    --foreground: var(--wmr-foreground);
+    --card: var(--wmr-card);
+    --card-foreground: var(--wmr-foreground);
+    --secondary: var(--wmr-secondary);
+    --muted: var(--wmr-muted);
+    --muted-foreground: var(--wmr-muted-foreground);
+    --border: var(--wmr-border);
+    --accent: var(--cyan);
+    --accent-foreground: var(--wmr-background);
+    --primary: 185, 80%, 45%;
+    --primary-foreground: var(--wmr-background);
+  }
+
+  /* WizMedik teal theme utility classes */
+  .wizmedik-theme {
+    --background: var(--wm-background);
+    --foreground: var(--wm-foreground);
+    --card: var(--wm-card);
+    --card-foreground: var(--wm-foreground);
+    --secondary: var(--wm-secondary);
+    --muted: var(--wm-muted);
+    --muted-foreground: var(--wm-muted-foreground);
+    --border: var(--wm-border);
+    --accent: var(--teal);
+    --accent-foreground: var(--wm-background);
+    --primary: 192, 91%, 36%;
+    --primary-foreground: 0, 0%, 100%;
+  }
+
+  .text-gradient-teal {
+    @apply bg-clip-text text-transparent;
+    background-image: var(--gradient-teal);
+  }
+
+  .bg-gradient-teal-hero {
+    background: var(--gradient-teal-hero);
+  }
+
+  /* Frizerino rose theme utility classes */
+  .frizerino-theme {
+    --background: var(--friz-background);
+    --foreground: var(--friz-foreground);
+    --card: var(--friz-card);
+    --card-foreground: var(--friz-foreground);
+    --secondary: var(--friz-secondary);
+    --muted: var(--friz-muted);
+    --muted-foreground: var(--friz-muted-foreground);
+    --border: var(--friz-border);
+    --accent: var(--rose);
+    --accent-foreground: var(--friz-background);
+    --primary: 340, 75%, 55%;
+    --primary-foreground: 0, 0%, 100%;
+  }
+
+  .text-gradient-rose {
+    @apply bg-clip-text text-transparent;
+    background-image: var(--gradient-rose);
+  }
+
+  .bg-gradient-rose-hero {
+    background: var(--gradient-rose-hero);
+  }
+
+  /* Chatko violet theme utility classes */
+  .chatko-theme {
+    --background: var(--ck-background);
+    --foreground: var(--ck-foreground);
+    --card: var(--ck-card);
+    --card-foreground: var(--ck-foreground);
+    --secondary: var(--ck-secondary);
+    --muted: var(--ck-muted);
+    --muted-foreground: var(--ck-muted-foreground);
+    --border: var(--ck-border);
+    --accent: var(--violet);
+    --accent-foreground: var(--ck-background);
+    --primary: 260, 70%, 58%;
+    --primary-foreground: 0, 0%, 100%;
+  }
+
+  .text-gradient-violet {
+    @apply bg-clip-text text-transparent;
+    background-image: var(--gradient-violet);
+  }
+
+  .bg-gradient-violet-hero {
+    background: var(--gradient-violet-hero);
+  }
+
+  /* Modern hover effects */
+  .hover-lift {
+    @apply transition-all duration-300 hover:-translate-y-1 hover:shadow-lg;
+  }
+
+  .hover-glow {
+    @apply transition-all duration-300 hover:shadow-glow;
+  }
+}
+
+
