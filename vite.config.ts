@@ -13,45 +13,6 @@ export default defineConfig(({ mode }) => ({
     // Keep the bundle friendly to older Safari versions that still have native modules.
     target: ["es2018", "safari12"],
     cssTarget: "safari12",
-    rollupOptions: {
-      output: {
-        manualChunks(id) {
-          if (!id.includes("node_modules")) {
-            return;
-          }
-
-          if (
-            id.includes("react-dom") ||
-            id.includes("react-router") ||
-            id.includes("/react/") ||
-            id.includes("\\react\\") ||
-            id.includes("scheduler")
-          ) {
-            return "framework";
-          }
-
-          if (
-            id.includes("framer-motion") ||
-            id.includes("motion-dom") ||
-            id.includes("embla-carousel")
-          ) {
-            return "motion";
-          }
-
-          if (
-            id.includes("@radix-ui") ||
-            id.includes("lucide-react") ||
-            id.includes("cmdk") ||
-            id.includes("sonner") ||
-            id.includes("vaul")
-          ) {
-            return "ui";
-          }
-
-          return "vendor";
-        },
-      },
-    },
   },
   plugins: [react(), mode === "development" && componentTagger()].filter(Boolean),
   resolve: {
