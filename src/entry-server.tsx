@@ -497,7 +497,7 @@ const buildHeadHtml = (urlPath: string) => {
   const localeMeta = LANGUAGE_SEO[language];
   const canonicalUrl = new URL(buildLangPath(basePath, language), BASE_URL).toString();
   const robots = data.noIndex ? "noindex, nofollow" : DEFAULT_ROBOTS;
-  const ogImage = `${BASE_URL}/favicon.ico`;
+  const ogImage = `${BASE_URL}/favicon.png`;
 
   const alternateLinks = SUPPORTED_LANGUAGES.map((lang) =>
     `<link rel="alternate" hreflang="${LANGUAGE_SEO[lang].hreflang}" href="${escapeHtml(

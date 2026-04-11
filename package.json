@@ -8,8 +8,8 @@
     "generate:sitemap": "node scripts/generate-sitemap.mjs",
     "build:ssr": "vite build --ssr src/entry-server.tsx --outDir .prerender",
     "prerender": "node scripts/prerender.mjs",
-    "build": "node scripts/generate-sitemap.mjs; if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }; vite build; if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }; vite build --ssr src/entry-server.tsx --outDir .prerender; if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }; node scripts/prerender.mjs",
-    "build:dev": "node scripts/generate-sitemap.mjs; if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }; vite build --mode development; if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }; vite build --ssr src/entry-server.tsx --outDir .prerender --mode development; if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }; node scripts/prerender.mjs",
+    "build": "node scripts/build.mjs",
+    "build:dev": "node scripts/build.mjs --mode development",
     "lint": "eslint .",
     "preview": "vite preview"
   },
