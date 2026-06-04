@@ -21,6 +21,7 @@ const uslugePage = createLazyPage(() => import("@/pages/Usluge"));
 const seoPage = createLazyPage(() => import("@/pages/SEOOptimizacija"));
 const webDevelopmentPage = createLazyPage(() => import("@/pages/WebDevelopment"));
 const grafickiDizajnPage = createLazyPage(() => import("@/pages/GrafickiDizajn"));
+const projectInquiryPage = createLazyPage(() => import("@/pages/ProjectInquiry"));
 const projectDetailPage = createLazyPage(() => import("@/pages/ProjectDetail"));
 const notFoundPage = createLazyPage(() => import("@/pages/NotFound"));
 
@@ -35,6 +36,7 @@ export const lazyPages = {
   SEOOptimizacija: seoPage.Component,
   WebDevelopment: webDevelopmentPage.Component,
   GrafickiDizajn: grafickiDizajnPage.Component,
+  ProjectInquiry: projectInquiryPage.Component,
   ProjectDetail: projectDetailPage.Component,
   NotFound: notFoundPage.Component,
 };
@@ -70,6 +72,7 @@ const routePrefetchers: Array<{ matches: (path: string) => boolean; importer: Pa
   { matches: (path) => path === "/usluge/graficki-dizajn", importer: grafickiDizajnPage.preload },
   { matches: (path) => path === "/usluge/seo-optimizacija", importer: seoPage.preload },
   { matches: (path) => path === "/usluge/izrada-web-stranica", importer: webDevelopmentPage.preload },
+  { matches: (path) => path === "/projektni-upitnik" || path === "/project-inquiry", importer: projectInquiryPage.preload },
   { matches: (path) => path.startsWith("/portfolio/"), importer: projectDetailPage.preload },
   { matches: (path) => path === "/usluge", importer: uslugePage.preload },
 ];

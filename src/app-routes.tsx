@@ -12,6 +12,7 @@ export type AppPages = {
   SEOOptimizacija: ComponentType;
   WebDevelopment: ComponentType;
   GrafickiDizajn: ComponentType;
+  ProjectInquiry: ComponentType;
   ProjectDetail: ComponentType;
   NotFound: ComponentType;
 };
@@ -37,6 +38,8 @@ export const AppRoutes = ({
       <Route path="usluge/izrada-web-stranica" element={wrapPage(<pages.WebDevelopment />)} />
       <Route path="usluge/seo-optimizacija" element={wrapPage(<pages.SEOOptimizacija />)} />
       <Route path="usluge/graficki-dizajn" element={wrapPage(<pages.GrafickiDizajn />)} />
+      <Route path="projektni-upitnik" element={wrapPage(<pages.ProjectInquiry />)} />
+      <Route path="project-inquiry" element={wrapPage(<pages.ProjectInquiry />)} />
       <Route path="portfolio/:slug" element={wrapPage(<pages.ProjectDetail />)} />
       <Route path="*" element={wrapPage(<pages.NotFound />)} />
     </>

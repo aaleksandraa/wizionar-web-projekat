@@ -41,6 +41,7 @@ import Usluge from "@/pages/Usluge";
 import SEOOptimizacija from "@/pages/SEOOptimizacija";
 import WebDevelopment from "@/pages/WebDevelopment";
 import GrafickiDizajn from "@/pages/GrafickiDizajn";
+import ProjectInquiry from "@/pages/ProjectInquiry";
 import ProjectDetail, { portfolioProjects } from "@/pages/ProjectDetail";
 import NotFound from "@/pages/NotFound";
 
@@ -55,6 +56,7 @@ const prerenderBasePaths = [
   SEO_PATHS.webDevelopment,
   SEO_PATHS.seoOptimization,
   SEO_PATHS.graphicDesign,
+  SEO_PATHS.projectInquiry,
   ...portfolioProjects.map((project) => `/portfolio/${project.slug}`),
 ];
 
@@ -73,6 +75,7 @@ const pages = {
   SEOOptimizacija,
   WebDevelopment,
   GrafickiDizajn,
+  ProjectInquiry,
   ProjectDetail,
   NotFound,
 };
@@ -430,6 +433,31 @@ const getHeadData = (urlPath: string): { language: keyof typeof LANGUAGE_SEO; ba
                 answer: item.a,
               }))
             ),
+          ],
+        },
+      };
+    }
+    case SEO_PATHS.projectInquiry: {
+      const seo = getPageSeo("projectInquiry", language);
+
+      return {
+        language,
+        basePath,
+        data: {
+          title: seo.title,
+          description: seo.description,
+          keywords: seo.keywords,
+          schema: [
+            createWebPageSchema({
+              language,
+              path: SEO_PATHS.projectInquiry,
+              title: seo.title,
+              description: seo.description,
+            }),
+            createBreadcrumbSchema(language, [
+              { name: getSeoLabel(language, "home"), path: SEO_PATHS.home },
+              { name: getSeoLabel(language, "projectInquiry"), path: SEO_PATHS.projectInquiry },
+            ]),
           ],
         },
       };

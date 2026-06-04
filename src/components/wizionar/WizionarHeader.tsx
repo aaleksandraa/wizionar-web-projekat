@@ -8,15 +8,22 @@ import wizionarLogo from "@/assets/wizionar-logo.png";
 import LanguageSwitcher from "./LanguageSwitcher";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { useLocalizedPath } from "@/hooks/useLocalizedPath";
+import { PROJECT_INQUIRY_PATH } from "@/lib/project-inquiry-schema";
 
 const WizionarHeader = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
-  const { t } = useLanguage();
+  const { t, language } = useLanguage();
   const location = useLocation();
   const localizedPath = useLocalizedPath();
 
   const isHomePage = location.pathname === "/" || /^\/(en|de|it)\/?$/.test(location.pathname);
+  const inquiryLabel = {
+    sr: "Upitnik",
+    en: "Inquiry",
+    de: "Fragebogen",
+    it: "Questionario",
+  }[language];
 
   const closeMobileMenu = () => setMobileMenuOpen(false);
 
@@ -50,6 +57,11 @@ const WizionarHeader = () => {
     {
       label: t.nav.services,
       href: "/usluge",
+      isRouterLink: true,
+    },
+    {
+      label: inquiryLabel,
+      href: PROJECT_INQUIRY_PATH,
       isRouterLink: true,
     },
     {
@@ -119,17 +131,10 @@ const WizionarHeader = () => {
           <div className="hidden items-center gap-3 md:flex">
             <LanguageSwitcher />
             <Button size="default" className="rounded-full shadow-orange gap-1.5" asChild>
-              {isHomePage ? (
-                <a href="#contact">
-                  {t.nav.requestDemo}
-                  <ArrowUpRight className="w-4 h-4" />
-                </a>
-              ) : (
-                <LocalizedLink to="/#contact">
-                  {t.nav.requestDemo}
-                  <ArrowUpRight className="w-4 h-4" />
-                </LocalizedLink>
-              )}
+              <LocalizedLink to={PROJECT_INQUIRY_PATH}>
+                {t.nav.requestDemo}
+                <ArrowUpRight className="w-4 h-4" />
+              </LocalizedLink>
             </Button>
           </div>
 
@@ -247,17 +252,10 @@ const WizionarHeader = () => {
                   </div>
                 </div>
                 <Button asChild size="lg" className="w-full rounded-xl shadow-orange gap-1.5">
-                  {isHomePage ? (
-                    <a href="#contact" onClick={closeMobileMenu}>
-                      {t.nav.requestDemo}
-                      <ArrowUpRight className="w-4 h-4" />
-                    </a>
-                  ) : (
-                    <LocalizedLink to="/#contact" onClick={closeMobileMenu}>
-                      {t.nav.requestDemo}
-                      <ArrowUpRight className="w-4 h-4" />
-                    </LocalizedLink>
-                  )}
+                  <LocalizedLink to={PROJECT_INQUIRY_PATH} onClick={closeMobileMenu}>
+                    {t.nav.requestDemo}
+                    <ArrowUpRight className="w-4 h-4" />
+                  </LocalizedLink>
                 </Button>
               </div>
             </motion.aside>

@@ -221,13 +221,13 @@ const WebDevelopment = () => {
                 transition={{ duration: 0.5, delay: 0.3 }}
                 className="flex flex-col justify-center gap-4 sm:flex-row"
               >
-                <a
-                  href="mailto:info@wizionar.com"
+                <LocalizedLink
+                  to="/projektni-upitnik"
                   className="inline-flex items-center justify-center gap-2 rounded-xl bg-primary px-8 py-4 font-semibold text-primary-foreground transition-opacity hover:opacity-90"
                 >
-                  <Mail className="h-5 w-5" />
+                  <ClipboardList className="h-5 w-5" />
                   {t.hero.cta1}
-                </a>
+                </LocalizedLink>
                 <a
                   href="#portfolio"
                   className="inline-flex items-center justify-center gap-2 rounded-xl border border-border px-8 py-4 font-semibold transition-colors hover:bg-secondary"
@@ -600,21 +600,30 @@ const WebDevelopment = () => {
                 {t.cta.title} <span className="text-gradient">{t.cta.titleHighlight}</span>
               </h2>
               <p className="mb-8 text-lg leading-relaxed text-muted-foreground">{t.cta.subtitle}</p>
-              <div className="mb-6 flex flex-col justify-center gap-4 sm:flex-row">
-                <a
-                  href="mailto:info@wizionar.com"
+              <div className="mb-6 flex flex-col items-center justify-center gap-4">
+                <div className="flex flex-col justify-center gap-4 sm:flex-row">
+                  <a
+                    href="mailto:info@wizionar.com"
+                    className="inline-flex items-center justify-center gap-2 rounded-xl bg-primary px-8 py-4 font-semibold text-primary-foreground transition-opacity hover:opacity-90"
+                  >
+                    <Mail className="h-5 w-5" />
+                    {t.cta.email}
+                  </a>
+                  <a
+                    href="tel:+38762000000"
+                    className="inline-flex items-center justify-center gap-2 rounded-xl border border-border px-8 py-4 font-semibold transition-colors hover:bg-secondary"
+                  >
+                    <Phone className="h-5 w-5" />
+                    {t.cta.phone}
+                  </a>
+                </div>
+                <LocalizedLink
+                  to="/projektni-upitnik"
                   className="inline-flex items-center justify-center gap-2 rounded-xl bg-primary px-8 py-4 font-semibold text-primary-foreground transition-opacity hover:opacity-90"
                 >
-                  <Mail className="h-5 w-5" />
-                  {t.cta.email}
-                </a>
-                <a
-                  href="tel:+38762000000"
-                  className="inline-flex items-center justify-center gap-2 rounded-xl border border-border px-8 py-4 font-semibold transition-colors hover:bg-secondary"
-                >
-                  <Phone className="h-5 w-5" />
-                  {t.cta.phone}
-                </a>
+                  <ClipboardList className="h-5 w-5" />
+                  {t.cta.quote}
+                </LocalizedLink>
               </div>
               <p className="text-sm text-muted-foreground">{t.cta.microcopy}</p>
             </motion.div>

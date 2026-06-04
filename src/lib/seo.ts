@@ -25,6 +25,7 @@ export const SEO_PATHS = {
   webDevelopment: "/usluge/izrada-web-stranica",
   seoOptimization: "/usluge/seo-optimizacija",
   graphicDesign: "/usluge/graficki-dizajn",
+  projectInquiry: "/projektni-upitnik",
 } as const;
 
 type SeoPageKey = keyof typeof SEO_PATHS;
@@ -35,7 +36,7 @@ type SeoPageContent = {
   keywords?: string[];
 };
 
-type BreadcrumbLabelKey = "home" | "services" | "webDevelopment" | "seo" | "graphicDesign" | "portfolio";
+type BreadcrumbLabelKey = "home" | "services" | "webDevelopment" | "seo" | "graphicDesign" | "projectInquiry" | "portfolio";
 
 const SEO_LABELS: Record<Language, Record<BreadcrumbLabelKey, string>> = {
   sr: {
@@ -44,6 +45,7 @@ const SEO_LABELS: Record<Language, Record<BreadcrumbLabelKey, string>> = {
     webDevelopment: "Izrada web stranica",
     seo: "SEO optimizacija",
     graphicDesign: "Grafički dizajn",
+    projectInquiry: "Projektni upitnik",
     portfolio: "Portfolio",
   },
   en: {
@@ -52,6 +54,7 @@ const SEO_LABELS: Record<Language, Record<BreadcrumbLabelKey, string>> = {
     webDevelopment: "Website Development",
     seo: "SEO Optimization",
     graphicDesign: "Graphic Design",
+    projectInquiry: "Project Inquiry",
     portfolio: "Portfolio",
   },
   de: {
@@ -60,6 +63,7 @@ const SEO_LABELS: Record<Language, Record<BreadcrumbLabelKey, string>> = {
     webDevelopment: "Webentwicklung",
     seo: "SEO-Optimierung",
     graphicDesign: "Grafikdesign",
+    projectInquiry: "Projektfragebogen",
     portfolio: "Portfolio",
   },
   it: {
@@ -68,6 +72,7 @@ const SEO_LABELS: Record<Language, Record<BreadcrumbLabelKey, string>> = {
     webDevelopment: "Sviluppo web",
     seo: "Ottimizzazione SEO",
     graphicDesign: "Design grafico",
+    projectInquiry: "Questionario progetto",
     portfolio: "Portfolio",
   },
 };
@@ -323,6 +328,32 @@ const PAGE_SEO: Record<SeoPageKey, Record<Language, SeoPageContent>> = {
       title: "Design grafico e branding | Wizionar",
       description:
         "Design grafico, identità visiva, packaging, creatività social e materiali promozionali per brand che vogliono distinguersi.",
+    },
+  },
+  projectInquiry: {
+    sr: {
+      title: "Projektni upitnik za web sajt, web shop ili aplikaciju | Wizionar",
+      description:
+        "Popunite projektni upitnik za web sajt, web shop, booking sistem, aplikaciju ili redizajn kako bismo pripremili jasne naredne korake.",
+      keywords: ["projektni upitnik", "web sajt", "web shop", "web aplikacija", "booking sistem"],
+    },
+    en: {
+      title: "Project inquiry for websites, shops and apps | Wizionar",
+      description:
+        "Complete a project inquiry for a website, online shop, booking system, app or redesign so we can prepare clear next steps.",
+      keywords: ["project inquiry", "website", "online shop", "web application", "booking system"],
+    },
+    de: {
+      title: "Projektfragebogen für Websites, Shops und Apps | Wizionar",
+      description:
+        "Füllen Sie einen Projektfragebogen für Website, Online-Shop, Buchungssystem, App oder Redesign aus, damit wir klare nächste Schritte vorbereiten können.",
+      keywords: ["Projektfragebogen", "Website", "Online-Shop", "Webanwendung", "Buchungssystem"],
+    },
+    it: {
+      title: "Questionario progetto per siti, shop e app | Wizionar",
+      description:
+        "Compila un questionario per sito web, shop online, sistema booking, app o redesign così possiamo preparare i prossimi passi.",
+      keywords: ["questionario progetto", "sito web", "shop online", "applicazione web", "booking"],
     },
   },
 };

@@ -9,7 +9,7 @@ export const translations = {
       process: "Proces",
       security: "Sigurnost",
       contact: "Kontakt",
-      requestDemo: "Zatraži demo"
+      requestDemo: "Popuni upitnik"
     },
     // Hero
     hero: {
@@ -186,7 +186,7 @@ export const translations = {
       process: "Process",
       security: "Security",
       contact: "Contact",
-      requestDemo: "Request demo"
+      requestDemo: "Start inquiry"
     },
     hero: {
       badge: "Product studio for B2B applications",
@@ -354,7 +354,7 @@ export const translations = {
       process: "Prozess",
       security: "Sicherheit",
       contact: "Kontakt",
-      requestDemo: "Demo anfordern"
+      requestDemo: "Fragebogen starten"
     },
     hero: {
       badge: "Product Studio für B2B-Anwendungen",
@@ -522,7 +522,7 @@ export const translations = {
       process: "Processo",
       security: "Sicurezza",
       contact: "Contatto",
-      requestDemo: "Richiedi demo"
+      requestDemo: "Apri questionario"
     },
     hero: {
       badge: "Product studio per applicazioni B2B",
