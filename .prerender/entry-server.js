@@ -11405,29 +11405,73 @@ const portfolioProjects = [
       it: "Sviluppo di una piattaforma eCommerce personalizzata che unifica vendite online, operazioni B2B e processi interni in un unico sistema."
     },
     challenge: {
-      sr: "",
-      en: "",
-      de: "",
-      it: ""
+      sr: "Kako je broj proizvoda, kupaca i prodajnih kanala rastao, postojeće rješenje više nije moglo pratiti razvoj poslovanja. Veliki dio procesa zahtijevao je ručne intervencije, podaci su dolazili iz različitih sistema, a administracija je postajala sve složenija.",
+      en: "As the number of products, customers and sales channels grew, the existing solution could no longer keep up with business development. Much of the process required manual intervention, data came from different systems, and administration was becoming increasingly complex.",
+      de: "Mit wachsender Anzahl an Produkten, Kunden und Vertriebskanälen konnte die bestehende Lösung die Geschäftsentwicklung nicht mehr mithalten. Viele Prozesse erforderten manuelle Eingriffe, Daten kamen aus verschiedenen Systemen und die Administration wurde zunehmend komplexer.",
+      it: "Con la crescita del numero di prodotti, clienti e canali di vendita, la soluzione esistente non riusciva più a tenere il passo con lo sviluppo del business. Gran parte dei processi richiedeva interventi manuali, i dati provenivano da sistemi diversi e l'amministrazione diventava sempre più complessa."
     },
     solution: {
-      sr: "",
-      en: "",
-      de: "",
-      it: ""
+      sr: "Osmislili smo i razvili platformu koja ne rješava samo prodaju putem interneta, već povezuje kompletan poslovni ekosistem u jedno centralizovano rješenje — modernu eCommerce platformu sa visokim nivoom automatizacije i mogućnošću daljeg razvoja.",
+      en: "We designed and developed a platform that doesn't just handle online sales, but connects the entire business ecosystem into one centralized solution — a modern eCommerce platform with a high level of automation and room to grow.",
+      de: "Wir konzipierten und entwickelten eine Plattform, die nicht nur den Online-Verkauf abwickelt, sondern das gesamte Geschäftsökosystem in einer zentralen Lösung verbindet — eine moderne E-Commerce-Plattform mit hohem Automatisierungsgrad und Entwicklungspotenzial.",
+      it: "Abbiamo progettato e sviluppato una piattaforma che non si limita alla vendita online, ma collega l'intero ecosistema aziendale in un'unica soluzione centralizzata — una piattaforma eCommerce moderna con alto livello di automazione e possibilità di crescita."
     },
     features: {
-      sr: [],
-      en: [],
-      de: [],
-      it: []
+      sr: [
+        "Automatska sinhronizacija proizvoda i zaliha",
+        "B2B portal sa prilagođenim cijenama",
+        "Napredna pretraga i filtriranje",
+        "Marketing alati (kuponi, promocije, akcije)",
+        "Administrativni panel",
+        "Sistem lojalnosti"
+      ],
+      en: [
+        "Automatic product and stock synchronization",
+        "B2B portal with custom pricing",
+        "Advanced search and filtering",
+        "Marketing tools (coupons, promotions, campaigns)",
+        "Admin panel",
+        "Loyalty system"
+      ],
+      de: [
+        "Automatische Produkt- und Bestandssynchronisation",
+        "B2B-Portal mit individuellen Preisen",
+        "Erweiterte Suche und Filterung",
+        "Marketing-Tools (Gutscheine, Aktionen, Kampagnen)",
+        "Administrationspanel",
+        "Treueprogramm"
+      ],
+      it: [
+        "Sincronizzazione automatica prodotti e scorte",
+        "Portale B2B con prezzi personalizzati",
+        "Ricerca e filtri avanzati",
+        "Strumenti marketing (coupon, promozioni, campagne)",
+        "Pannello amministrativo",
+        "Sistema fedeltà"
+      ]
     },
-    technologies: [],
+    technologies: ["Custom Backend", "REST API", "MySQL", "ERP integracija", "Responsive Design", "SEO optimizacija"],
     results: {
-      sr: [],
-      en: [],
-      de: [],
-      it: []
+      sr: [
+        "Centralizovana digitalna platforma",
+        "Automatizacija svakodnevnih procesa",
+        "Platforma spremna za dalji rast"
+      ],
+      en: [
+        "Centralized digital platform",
+        "Automation of daily processes",
+        "Platform ready for further growth"
+      ],
+      de: [
+        "Zentralisierte digitale Plattform",
+        "Automatisierung täglicher Prozesse",
+        "Plattform bereit für weiteres Wachstum"
+      ],
+      it: [
+        "Piattaforma digitale centralizzata",
+        "Automazione dei processi quotidiani",
+        "Piattaforma pronta per ulteriore crescita"
+      ]
     }
   },
   {
@@ -11608,7 +11652,8 @@ const labels = {
     results: "Rezultati",
     cta: "Želite sličan projekat?",
     ctaDesc: "Kontaktirajte nas i razgovarajmo o vašem projektu.",
-    ctaBtn: "Kontaktirajte nas"
+    ctaBtn: "Kontaktirajte nas",
+    website: "Web sajt"
   },
   en: {
     back: "Back to portfolio",
@@ -11621,7 +11666,8 @@ const labels = {
     results: "Results",
     cta: "Want a similar project?",
     ctaDesc: "Contact us and let's discuss your project.",
-    ctaBtn: "Contact us"
+    ctaBtn: "Contact us",
+    website: "Website"
   },
   de: {
     back: "Zurück zum Portfolio",
@@ -11634,7 +11680,8 @@ const labels = {
     results: "Ergebnisse",
     cta: "Möchten Sie ein ähnliches Projekt?",
     ctaDesc: "Kontaktieren Sie uns und lassen Sie uns über Ihr Projekt sprechen.",
-    ctaBtn: "Kontaktieren Sie uns"
+    ctaBtn: "Kontaktieren Sie uns",
+    website: "Webseite"
   },
   it: {
     back: "Torna al portfolio",
@@ -11647,19 +11694,188 @@ const labels = {
     results: "Risultati",
     cta: "Vuoi un progetto simile?",
     ctaDesc: "Contattaci e discutiamo del tuo progetto.",
-    ctaBtn: "Contattaci"
+    ctaBtn: "Contattaci",
+    website: "Sito web"
   }
 };
 const featureIcons = [Globe, Smartphone, Search, Zap, Code2, ShoppingCart];
-const PortfolioArticleContent = ({ lang }) => {
+const BncPortfolioContent = ({
+  project,
+  lang,
+  l
+}) => {
   const sections2 = getBncShopArticle(lang);
-  return /* @__PURE__ */ jsx("section", { className: "pb-20", children: /* @__PURE__ */ jsx("div", { className: "container mx-auto px-6", children: /* @__PURE__ */ jsx("div", { className: "w-full space-y-12", children: sections2.map((section, index) => {
-    var _a2;
-    return /* @__PURE__ */ jsxs(motion.div, { ...fadeUp$2, transition: { delay: index * 0.05 }, children: [
-      section.heading && /* @__PURE__ */ jsx("h2", { className: "mb-6 text-2xl font-bold md:text-3xl", children: section.heading }),
-      /* @__PURE__ */ jsx("div", { className: "space-y-4", children: section.paragraphs.map((paragraph) => /* @__PURE__ */ jsx("p", { className: "text-lg leading-relaxed text-muted-foreground", children: paragraph }, paragraph)) })
-    ] }, (_a2 = section.heading) != null ? _a2 : index);
-  }) }) }) });
+  const [intro, ...restSections] = sections2;
+  const resultSection = restSections[restSections.length - 1];
+  const contentSections = restSections.slice(0, -1);
+  const userTypesIndex = contentSections.findIndex(
+    (section) => section.paragraphs.some((p) => p.toLowerCase().includes("b2b") || p.toLowerCase().includes("krajnji"))
+  );
+  return /* @__PURE__ */ jsxs(Fragment, { children: [
+    /* @__PURE__ */ jsx("section", { className: "pb-12", children: /* @__PURE__ */ jsx("div", { className: "container mx-auto px-6", children: /* @__PURE__ */ jsxs("div", { className: "grid w-full gap-4 md:grid-cols-3", children: [
+      /* @__PURE__ */ jsxs("div", { className: "rounded-xl border border-border bg-card p-5", children: [
+        /* @__PURE__ */ jsx("span", { className: "text-xs uppercase tracking-wider text-muted-foreground", children: l.client }),
+        /* @__PURE__ */ jsx("p", { className: "mt-1 font-semibold", children: project.client[lang] })
+      ] }),
+      /* @__PURE__ */ jsxs("div", { className: "rounded-xl border border-border bg-card p-5", children: [
+        /* @__PURE__ */ jsx("span", { className: "text-xs uppercase tracking-wider text-muted-foreground", children: l.category }),
+        /* @__PURE__ */ jsx("p", { className: "mt-1 font-semibold", children: project.category[lang] })
+      ] }),
+      project.liveUrl && /* @__PURE__ */ jsxs("div", { className: "rounded-xl border border-border bg-card p-5", children: [
+        /* @__PURE__ */ jsx("span", { className: "text-xs uppercase tracking-wider text-muted-foreground", children: l.website }),
+        /* @__PURE__ */ jsxs(
+          "a",
+          {
+            href: project.liveUrl,
+            target: "_blank",
+            rel: "noopener noreferrer",
+            className: "mt-1 inline-flex items-center gap-1 font-semibold text-primary hover:underline",
+            children: [
+              project.liveUrl.replace(/^https?:\/\//, ""),
+              /* @__PURE__ */ jsx(Globe, { className: "h-4 w-4" })
+            ]
+          }
+        )
+      ] })
+    ] }) }) }),
+    (intro == null ? void 0 : intro.paragraphs[0]) && /* @__PURE__ */ jsx("section", { className: "pb-12", children: /* @__PURE__ */ jsx("div", { className: "container mx-auto px-6", children: /* @__PURE__ */ jsx(
+      motion.div,
+      {
+        ...fadeUp$2,
+        className: "rounded-2xl border border-primary/20 bg-primary/5 p-8 md:p-10",
+        children: /* @__PURE__ */ jsx("p", { className: "text-lg leading-relaxed text-foreground md:text-xl", children: intro.paragraphs[0] })
+      }
+    ) }) }),
+    /* @__PURE__ */ jsx("section", { className: "pb-16", children: /* @__PURE__ */ jsx("div", { className: "container mx-auto px-6", children: /* @__PURE__ */ jsxs("div", { className: "grid w-full gap-8 lg:grid-cols-2", children: [
+      /* @__PURE__ */ jsxs(motion.div, { ...fadeUp$2, className: "rounded-2xl border border-border bg-card p-8", children: [
+        /* @__PURE__ */ jsxs("h2", { className: "mb-4 flex items-center gap-2 text-xl font-bold", children: [
+          /* @__PURE__ */ jsx(Shield, { className: "h-5 w-5 text-primary" }),
+          l.challenge
+        ] }),
+        /* @__PURE__ */ jsx("p", { className: "leading-relaxed text-muted-foreground", children: project.challenge[lang] })
+      ] }),
+      /* @__PURE__ */ jsxs(
+        motion.div,
+        {
+          ...fadeUp$2,
+          transition: { delay: 0.1 },
+          className: "rounded-2xl border border-primary/20 bg-primary/5 p-8",
+          children: [
+            /* @__PURE__ */ jsxs("h2", { className: "mb-4 flex items-center gap-2 text-xl font-bold", children: [
+              /* @__PURE__ */ jsx(Zap, { className: "h-5 w-5 text-primary" }),
+              l.solution
+            ] }),
+            /* @__PURE__ */ jsx("p", { className: "leading-relaxed text-muted-foreground", children: project.solution[lang] })
+          ]
+        }
+      )
+    ] }) }) }),
+    intro && intro.paragraphs.length > 1 && /* @__PURE__ */ jsx("section", { className: "bg-secondary/30 py-16", children: /* @__PURE__ */ jsx("div", { className: "container mx-auto px-6", children: /* @__PURE__ */ jsx(motion.div, { ...fadeUp$2, className: "w-full space-y-4", children: intro.paragraphs.slice(1).map((paragraph) => /* @__PURE__ */ jsx("p", { className: "text-lg leading-relaxed text-muted-foreground", children: paragraph }, paragraph)) }) }) }),
+    contentSections.map((section, index) => {
+      var _a2;
+      const isUserTypes = index === userTypesIndex;
+      const isAlt = index % 2 === 1;
+      if (isUserTypes && section.paragraphs.length > 1) {
+        const [lead, ...items] = section.paragraphs;
+        const closing = items.length > 3 ? items[items.length - 1] : void 0;
+        const featureItems = closing ? items.slice(0, -1) : items;
+        return /* @__PURE__ */ jsx("section", { className: isAlt ? "bg-secondary/30 py-20" : "py-20", children: /* @__PURE__ */ jsxs("div", { className: "container mx-auto px-6", children: [
+          /* @__PURE__ */ jsxs(motion.div, { ...fadeUp$2, className: "mb-10", children: [
+            section.heading && /* @__PURE__ */ jsx("h2", { className: "mb-4 text-2xl font-bold md:text-3xl", children: section.heading }),
+            /* @__PURE__ */ jsx("p", { className: "text-lg leading-relaxed text-muted-foreground", children: lead })
+          ] }),
+          /* @__PURE__ */ jsx("div", { className: "grid gap-4 sm:grid-cols-2 lg:grid-cols-3", children: featureItems.map((item, itemIndex) => {
+            const Icon = featureIcons[itemIndex % featureIcons.length];
+            return /* @__PURE__ */ jsxs(
+              motion.div,
+              {
+                ...fadeUp$2,
+                transition: { delay: itemIndex * 0.05 },
+                className: "rounded-xl border border-border bg-card p-5",
+                children: [
+                  /* @__PURE__ */ jsx(Icon, { className: "mb-3 h-5 w-5 text-primary" }),
+                  /* @__PURE__ */ jsx("p", { className: "text-sm leading-relaxed text-muted-foreground", children: item })
+                ]
+              },
+              item
+            );
+          }) }),
+          closing && /* @__PURE__ */ jsx(motion.p, { ...fadeUp$2, className: "mt-8 text-lg leading-relaxed text-muted-foreground", children: closing })
+        ] }) }, section.heading);
+      }
+      return /* @__PURE__ */ jsx("section", { className: isAlt ? "bg-secondary/30 py-16" : "pb-16 pt-4", children: /* @__PURE__ */ jsx("div", { className: "container mx-auto px-6", children: /* @__PURE__ */ jsxs(
+        motion.div,
+        {
+          ...fadeUp$2,
+          transition: { delay: index * 0.05 },
+          className: "rounded-2xl border border-border bg-card p-8 md:p-10",
+          children: [
+            section.heading && /* @__PURE__ */ jsx("h2", { className: "mb-6 text-2xl font-bold md:text-3xl", children: section.heading }),
+            /* @__PURE__ */ jsx("div", { className: "space-y-4", children: section.paragraphs.map((paragraph) => /* @__PURE__ */ jsx("p", { className: "text-lg leading-relaxed text-muted-foreground", children: paragraph }, paragraph)) })
+          ]
+        }
+      ) }) }, (_a2 = section.heading) != null ? _a2 : index);
+    }),
+    /* @__PURE__ */ jsx("section", { className: "bg-secondary/30 py-20", children: /* @__PURE__ */ jsxs("div", { className: "container mx-auto px-6", children: [
+      /* @__PURE__ */ jsx(motion.div, { ...fadeUp$2, className: "mb-12 text-center", children: /* @__PURE__ */ jsx("h2", { className: "text-2xl font-bold md:text-3xl", children: l.features }) }),
+      /* @__PURE__ */ jsx("div", { className: "grid gap-4 sm:grid-cols-2 lg:grid-cols-3", children: project.features[lang].map((feature, index) => {
+        const Icon = featureIcons[index % featureIcons.length];
+        return /* @__PURE__ */ jsxs(
+          motion.div,
+          {
+            ...fadeUp$2,
+            transition: { delay: index * 0.05 },
+            className: "flex items-center gap-3 rounded-xl border border-border bg-card p-4",
+            children: [
+              /* @__PURE__ */ jsx(Icon, { className: "h-5 w-5 shrink-0 text-primary" }),
+              /* @__PURE__ */ jsx("span", { className: "text-sm font-medium", children: feature })
+            ]
+          },
+          feature
+        );
+      }) })
+    ] }) }),
+    /* @__PURE__ */ jsx("section", { className: "py-20", children: /* @__PURE__ */ jsxs("div", { className: "container mx-auto px-6", children: [
+      /* @__PURE__ */ jsx(motion.div, { ...fadeUp$2, className: "mb-12 text-center", children: /* @__PURE__ */ jsx("h2", { className: "text-2xl font-bold md:text-3xl", children: l.tech }) }),
+      /* @__PURE__ */ jsx("div", { className: "flex flex-wrap justify-center gap-3", children: project.technologies.map((technology, index) => /* @__PURE__ */ jsx(
+        motion.span,
+        {
+          ...fadeUp$2,
+          transition: { delay: index * 0.05 },
+          className: "rounded-full border border-border bg-card px-5 py-2.5 text-sm font-semibold",
+          children: technology
+        },
+        technology
+      )) })
+    ] }) }),
+    /* @__PURE__ */ jsx("section", { className: "bg-secondary/30 py-20", children: /* @__PURE__ */ jsxs("div", { className: "container mx-auto px-6", children: [
+      /* @__PURE__ */ jsx(motion.div, { ...fadeUp$2, className: "mb-12 text-center", children: /* @__PURE__ */ jsx("h2", { className: "text-2xl font-bold md:text-3xl", children: l.results }) }),
+      /* @__PURE__ */ jsx("div", { className: "grid gap-6 sm:grid-cols-3", children: project.results[lang].map((result, index) => /* @__PURE__ */ jsxs(
+        motion.div,
+        {
+          ...fadeUp$2,
+          transition: { delay: index * 0.1 },
+          className: "rounded-2xl border border-border bg-card p-6 text-center",
+          children: [
+            /* @__PURE__ */ jsx(CheckCircle2, { className: "mx-auto mb-3 h-8 w-8 text-primary" }),
+            /* @__PURE__ */ jsx("p", { className: "font-bold", children: result })
+          ]
+        },
+        result
+      )) })
+    ] }) }),
+    resultSection && /* @__PURE__ */ jsx("section", { className: "pb-20", children: /* @__PURE__ */ jsx("div", { className: "container mx-auto px-6", children: /* @__PURE__ */ jsxs(
+      motion.div,
+      {
+        ...fadeUp$2,
+        className: "rounded-2xl border border-primary/20 bg-primary/5 p-8 md:p-12",
+        children: [
+          resultSection.heading && /* @__PURE__ */ jsx("h2", { className: "mb-6 text-2xl font-bold md:text-3xl", children: resultSection.heading }),
+          /* @__PURE__ */ jsx("div", { className: "space-y-4", children: resultSection.paragraphs.map((paragraph) => /* @__PURE__ */ jsx("p", { className: "text-lg leading-relaxed text-muted-foreground", children: paragraph }, paragraph)) })
+        ]
+      }
+    ) }) })
+  ] });
 };
 const GalleryCarousel = ({ images, title }) => {
   const [emblaRef, emblaApi] = useEmblaCarousel({ loop: true, align: "start", slidesToScroll: 1 });
@@ -11824,7 +12040,7 @@ const ProjectDetail = () => {
         )
       }
     ) }) }),
-    isArticleLayout ? /* @__PURE__ */ jsx(PortfolioArticleContent, { lang }) : /* @__PURE__ */ jsxs(Fragment, { children: [
+    isArticleLayout ? /* @__PURE__ */ jsx(BncPortfolioContent, { project, lang, l }) : /* @__PURE__ */ jsxs(Fragment, { children: [
       /* @__PURE__ */ jsx("section", { className: "pb-16", children: /* @__PURE__ */ jsx("div", { className: "container mx-auto px-6", children: /* @__PURE__ */ jsxs("div", { className: "grid w-full gap-4 md:grid-cols-2", children: [
         /* @__PURE__ */ jsxs("div", { className: "rounded-xl border border-border bg-card p-5", children: [
           /* @__PURE__ */ jsx("span", { className: "text-xs uppercase tracking-wider text-muted-foreground", children: l.client }),

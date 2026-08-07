@@ -98,29 +98,73 @@ export const portfolioProjects: PortfolioProjectData[] = [
       it: "Sviluppo di una piattaforma eCommerce personalizzata che unifica vendite online, operazioni B2B e processi interni in un unico sistema.",
     },
     challenge: {
-      sr: "",
-      en: "",
-      de: "",
-      it: "",
+      sr: "Kako je broj proizvoda, kupaca i prodajnih kanala rastao, postojeće rješenje više nije moglo pratiti razvoj poslovanja. Veliki dio procesa zahtijevao je ručne intervencije, podaci su dolazili iz različitih sistema, a administracija je postajala sve složenija.",
+      en: "As the number of products, customers and sales channels grew, the existing solution could no longer keep up with business development. Much of the process required manual intervention, data came from different systems, and administration was becoming increasingly complex.",
+      de: "Mit wachsender Anzahl an Produkten, Kunden und Vertriebskanälen konnte die bestehende Lösung die Geschäftsentwicklung nicht mehr mithalten. Viele Prozesse erforderten manuelle Eingriffe, Daten kamen aus verschiedenen Systemen und die Administration wurde zunehmend komplexer.",
+      it: "Con la crescita del numero di prodotti, clienti e canali di vendita, la soluzione esistente non riusciva più a tenere il passo con lo sviluppo del business. Gran parte dei processi richiedeva interventi manuali, i dati provenivano da sistemi diversi e l'amministrazione diventava sempre più complessa.",
     },
     solution: {
-      sr: "",
-      en: "",
-      de: "",
-      it: "",
+      sr: "Osmislili smo i razvili platformu koja ne rješava samo prodaju putem interneta, već povezuje kompletan poslovni ekosistem u jedno centralizovano rješenje — modernu eCommerce platformu sa visokim nivoom automatizacije i mogućnošću daljeg razvoja.",
+      en: "We designed and developed a platform that doesn't just handle online sales, but connects the entire business ecosystem into one centralized solution — a modern eCommerce platform with a high level of automation and room to grow.",
+      de: "Wir konzipierten und entwickelten eine Plattform, die nicht nur den Online-Verkauf abwickelt, sondern das gesamte Geschäftsökosystem in einer zentralen Lösung verbindet — eine moderne E-Commerce-Plattform mit hohem Automatisierungsgrad und Entwicklungspotenzial.",
+      it: "Abbiamo progettato e sviluppato una piattaforma che non si limita alla vendita online, ma collega l'intero ecosistema aziendale in un'unica soluzione centralizzata — una piattaforma eCommerce moderna con alto livello di automazione e possibilità di crescita.",
     },
     features: {
-      sr: [],
-      en: [],
-      de: [],
-      it: [],
+      sr: [
+        "Automatska sinhronizacija proizvoda i zaliha",
+        "B2B portal sa prilagođenim cijenama",
+        "Napredna pretraga i filtriranje",
+        "Marketing alati (kuponi, promocije, akcije)",
+        "Administrativni panel",
+        "Sistem lojalnosti",
+      ],
+      en: [
+        "Automatic product and stock synchronization",
+        "B2B portal with custom pricing",
+        "Advanced search and filtering",
+        "Marketing tools (coupons, promotions, campaigns)",
+        "Admin panel",
+        "Loyalty system",
+      ],
+      de: [
+        "Automatische Produkt- und Bestandssynchronisation",
+        "B2B-Portal mit individuellen Preisen",
+        "Erweiterte Suche und Filterung",
+        "Marketing-Tools (Gutscheine, Aktionen, Kampagnen)",
+        "Administrationspanel",
+        "Treueprogramm",
+      ],
+      it: [
+        "Sincronizzazione automatica prodotti e scorte",
+        "Portale B2B con prezzi personalizzati",
+        "Ricerca e filtri avanzati",
+        "Strumenti marketing (coupon, promozioni, campagne)",
+        "Pannello amministrativo",
+        "Sistema fedeltà",
+      ],
     },
-    technologies: [],
+    technologies: ["Custom Backend", "REST API", "MySQL", "ERP integracija", "Responsive Design", "SEO optimizacija"],
     results: {
-      sr: [],
-      en: [],
-      de: [],
-      it: [],
+      sr: [
+        "Centralizovana digitalna platforma",
+        "Automatizacija svakodnevnih procesa",
+        "Platforma spremna za dalji rast",
+      ],
+      en: [
+        "Centralized digital platform",
+        "Automation of daily processes",
+        "Platform ready for further growth",
+      ],
+      de: [
+        "Zentralisierte digitale Plattform",
+        "Automatisierung täglicher Prozesse",
+        "Plattform bereit für weiteres Wachstum",
+      ],
+      it: [
+        "Piattaforma digitale centralizzata",
+        "Automazione dei processi quotidiani",
+        "Piattaforma pronta per ulteriore crescita",
+      ],
     },
   },
   {
@@ -304,6 +348,7 @@ const labels: Record<
     cta: string;
     ctaDesc: string;
     ctaBtn: string;
+    website: string;
   }
 > = {
   sr: {
@@ -318,6 +363,7 @@ const labels: Record<
     cta: "Želite sličan projekat?",
     ctaDesc: "Kontaktirajte nas i razgovarajmo o vašem projektu.",
     ctaBtn: "Kontaktirajte nas",
+    website: "Web sajt",
   },
   en: {
     back: "Back to portfolio",
@@ -331,6 +377,7 @@ const labels: Record<
     cta: "Want a similar project?",
     ctaDesc: "Contact us and let's discuss your project.",
     ctaBtn: "Contact us",
+    website: "Website",
   },
   de: {
     back: "Zurück zum Portfolio",
@@ -344,6 +391,7 @@ const labels: Record<
     cta: "Möchten Sie ein ähnliches Projekt?",
     ctaDesc: "Kontaktieren Sie uns und lassen Sie uns über Ihr Projekt sprechen.",
     ctaBtn: "Kontaktieren Sie uns",
+    website: "Webseite",
   },
   it: {
     back: "Torna al portfolio",
@@ -357,35 +405,267 @@ const labels: Record<
     cta: "Vuoi un progetto simile?",
     ctaDesc: "Contattaci e discutiamo del tuo progetto.",
     ctaBtn: "Contattaci",
+    website: "Sito web",
   },
 };
 
 const featureIcons = [Globe, Smartphone, Search, Zap, Code2, ShoppingCart];
 
-const PortfolioArticleContent = ({ lang }: { lang: Lang }) => {
+const BncPortfolioContent = ({
+  project,
+  lang,
+  l,
+}: {
+  project: PortfolioProjectData;
+  lang: Lang;
+  l: (typeof labels)["sr"];
+}) => {
   const sections = getBncShopArticle(lang);
+  const [intro, ...restSections] = sections;
+  const resultSection = restSections[restSections.length - 1];
+  const contentSections = restSections.slice(0, -1);
+  const userTypesIndex = contentSections.findIndex((section) =>
+    section.paragraphs.some((p) => p.toLowerCase().includes("b2b") || p.toLowerCase().includes("krajnji"))
+  );
 
   return (
-    <section className="pb-20">
-      <div className="container mx-auto px-6">
-        <div className="w-full space-y-12">
-          {sections.map((section, index) => (
-            <motion.div key={section.heading ?? index} {...fadeUp} transition={{ delay: index * 0.05 }}>
-              {section.heading && (
-                <h2 className="mb-6 text-2xl font-bold md:text-3xl">{section.heading}</h2>
+    <>
+      <section className="pb-12">
+        <div className="container mx-auto px-6">
+          <div className="grid w-full gap-4 md:grid-cols-3">
+            <div className="rounded-xl border border-border bg-card p-5">
+              <span className="text-xs uppercase tracking-wider text-muted-foreground">{l.client}</span>
+              <p className="mt-1 font-semibold">{project.client[lang]}</p>
+            </div>
+            <div className="rounded-xl border border-border bg-card p-5">
+              <span className="text-xs uppercase tracking-wider text-muted-foreground">{l.category}</span>
+              <p className="mt-1 font-semibold">{project.category[lang]}</p>
+            </div>
+            {project.liveUrl && (
+              <div className="rounded-xl border border-border bg-card p-5">
+                <span className="text-xs uppercase tracking-wider text-muted-foreground">{l.website}</span>
+                <a
+                  href={project.liveUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="mt-1 inline-flex items-center gap-1 font-semibold text-primary hover:underline"
+                >
+                  {project.liveUrl.replace(/^https?:\/\//, "")}
+                  <Globe className="h-4 w-4" />
+                </a>
+              </div>
+            )}
+          </div>
+        </div>
+      </section>
+
+      {intro?.paragraphs[0] && (
+        <section className="pb-12">
+          <div className="container mx-auto px-6">
+            <motion.div
+              {...fadeUp}
+              className="rounded-2xl border border-primary/20 bg-primary/5 p-8 md:p-10"
+            >
+              <p className="text-lg leading-relaxed text-foreground md:text-xl">{intro.paragraphs[0]}</p>
+            </motion.div>
+          </div>
+        </section>
+      )}
+
+      <section className="pb-16">
+        <div className="container mx-auto px-6">
+          <div className="grid w-full gap-8 lg:grid-cols-2">
+            <motion.div {...fadeUp} className="rounded-2xl border border-border bg-card p-8">
+              <h2 className="mb-4 flex items-center gap-2 text-xl font-bold">
+                <Shield className="h-5 w-5 text-primary" />
+                {l.challenge}
+              </h2>
+              <p className="leading-relaxed text-muted-foreground">{project.challenge[lang]}</p>
+            </motion.div>
+            <motion.div
+              {...fadeUp}
+              transition={{ delay: 0.1 }}
+              className="rounded-2xl border border-primary/20 bg-primary/5 p-8"
+            >
+              <h2 className="mb-4 flex items-center gap-2 text-xl font-bold">
+                <Zap className="h-5 w-5 text-primary" />
+                {l.solution}
+              </h2>
+              <p className="leading-relaxed text-muted-foreground">{project.solution[lang]}</p>
+            </motion.div>
+          </div>
+        </div>
+      </section>
+
+      {intro && intro.paragraphs.length > 1 && (
+        <section className="bg-secondary/30 py-16">
+          <div className="container mx-auto px-6">
+            <motion.div {...fadeUp} className="w-full space-y-4">
+              {intro.paragraphs.slice(1).map((paragraph) => (
+                <p key={paragraph} className="text-lg leading-relaxed text-muted-foreground">
+                  {paragraph}
+                </p>
+              ))}
+            </motion.div>
+          </div>
+        </section>
+      )}
+
+      {contentSections.map((section, index) => {
+        const isUserTypes = index === userTypesIndex;
+        const isAlt = index % 2 === 1;
+
+        if (isUserTypes && section.paragraphs.length > 1) {
+          const [lead, ...items] = section.paragraphs;
+          const closing = items.length > 3 ? items[items.length - 1] : undefined;
+          const featureItems = closing ? items.slice(0, -1) : items;
+
+          return (
+            <section key={section.heading} className={isAlt ? "bg-secondary/30 py-20" : "py-20"}>
+              <div className="container mx-auto px-6">
+                <motion.div {...fadeUp} className="mb-10">
+                  {section.heading && (
+                    <h2 className="mb-4 text-2xl font-bold md:text-3xl">{section.heading}</h2>
+                  )}
+                  <p className="text-lg leading-relaxed text-muted-foreground">{lead}</p>
+                </motion.div>
+                <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+                  {featureItems.map((item, itemIndex) => {
+                    const Icon = featureIcons[itemIndex % featureIcons.length];
+                    return (
+                      <motion.div
+                        key={item}
+                        {...fadeUp}
+                        transition={{ delay: itemIndex * 0.05 }}
+                        className="rounded-xl border border-border bg-card p-5"
+                      >
+                        <Icon className="mb-3 h-5 w-5 text-primary" />
+                        <p className="text-sm leading-relaxed text-muted-foreground">{item}</p>
+                      </motion.div>
+                    );
+                  })}
+                </div>
+                {closing && (
+                  <motion.p {...fadeUp} className="mt-8 text-lg leading-relaxed text-muted-foreground">
+                    {closing}
+                  </motion.p>
+                )}
+              </div>
+            </section>
+          );
+        }
+
+        return (
+          <section key={section.heading ?? index} className={isAlt ? "bg-secondary/30 py-16" : "pb-16 pt-4"}>
+            <div className="container mx-auto px-6">
+              <motion.div
+                {...fadeUp}
+                transition={{ delay: index * 0.05 }}
+                className="rounded-2xl border border-border bg-card p-8 md:p-10"
+              >
+                {section.heading && (
+                  <h2 className="mb-6 text-2xl font-bold md:text-3xl">{section.heading}</h2>
+                )}
+                <div className="space-y-4">
+                  {section.paragraphs.map((paragraph) => (
+                    <p key={paragraph} className="text-lg leading-relaxed text-muted-foreground">
+                      {paragraph}
+                    </p>
+                  ))}
+                </div>
+              </motion.div>
+            </div>
+          </section>
+        );
+      })}
+
+      <section className="bg-secondary/30 py-20">
+        <div className="container mx-auto px-6">
+          <motion.div {...fadeUp} className="mb-12 text-center">
+            <h2 className="text-2xl font-bold md:text-3xl">{l.features}</h2>
+          </motion.div>
+          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+            {project.features[lang].map((feature, index) => {
+              const Icon = featureIcons[index % featureIcons.length];
+              return (
+                <motion.div
+                  key={feature}
+                  {...fadeUp}
+                  transition={{ delay: index * 0.05 }}
+                  className="flex items-center gap-3 rounded-xl border border-border bg-card p-4"
+                >
+                  <Icon className="h-5 w-5 shrink-0 text-primary" />
+                  <span className="text-sm font-medium">{feature}</span>
+                </motion.div>
+              );
+            })}
+          </div>
+        </div>
+      </section>
+
+      <section className="py-20">
+        <div className="container mx-auto px-6">
+          <motion.div {...fadeUp} className="mb-12 text-center">
+            <h2 className="text-2xl font-bold md:text-3xl">{l.tech}</h2>
+          </motion.div>
+          <div className="flex flex-wrap justify-center gap-3">
+            {project.technologies.map((technology, index) => (
+              <motion.span
+                key={technology}
+                {...fadeUp}
+                transition={{ delay: index * 0.05 }}
+                className="rounded-full border border-border bg-card px-5 py-2.5 text-sm font-semibold"
+              >
+                {technology}
+              </motion.span>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="bg-secondary/30 py-20">
+        <div className="container mx-auto px-6">
+          <motion.div {...fadeUp} className="mb-12 text-center">
+            <h2 className="text-2xl font-bold md:text-3xl">{l.results}</h2>
+          </motion.div>
+          <div className="grid gap-6 sm:grid-cols-3">
+            {project.results[lang].map((result, index) => (
+              <motion.div
+                key={result}
+                {...fadeUp}
+                transition={{ delay: index * 0.1 }}
+                className="rounded-2xl border border-border bg-card p-6 text-center"
+              >
+                <CheckCircle2 className="mx-auto mb-3 h-8 w-8 text-primary" />
+                <p className="font-bold">{result}</p>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {resultSection && (
+        <section className="pb-20">
+          <div className="container mx-auto px-6">
+            <motion.div
+              {...fadeUp}
+              className="rounded-2xl border border-primary/20 bg-primary/5 p-8 md:p-12"
+            >
+              {resultSection.heading && (
+                <h2 className="mb-6 text-2xl font-bold md:text-3xl">{resultSection.heading}</h2>
               )}
               <div className="space-y-4">
-                {section.paragraphs.map((paragraph) => (
+                {resultSection.paragraphs.map((paragraph) => (
                   <p key={paragraph} className="text-lg leading-relaxed text-muted-foreground">
                     {paragraph}
                   </p>
                 ))}
               </div>
             </motion.div>
-          ))}
-        </div>
-      </div>
-    </section>
+          </div>
+        </section>
+      )}
+    </>
   );
 };
 
@@ -577,7 +857,7 @@ const ProjectDetail = () => {
       </section>
 
       {isArticleLayout ? (
-        <PortfolioArticleContent lang={lang} />
+        <BncPortfolioContent project={project} lang={lang} l={l} />
       ) : (
         <>
       <section className="pb-16">
