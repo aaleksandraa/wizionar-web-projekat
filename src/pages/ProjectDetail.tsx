@@ -35,6 +35,7 @@ import portfolioMedical from "@/assets/portfolio-medical.jpg";
 import portfolioRestaurant from "@/assets/portfolio-restaurant.jpg";
 import portfolioSalon from "@/assets/portfolio-salon.jpg";
 import portfolioRealestate from "@/assets/portfolio-realestate.jpg";
+import portfolioBncWebshop from "@/assets/portfolio-bnc-webshop.jpg";
 
 const fadeUp = {
   initial: { opacity: 0, y: 24 },
@@ -62,6 +63,100 @@ export interface PortfolioProjectData {
 }
 
 export const portfolioProjects: PortfolioProjectData[] = [
+  {
+    slug: "bnc-shop",
+    title: "BNC Shop",
+    image: portfolioBncWebshop,
+    gallery: [portfolioBncWebshop],
+    liveUrl: "https://bnc.ba",
+    client: {
+      sr: "BNC",
+      en: "BNC",
+      de: "BNC",
+      it: "BNC",
+    },
+    category: {
+      sr: "Custom eCommerce platforma",
+      en: "Custom eCommerce platform",
+      de: "Maßgeschneiderte E-Commerce-Plattform",
+      it: "Piattaforma eCommerce personalizzata",
+    },
+    description: {
+      sr: "Razvoj custom eCommerce platforme koja objedinjuje online prodaju, B2B poslovanje i interne procese u jedinstven sistem. Moderna platforma za upravljanje proizvodima, narudžbama, marketing kampanjama, poslovnim kupcima i internim procesima, uz visok nivo automatizacije i mogućnost daljeg razvoja.",
+      en: "Development of a custom eCommerce platform that unifies online sales, B2B operations and internal processes into a single system. A modern platform for managing products, orders, marketing campaigns, business customers and internal processes, with a high level of automation and room to grow.",
+      de: "Entwicklung einer maßgeschneiderten E-Commerce-Plattform, die Online-Verkauf, B2B-Geschäft und interne Prozesse in einem System vereint. Eine moderne Plattform zur Verwaltung von Produkten, Bestellungen, Marketingkampagnen, Geschäftskunden und internen Prozessen mit hohem Automatisierungsgrad und Entwicklungspotenzial.",
+      it: "Sviluppo di una piattaforma eCommerce personalizzata che unifica vendite online, operazioni B2B e processi interni in un unico sistema. Una piattaforma moderna per la gestione di prodotti, ordini, campagne marketing, clienti business e processi interni, con alto livello di automazione e possibilità di crescita.",
+    },
+    challenge: {
+      sr: "Kako je broj proizvoda, kupaca i prodajnih kanala rastao, postojeće rješenje više nije moglo pratiti razvoj poslovanja. Veliki dio procesa zahtijevao je ručne intervencije, podaci su dolazili iz različitih sistema, a administracija je postajala sve složenija.",
+      en: "As the number of products, customers and sales channels grew, the existing solution could no longer keep up with business development. Much of the process required manual intervention, data came from different systems, and administration was becoming increasingly complex.",
+      de: "Mit wachsender Anzahl an Produkten, Kunden und Vertriebskanälen konnte die bestehende Lösung die Geschäftsentwicklung nicht mehr mithalten. Viele Prozesse erforderten manuelle Eingriffe, Daten kamen aus verschiedenen Systemen und die Administration wurde zunehmend komplexer.",
+      it: "Con la crescita del numero di prodotti, clienti e canali di vendita, la soluzione esistente non riusciva più a tenere il passo con lo sviluppo del business. Gran parte dei processi richiedeva interventi manuali, i dati provenivano da sistemi diversi e l'amministrazione diventava sempre più complessa.",
+    },
+    solution: {
+      sr: "Osmislili smo i razvili platformu koja ne rješava samo prodaju putem interneta, već povezuje kompletan poslovni ekosistem u jedno centralizovano rješenje — sa automatskom sinhronizacijom podataka, alatima za marketing tim i iskustvom prilagođenim različitim tipovima korisnika.",
+      en: "We designed and developed a platform that doesn't just handle online sales, but connects the entire business ecosystem into one centralized solution — with automatic data synchronization, tools for the marketing team and experiences tailored to different user types.",
+      de: "Wir konzipierten und entwickelten eine Plattform, die nicht nur den Online-Verkauf abwickelt, sondern das gesamte Geschäftsökosystem in einer zentralen Lösung verbindet — mit automatischer Datensynchronisation, Tools für das Marketing-Team und auf verschiedene Nutzertypen zugeschnittenen Erlebnissen.",
+      it: "Abbiamo progettato e sviluppato una piattaforma che non si limita alla vendita online, ma collega l'intero ecosistema aziendale in un'unica soluzione centralizzata — con sincronizzazione automatica dei dati, strumenti per il team marketing ed esperienze personalizzate per diversi tipi di utenti.",
+    },
+    features: {
+      sr: [
+        "Automatska sinhronizacija proizvoda i zaliha",
+        "B2B portal sa prilagođenim cijenama",
+        "Napredna pretraga i filtriranje",
+        "Marketing alati (kuponi, promocije, akcije)",
+        "Administrativni panel",
+        "Sistem lojalnosti",
+      ],
+      en: [
+        "Automatic product and stock synchronization",
+        "B2B portal with custom pricing",
+        "Advanced search and filtering",
+        "Marketing tools (coupons, promotions, campaigns)",
+        "Admin panel",
+        "Loyalty system",
+      ],
+      de: [
+        "Automatische Produkt- und Bestandssynchronisation",
+        "B2B-Portal mit individuellen Preisen",
+        "Erweiterte Suche und Filterung",
+        "Marketing-Tools (Gutscheine, Aktionen, Kampagnen)",
+        "Administrationspanel",
+        "Treueprogramm",
+      ],
+      it: [
+        "Sincronizzazione automatica prodotti e scorte",
+        "Portale B2B con prezzi personalizzati",
+        "Ricerca e filtri avanzati",
+        "Strumenti marketing (coupon, promozioni, campagne)",
+        "Pannello amministrativo",
+        "Sistema fedeltà",
+      ],
+    },
+    technologies: ["Custom Backend", "REST API", "MySQL", "ERP integracija", "Responsive Design", "SEO optimizacija"],
+    results: {
+      sr: [
+        "Centralizovana digitalna platforma",
+        "Automatizacija svakodnevnih procesa",
+        "Platforma spremna za dalji rast",
+      ],
+      en: [
+        "Centralized digital platform",
+        "Automation of daily processes",
+        "Platform ready for further growth",
+      ],
+      de: [
+        "Zentralisierte digitale Plattform",
+        "Automatisierung täglicher Prozesse",
+        "Plattform bereit für weiteres Wachstum",
+      ],
+      it: [
+        "Piattaforma digitale centralizzata",
+        "Automazione dei processi quotidiani",
+        "Piattaforma pronta per ulteriore crescita",
+      ],
+    },
+  },
   {
     slug: "techflow-dashboard",
     title: "TechFlow Dashboard",

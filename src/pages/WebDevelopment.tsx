@@ -59,6 +59,7 @@ import portfolioMedical from "@/assets/portfolio-medical.jpg";
 import portfolioRestaurant from "@/assets/portfolio-restaurant.jpg";
 import portfolioSalon from "@/assets/portfolio-salon.jpg";
 import portfolioRealestate from "@/assets/portfolio-realestate.jpg";
+import portfolioBncWebshop from "@/assets/portfolio-bnc-webshop.jpg";
 
 const fadeUp = {
   initial: { opacity: 0, y: 24 },
@@ -90,16 +91,18 @@ const resultIcons = [Phone, MessageSquare, ShoppingCart, Star, Users, TrendingUp
 const advantageIcons = [Star, Target, Users, TrendingUp, Clock, Shield];
 
 const portfolioData = [
-  { image: portfolioCorporate, title: "TechFlow Dashboard", link: "/portfolio/techflow-dashboard", descKey: 0 },
-  { image: portfolioEshop, title: "StyleOut Fashion Shop", link: "/portfolio/styleout-fashion-shop", descKey: 1 },
-  { image: portfolioMedical, title: "MediConnect Klinika", link: "/portfolio/mediconnect-klinika", descKey: 2 },
-  { image: portfolioRestaurant, title: "GastroPress Restoran", link: "#", descKey: 3 },
-  { image: portfolioSalon, title: "BeautyGlow Salon", link: "#", descKey: 4 },
-  { image: portfolioRealestate, title: "PropertyVista Nekretnine", link: "#", descKey: 5 },
+  { image: portfolioBncWebshop, title: "BNC Shop", link: "/portfolio/bnc-shop", descKey: 0 },
+  { image: portfolioCorporate, title: "TechFlow Dashboard", link: "/portfolio/techflow-dashboard", descKey: 1 },
+  { image: portfolioEshop, title: "StyleOut Fashion Shop", link: "/portfolio/styleout-fashion-shop", descKey: 2 },
+  { image: portfolioMedical, title: "MediConnect Klinika", link: "/portfolio/mediconnect-klinika", descKey: 3 },
+  { image: portfolioRestaurant, title: "GastroPress Restoran", link: "#", descKey: 4 },
+  { image: portfolioSalon, title: "BeautyGlow Salon", link: "#", descKey: 5 },
+  { image: portfolioRealestate, title: "PropertyVista Nekretnine", link: "#", descKey: 6 },
 ];
 
 const portfolioDescs = {
   sr: [
+    "Custom eCommerce platforma koja objedinjuje online prodaju, B2B poslovanje i interne procese.",
     "Korporativni dashboard sa analitikom i izvještavanjem za finansijsku kompaniju.",
     "Moderan fashion web shop sa naprednim filterima i online plaćanjem.",
     "Platforma za medicinsku ustanovu sa online zakazivanjem termina.",
@@ -108,6 +111,7 @@ const portfolioDescs = {
     "Portal za nekretnine sa mapom, filterima i detaljnim listinzima.",
   ],
   en: [
+    "Custom eCommerce platform unifying online sales, B2B operations and internal processes.",
     "Corporate dashboard with analytics and reporting for a financial company.",
     "Modern fashion web shop with advanced filters and online payment.",
     "Platform for a medical institution with online appointment scheduling.",
@@ -116,6 +120,7 @@ const portfolioDescs = {
     "Real estate portal with map, filters and detailed listings.",
   ],
   de: [
+    "Maßgeschneiderte E-Commerce-Plattform, die Online-Verkauf, B2B-Geschäft und interne Prozesse vereint.",
     "Unternehmens-Dashboard mit Analytik und Reporting für ein Finanzunternehmen.",
     "Moderner Fashion-Webshop mit erweiterten Filtern und Online-Zahlung.",
     "Plattform für eine medizinische Einrichtung mit Online-Terminbuchung.",
@@ -124,6 +129,7 @@ const portfolioDescs = {
     "Immobilienportal mit Karte, Filtern und detaillierten Inseraten.",
   ],
   it: [
+    "Piattaforma eCommerce personalizzata che unifica vendite online, operazioni B2B e processi interni.",
     "Dashboard aziendale con analisi e reportistica per una società finanziaria.",
     "Web shop di moda moderno con filtri avanzati e pagamento online.",
     "Piattaforma per un istituto medico con prenotazione appuntamenti online.",
