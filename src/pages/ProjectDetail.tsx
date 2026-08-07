@@ -36,6 +36,7 @@ import portfolioRestaurant from "@/assets/portfolio-restaurant.jpg";
 import portfolioSalon from "@/assets/portfolio-salon.jpg";
 import portfolioRealestate from "@/assets/portfolio-realestate.jpg";
 import portfolioBncWebshop from "@/assets/portfolio-bnc-webshop.jpg";
+import { getBncShopArticle } from "@/lib/portfolio/bnc-shop-content";
 
 const fadeUp = {
   initial: { opacity: 0, y: 24 },
@@ -61,6 +62,7 @@ export interface PortfolioProjectData {
   technologies: string[];
   results: Record<Lang, string[]>;
   liveUrl?: string;
+  layout?: "default" | "article";
 }
 
 export const portfolioProjects: PortfolioProjectData[] = [
@@ -70,6 +72,7 @@ export const portfolioProjects: PortfolioProjectData[] = [
     image: portfolioBncWebshop,
     gallery: [portfolioBncWebshop],
     liveUrl: "https://bnc.ba",
+    layout: "article",
     client: {
       sr: "BNC",
       en: "BNC",
@@ -89,79 +92,35 @@ export const portfolioProjects: PortfolioProjectData[] = [
       it: "Piattaforma eCommerce personalizzata che unifica vendite online, operazioni B2B e processi interni.",
     },
     description: {
-      sr: "Razvoj custom eCommerce platforme koja objedinjuje online prodaju, B2B poslovanje i interne procese u jedinstven sistem. Moderna platforma za upravljanje proizvodima, narudžbama, marketing kampanjama, poslovnim kupcima i internim procesima, uz visok nivo automatizacije i mogućnost daljeg razvoja.",
-      en: "Development of a custom eCommerce platform that unifies online sales, B2B operations and internal processes into a single system. A modern platform for managing products, orders, marketing campaigns, business customers and internal processes, with a high level of automation and room to grow.",
-      de: "Entwicklung einer maßgeschneiderten E-Commerce-Plattform, die Online-Verkauf, B2B-Geschäft und interne Prozesse in einem System vereint. Eine moderne Plattform zur Verwaltung von Produkten, Bestellungen, Marketingkampagnen, Geschäftskunden und internen Prozessen mit hohem Automatisierungsgrad und Entwicklungspotenzial.",
-      it: "Sviluppo di una piattaforma eCommerce personalizzata che unifica vendite online, operazioni B2B e processi interni in un unico sistema. Una piattaforma moderna per la gestione di prodotti, ordini, campagne marketing, clienti business e processi interni, con alto livello di automazione e possibilità di crescita.",
+      sr: "Razvoj custom eCommerce platforme koja objedinjuje online prodaju, B2B poslovanje i interne procese u jedinstven sistem.",
+      en: "Development of a custom eCommerce platform that unifies online sales, B2B operations and internal processes into a single system.",
+      de: "Entwicklung einer maßgeschneiderten E-Commerce-Plattform, die Online-Verkauf, B2B-Geschäft und interne Prozesse in einem System vereint.",
+      it: "Sviluppo di una piattaforma eCommerce personalizzata che unifica vendite online, operazioni B2B e processi interni in un unico sistema.",
     },
     challenge: {
-      sr: "Kako je broj proizvoda, kupaca i prodajnih kanala rastao, postojeće rješenje više nije moglo pratiti razvoj poslovanja. Veliki dio procesa zahtijevao je ručne intervencije, podaci su dolazili iz različitih sistema, a administracija je postajala sve složenija.",
-      en: "As the number of products, customers and sales channels grew, the existing solution could no longer keep up with business development. Much of the process required manual intervention, data came from different systems, and administration was becoming increasingly complex.",
-      de: "Mit wachsender Anzahl an Produkten, Kunden und Vertriebskanälen konnte die bestehende Lösung die Geschäftsentwicklung nicht mehr mithalten. Viele Prozesse erforderten manuelle Eingriffe, Daten kamen aus verschiedenen Systemen und die Administration wurde zunehmend komplexer.",
-      it: "Con la crescita del numero di prodotti, clienti e canali di vendita, la soluzione esistente non riusciva più a tenere il passo con lo sviluppo del business. Gran parte dei processi richiedeva interventi manuali, i dati provenivano da sistemi diversi e l'amministrazione diventava sempre più complessa.",
+      sr: "",
+      en: "",
+      de: "",
+      it: "",
     },
     solution: {
-      sr: "Osmislili smo i razvili platformu koja ne rješava samo prodaju putem interneta, već povezuje kompletan poslovni ekosistem u jedno centralizovano rješenje — sa automatskom sinhronizacijom podataka, alatima za marketing tim i iskustvom prilagođenim različitim tipovima korisnika.",
-      en: "We designed and developed a platform that doesn't just handle online sales, but connects the entire business ecosystem into one centralized solution — with automatic data synchronization, tools for the marketing team and experiences tailored to different user types.",
-      de: "Wir konzipierten und entwickelten eine Plattform, die nicht nur den Online-Verkauf abwickelt, sondern das gesamte Geschäftsökosystem in einer zentralen Lösung verbindet — mit automatischer Datensynchronisation, Tools für das Marketing-Team und auf verschiedene Nutzertypen zugeschnittenen Erlebnissen.",
-      it: "Abbiamo progettato e sviluppato una piattaforma che non si limita alla vendita online, ma collega l'intero ecosistema aziendale in un'unica soluzione centralizzata — con sincronizzazione automatica dei dati, strumenti per il team marketing ed esperienze personalizzate per diversi tipi di utenti.",
+      sr: "",
+      en: "",
+      de: "",
+      it: "",
     },
     features: {
-      sr: [
-        "Automatska sinhronizacija proizvoda i zaliha",
-        "B2B portal sa prilagođenim cijenama",
-        "Napredna pretraga i filtriranje",
-        "Marketing alati (kuponi, promocije, akcije)",
-        "Administrativni panel",
-        "Sistem lojalnosti",
-      ],
-      en: [
-        "Automatic product and stock synchronization",
-        "B2B portal with custom pricing",
-        "Advanced search and filtering",
-        "Marketing tools (coupons, promotions, campaigns)",
-        "Admin panel",
-        "Loyalty system",
-      ],
-      de: [
-        "Automatische Produkt- und Bestandssynchronisation",
-        "B2B-Portal mit individuellen Preisen",
-        "Erweiterte Suche und Filterung",
-        "Marketing-Tools (Gutscheine, Aktionen, Kampagnen)",
-        "Administrationspanel",
-        "Treueprogramm",
-      ],
-      it: [
-        "Sincronizzazione automatica prodotti e scorte",
-        "Portale B2B con prezzi personalizzati",
-        "Ricerca e filtri avanzati",
-        "Strumenti marketing (coupon, promozioni, campagne)",
-        "Pannello amministrativo",
-        "Sistema fedeltà",
-      ],
+      sr: [],
+      en: [],
+      de: [],
+      it: [],
     },
-    technologies: ["Custom Backend", "REST API", "MySQL", "ERP integracija", "Responsive Design", "SEO optimizacija"],
+    technologies: [],
     results: {
-      sr: [
-        "Centralizovana digitalna platforma",
-        "Automatizacija svakodnevnih procesa",
-        "Platforma spremna za dalji rast",
-      ],
-      en: [
-        "Centralized digital platform",
-        "Automation of daily processes",
-        "Platform ready for further growth",
-      ],
-      de: [
-        "Zentralisierte digitale Plattform",
-        "Automatisierung täglicher Prozesse",
-        "Plattform bereit für weiteres Wachstum",
-      ],
-      it: [
-        "Piattaforma digitale centralizzata",
-        "Automazione dei processi quotidiani",
-        "Piattaforma pronta per ulteriore crescita",
-      ],
+      sr: [],
+      en: [],
+      de: [],
+      it: [],
     },
   },
   {
@@ -403,6 +362,33 @@ const labels: Record<
 
 const featureIcons = [Globe, Smartphone, Search, Zap, Code2, ShoppingCart];
 
+const PortfolioArticleContent = ({ lang }: { lang: Lang }) => {
+  const sections = getBncShopArticle(lang);
+
+  return (
+    <section className="pb-20">
+      <div className="container mx-auto px-6">
+        <div className="w-full space-y-12">
+          {sections.map((section, index) => (
+            <motion.div key={section.heading ?? index} {...fadeUp} transition={{ delay: index * 0.05 }}>
+              {section.heading && (
+                <h2 className="mb-6 text-2xl font-bold md:text-3xl">{section.heading}</h2>
+              )}
+              <div className="space-y-4">
+                {section.paragraphs.map((paragraph) => (
+                  <p key={paragraph} className="text-lg leading-relaxed text-muted-foreground">
+                    {paragraph}
+                  </p>
+                ))}
+              </div>
+            </motion.div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+};
+
 const GalleryCarousel = ({ images, title }: { images: string[]; title: string }) => {
   const [emblaRef, emblaApi] = useEmblaCarousel({ loop: true, align: "start", slidesToScroll: 1 });
   const [selectedIndex, setSelectedIndex] = useState(0);
@@ -504,6 +490,7 @@ const ProjectDetail = () => {
   const seoTitle = `${project.title} | ${project.category[lang]} | Wizionar`;
   const seoDescription = project.description[lang];
   const projectPath = `/portfolio/${project.slug}`;
+  const isArticleLayout = project.layout === "article";
 
   return (
     <div className="min-h-screen bg-background text-foreground">
@@ -553,7 +540,20 @@ const ProjectDetail = () => {
               </span>
             </div>
             <h1 className="mb-4 text-3xl font-bold md:text-5xl">{project.title}</h1>
-            <p className="max-w-3xl text-lg text-muted-foreground">{project.description[lang]}</p>
+            <p className="w-full text-lg leading-relaxed text-muted-foreground">
+              {project.description[lang]}
+            </p>
+            {project.liveUrl && (
+              <a
+                href={project.liveUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="mt-4 inline-flex items-center gap-2 text-primary hover:underline"
+              >
+                {project.liveUrl.replace(/^https?:\/\//, "")}
+                <Globe className="h-4 w-4" />
+              </a>
+            )}
           </motion.div>
         </div>
       </section>
@@ -570,16 +570,19 @@ const ProjectDetail = () => {
               loading="eager"
               fetchpriority="high"
               decoding="async"
-              sizes="(max-width: 768px) 100vw, 1200px"
-              className="aspect-video w-full object-cover"
+              className="h-auto w-full"
             />
           </motion.div>
         </div>
       </section>
 
+      {isArticleLayout ? (
+        <PortfolioArticleContent lang={lang} />
+      ) : (
+        <>
       <section className="pb-16">
         <div className="container mx-auto px-6">
-          <div className="grid max-w-4xl gap-4 md:grid-cols-2">
+          <div className="grid w-full gap-4 md:grid-cols-2">
             <div className="rounded-xl border border-border bg-card p-5">
               <span className="text-xs uppercase tracking-wider text-muted-foreground">{l.client}</span>
               <p className="mt-1 font-semibold">{project.client[lang]}</p>
@@ -687,6 +690,8 @@ const ProjectDetail = () => {
           </div>
         </div>
       </section>
+        </>
+      )}
 
       <section className="py-24">
         <div className="container mx-auto px-6 text-center">
