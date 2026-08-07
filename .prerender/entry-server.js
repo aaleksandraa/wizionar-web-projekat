@@ -9,7 +9,7 @@ import * as React from "react";
 import { createContext, useContext, useState, useEffect, useCallback, useMemo, lazy, forwardRef } from "react";
 import * as ToastPrimitives from "@radix-ui/react-toast";
 import { cva } from "class-variance-authority";
-import { X, ArrowUpRight, Menu, ChevronRight, Mail, Facebook, Instagram, Phone, ArrowRight, Play, Briefcase, Database, Zap, Shield, FileDown, Layers, Eye, TrendingUp, CreditCard, Stethoscope, Wallet, Building2, Scissors, MessageCircle, Cat, Search, Monitor, Settings, TestTube, Rocket, FileCheck, Lock, Activity, CheckCircle, Calculator, Package, Palette, Handshake, BarChart3, Clock, FileSpreadsheet, AlertTriangle, CheckCircle2, LayoutDashboard, Users, CalendarClock, Globe, ShieldCheck, UserCheck, Key, Factory, Truck, Server, Gauge, Tag, FileText, DollarSign, Calendar, MapPin, FlaskConical, Heart, Home, MessageCircleQuestion, Star, Bell, Sparkles, Plug, ShoppingCart, MessageSquare, Smartphone, PenTool, Headphones, ChevronDown, Target, Link2, ClipboardList, Code2, Languages, Wrench, Image, LayoutGrid, Filter, ExternalLink, Share2, BookOpen, ChevronLeft, Check, ArrowLeft, Loader2 } from "lucide-react";
+import { X, ArrowUpRight, Menu, ChevronRight, Mail, Facebook, Instagram, Phone, ArrowRight, Play, Briefcase, Database, Zap, Shield, FileDown, Layers, Eye, TrendingUp, CreditCard, Stethoscope, Wallet, Building2, Scissors, MessageCircle, Cat, Search, Monitor, Settings, TestTube, Rocket, FileCheck, Lock, Activity, CheckCircle, Calculator, Package, Palette, Handshake, BarChart3, Clock, FileSpreadsheet, AlertTriangle, CheckCircle2, LayoutDashboard, Users, CalendarClock, Globe, ShieldCheck, UserCheck, Key, Factory, Truck, Server, Gauge, Tag, FileText, DollarSign, Calendar, MapPin, FlaskConical, Heart, Home, MessageCircleQuestion, Star, Bell, Sparkles, Plug, ShoppingCart, MessageSquare, Smartphone, PenTool, Headphones, ChevronDown, Target, Link2, ArrowLeft, Code2, ChevronLeft, ClipboardList, Languages, Wrench, Image, LayoutGrid, Filter, ExternalLink, Share2, BookOpen, Check, Loader2 } from "lucide-react";
 import { clsx } from "clsx";
 import { twMerge } from "tailwind-merge";
 import { useTheme } from "next-themes";
@@ -17,9 +17,9 @@ import { Toaster as Toaster$2 } from "sonner";
 import * as TooltipPrimitive from "@radix-ui/react-tooltip";
 import { Slot } from "@radix-ui/react-slot";
 import * as AccordionPrimitive from "@radix-ui/react-accordion";
+import useEmblaCarousel from "embla-carousel-react";
 import * as CheckboxPrimitive from "@radix-ui/react-checkbox";
 import * as ProgressPrimitive from "@radix-ui/react-progress";
-import useEmblaCarousel from "embla-carousel-react";
 const identity = (page) => page;
 const AppRoutes = ({
   pages: pages2,
@@ -11181,6 +11181,590 @@ const fadeUp$2 = {
   viewport: { once: true },
   transition: { duration: 0.5 }
 };
+const portfolioProjects = [
+  {
+    slug: "bnc-shop",
+    title: "BNC Shop",
+    image: portfolioBncWebshop,
+    gallery: [portfolioBncWebshop],
+    liveUrl: "https://bnc.ba",
+    client: {
+      sr: "BNC",
+      en: "BNC",
+      de: "BNC",
+      it: "BNC"
+    },
+    category: {
+      sr: "Web shop",
+      en: "E-commerce",
+      de: "Webshop",
+      it: "E-commerce"
+    },
+    summary: {
+      sr: "Custom eCommerce platforma koja objedinjuje online prodaju, B2B poslovanje i interne procese.",
+      en: "Custom eCommerce platform unifying online sales, B2B operations and internal processes.",
+      de: "Maßgeschneiderte E-Commerce-Plattform, die Online-Verkauf, B2B-Geschäft und interne Prozesse vereint.",
+      it: "Piattaforma eCommerce personalizzata che unifica vendite online, operazioni B2B e processi interni."
+    },
+    description: {
+      sr: "Razvoj custom eCommerce platforme koja objedinjuje online prodaju, B2B poslovanje i interne procese u jedinstven sistem. Moderna platforma za upravljanje proizvodima, narudžbama, marketing kampanjama, poslovnim kupcima i internim procesima, uz visok nivo automatizacije i mogućnost daljeg razvoja.",
+      en: "Development of a custom eCommerce platform that unifies online sales, B2B operations and internal processes into a single system. A modern platform for managing products, orders, marketing campaigns, business customers and internal processes, with a high level of automation and room to grow.",
+      de: "Entwicklung einer maßgeschneiderten E-Commerce-Plattform, die Online-Verkauf, B2B-Geschäft und interne Prozesse in einem System vereint. Eine moderne Plattform zur Verwaltung von Produkten, Bestellungen, Marketingkampagnen, Geschäftskunden und internen Prozessen mit hohem Automatisierungsgrad und Entwicklungspotenzial.",
+      it: "Sviluppo di una piattaforma eCommerce personalizzata che unifica vendite online, operazioni B2B e processi interni in un unico sistema. Una piattaforma moderna per la gestione di prodotti, ordini, campagne marketing, clienti business e processi interni, con alto livello di automazione e possibilità di crescita."
+    },
+    challenge: {
+      sr: "Kako je broj proizvoda, kupaca i prodajnih kanala rastao, postojeće rješenje više nije moglo pratiti razvoj poslovanja. Veliki dio procesa zahtijevao je ručne intervencije, podaci su dolazili iz različitih sistema, a administracija je postajala sve složenija.",
+      en: "As the number of products, customers and sales channels grew, the existing solution could no longer keep up with business development. Much of the process required manual intervention, data came from different systems, and administration was becoming increasingly complex.",
+      de: "Mit wachsender Anzahl an Produkten, Kunden und Vertriebskanälen konnte die bestehende Lösung die Geschäftsentwicklung nicht mehr mithalten. Viele Prozesse erforderten manuelle Eingriffe, Daten kamen aus verschiedenen Systemen und die Administration wurde zunehmend komplexer.",
+      it: "Con la crescita del numero di prodotti, clienti e canali di vendita, la soluzione esistente non riusciva più a tenere il passo con lo sviluppo del business. Gran parte dei processi richiedeva interventi manuali, i dati provenivano da sistemi diversi e l'amministrazione diventava sempre più complessa."
+    },
+    solution: {
+      sr: "Osmislili smo i razvili platformu koja ne rješava samo prodaju putem interneta, već povezuje kompletan poslovni ekosistem u jedno centralizovano rješenje — sa automatskom sinhronizacijom podataka, alatima za marketing tim i iskustvom prilagođenim različitim tipovima korisnika.",
+      en: "We designed and developed a platform that doesn't just handle online sales, but connects the entire business ecosystem into one centralized solution — with automatic data synchronization, tools for the marketing team and experiences tailored to different user types.",
+      de: "Wir konzipierten und entwickelten eine Plattform, die nicht nur den Online-Verkauf abwickelt, sondern das gesamte Geschäftsökosystem in einer zentralen Lösung verbindet — mit automatischer Datensynchronisation, Tools für das Marketing-Team und auf verschiedene Nutzertypen zugeschnittenen Erlebnissen.",
+      it: "Abbiamo progettato e sviluppato una piattaforma che non si limita alla vendita online, ma collega l'intero ecosistema aziendale in un'unica soluzione centralizzata — con sincronizzazione automatica dei dati, strumenti per il team marketing ed esperienze personalizzate per diversi tipi di utenti."
+    },
+    features: {
+      sr: [
+        "Automatska sinhronizacija proizvoda i zaliha",
+        "B2B portal sa prilagođenim cijenama",
+        "Napredna pretraga i filtriranje",
+        "Marketing alati (kuponi, promocije, akcije)",
+        "Administrativni panel",
+        "Sistem lojalnosti"
+      ],
+      en: [
+        "Automatic product and stock synchronization",
+        "B2B portal with custom pricing",
+        "Advanced search and filtering",
+        "Marketing tools (coupons, promotions, campaigns)",
+        "Admin panel",
+        "Loyalty system"
+      ],
+      de: [
+        "Automatische Produkt- und Bestandssynchronisation",
+        "B2B-Portal mit individuellen Preisen",
+        "Erweiterte Suche und Filterung",
+        "Marketing-Tools (Gutscheine, Aktionen, Kampagnen)",
+        "Administrationspanel",
+        "Treueprogramm"
+      ],
+      it: [
+        "Sincronizzazione automatica prodotti e scorte",
+        "Portale B2B con prezzi personalizzati",
+        "Ricerca e filtri avanzati",
+        "Strumenti marketing (coupon, promozioni, campagne)",
+        "Pannello amministrativo",
+        "Sistema fedeltà"
+      ]
+    },
+    technologies: ["Custom Backend", "REST API", "MySQL", "ERP integracija", "Responsive Design", "SEO optimizacija"],
+    results: {
+      sr: [
+        "Centralizovana digitalna platforma",
+        "Automatizacija svakodnevnih procesa",
+        "Platforma spremna za dalji rast"
+      ],
+      en: [
+        "Centralized digital platform",
+        "Automation of daily processes",
+        "Platform ready for further growth"
+      ],
+      de: [
+        "Zentralisierte digitale Plattform",
+        "Automatisierung täglicher Prozesse",
+        "Plattform bereit für weiteres Wachstum"
+      ],
+      it: [
+        "Piattaforma digitale centralizzata",
+        "Automazione dei processi quotidiani",
+        "Piattaforma pronta per ulteriore crescita"
+      ]
+    }
+  },
+  {
+    slug: "techflow-dashboard",
+    title: "TechFlow Dashboard",
+    image: portfolioCorporate,
+    gallery: [portfolioCorporate, portfolioEshop, portfolioMedical, portfolioRestaurant],
+    client: {
+      sr: "TechFlow Solutions",
+      en: "TechFlow Solutions",
+      de: "TechFlow Solutions",
+      it: "TechFlow Solutions"
+    },
+    category: {
+      sr: "Korporativni web sajt",
+      en: "Corporate website",
+      de: "Unternehmenswebsite",
+      it: "Sito web aziendale"
+    },
+    summary: {
+      sr: "Korporativni dashboard sa analitikom i izvještavanjem za finansijsku kompaniju.",
+      en: "Corporate dashboard with analytics and reporting for a financial company.",
+      de: "Unternehmens-Dashboard mit Analytik und Reporting für ein Finanzunternehmen.",
+      it: "Dashboard aziendale con analisi e reportistica per una società finanziaria."
+    },
+    description: {
+      sr: "Korporativni dashboard sa analitikom i izvještavanjem za finansijsku kompaniju. Kompleksan projekat koji je zahtijevao integraciju višestrukih izvora podataka i prikaz u realnom vremenu.",
+      en: "Corporate dashboard with analytics and reporting for a financial company. A complex project requiring integration of multiple data sources and real-time display.",
+      de: "Unternehmens-Dashboard mit Analytik und Reporting für ein Finanzunternehmen. Ein komplexes Projekt mit Integration mehrerer Datenquellen und Echtzeitanzeige.",
+      it: "Dashboard aziendale con analisi e reportistica per una società finanziaria. Un progetto complesso che richiedeva l'integrazione di più fonti di dati e la visualizzazione in tempo reale."
+    },
+    challenge: {
+      sr: "Klijent je trebao centralizovanu platformu za praćenje svih finansijskih metrika u realnom vremenu, sa mogućnošću generisanja izvještaja i vizuelnog prikaza podataka za različite odjele.",
+      en: "The client needed a centralized platform to track all financial metrics in real time, with the ability to generate reports and visually present data for different departments.",
+      de: "Der Kunde benötigte eine zentrale Plattform zur Echtzeit-Verfolgung aller Finanzkennzahlen mit der Möglichkeit, Berichte zu erstellen und Daten für verschiedene Abteilungen visuell darzustellen.",
+      it: "Il cliente aveva bisogno di una piattaforma centralizzata per monitorare tutte le metriche finanziarie in tempo reale, con la possibilità di generare report e visualizzare i dati per diversi dipartimenti."
+    },
+    solution: {
+      sr: "Razvili smo custom dashboard sa interaktivnim grafikonima, automatizovanim izvještajima i pristupom po ulogama. Platforma se integriše sa postojećim ERP sistemom klijenta.",
+      en: "We developed a custom dashboard with interactive charts, automated reports and role-based access. The platform integrates with the client's existing ERP system.",
+      de: "Wir entwickelten ein maßgeschneidertes Dashboard mit interaktiven Diagrammen, automatisierten Berichten und rollenbasiertem Zugriff. Die Plattform integriert sich in das bestehende ERP-System des Kunden.",
+      it: "Abbiamo sviluppato una dashboard personalizzata con grafici interattivi, report automatizzati e accesso basato sui ruoli. La piattaforma si integra con il sistema ERP esistente del cliente."
+    },
+    features: {
+      sr: ["Real-time analitika", "Automatski izvještaji", "Pristup po ulogama", "ERP integracija", "Responsive dizajn", "Dark/Light mode"],
+      en: ["Real-time analytics", "Automated reports", "Role-based access", "ERP integration", "Responsive design", "Dark/Light mode"],
+      de: ["Echtzeit-Analytik", "Automatisierte Berichte", "Rollenbasierter Zugriff", "ERP-Integration", "Responsives Design", "Dark/Light-Modus"],
+      it: ["Analisi in tempo reale", "Report automatizzati", "Accesso basato sui ruoli", "Integrazione ERP", "Design responsive", "Modalità Dark/Light"]
+    },
+    technologies: ["React", "TypeScript", "Tailwind CSS", "Recharts", "Supabase", "Framer Motion"],
+    results: {
+      sr: ["40% brže donošenje odluka", "Ušteda 15h sedmično na izvještavanju", "98% uptime platforme"],
+      en: ["40% faster decision making", "Saving 15h weekly on reporting", "98% platform uptime"],
+      de: ["40% schnellere Entscheidungsfindung", "15h wöchentliche Einsparung bei Berichten", "98% Plattform-Uptime"],
+      it: ["40% più veloce u procesu donošenja odluka", "Risparmio di 15h settimanali nei report", "98% uptime della piattaforma"]
+    }
+  },
+  {
+    slug: "styleout-fashion-shop",
+    title: "StyleOut Fashion Shop",
+    image: portfolioEshop,
+    gallery: [portfolioEshop, portfolioCorporate, portfolioSalon, portfolioRealestate],
+    client: {
+      sr: "StyleOut d.o.o.",
+      en: "StyleOut Ltd.",
+      de: "StyleOut GmbH",
+      it: "StyleOut Srl"
+    },
+    category: {
+      sr: "Web shop",
+      en: "E-commerce",
+      de: "Webshop",
+      it: "E-commerce"
+    },
+    summary: {
+      sr: "Moderan fashion web shop sa naprednim filterima i online plaćanjem.",
+      en: "Modern fashion web shop with advanced filters and online payment.",
+      de: "Moderner Fashion-Webshop mit erweiterten Filtern und Online-Zahlung.",
+      it: "Web shop di moda moderno con filtri avanzati e pagamento online."
+    },
+    description: {
+      sr: "Moderan fashion web shop sa naprednim filterima, wishlist-om i online plaćanjem. Kompletan e-commerce sistem prilagođen modnoj industriji.",
+      en: "Modern fashion web shop with advanced filters, wishlist and online payment. A complete e-commerce system tailored for the fashion industry.",
+      de: "Moderner Fashion-Webshop mit erweiterten Filtern, Wunschliste und Online-Zahlung. Ein komplettes E-Commerce-System für die Modebranche.",
+      it: "Web shop di moda moderno con filtri avanzati, wishlist e pagamento online. Un sistema e-commerce completo per l'industria della moda."
+    },
+    challenge: {
+      sr: "Klijent je želio premium online iskustvo kupovine sa brzim pretraživanjem, pametnim filterima i besprijekornim checkout procesom.",
+      en: "The client wanted a premium online shopping experience with fast search, smart filters and a seamless checkout process.",
+      de: "Der Kunde wollte ein Premium-Online-Einkaufserlebnis mit schneller Suche, intelligenten Filtern und einem nahtlosen Checkout-Prozess.",
+      it: "Il cliente desiderava un'esperienza di acquisto online premium con ricerca veloce, filtri intelligenti e un processo di checkout impeccabile."
+    },
+    solution: {
+      sr: "Kreirali smo custom web shop sa intuitivnim UX dizajnom, naprednim filterima po kategorijama, veličinama i bojama, te integrisanim payment gateway-em.",
+      en: "We created a custom web shop with intuitive UX design, advanced filters by category, size and color, and an integrated payment gateway.",
+      de: "Wir erstellten einen maßgeschneiderten Webshop mit intuitivem UX-Design, erweiterten Filtern nach Kategorie, Größe und Farbe sowie einem integrierten Payment-Gateway.",
+      it: "Abbiamo creato un web shop personalizzato con design UX intuitivo, filtri avanzati per categoria, taglia e colore, e un gateway di pagamento integrato."
+    },
+    features: {
+      sr: ["Napredni filteri", "Wishlist", "Online plaćanje", "Praćenje narudžbi", "Responsive dizajn", "SEO optimizacija"],
+      en: ["Advanced filters", "Wishlist", "Online payment", "Order tracking", "Responsive design", "SEO optimization"],
+      de: ["Erweiterte Filter", "Wunschliste", "Online-Zahlung", "Auftragsverfolgung", "Responsives Design", "SEO-Optimierung"],
+      it: ["Filtri avanzati", "Wishlist", "Pagamento online", "Tracciamento ordini", "Design responsive", "Ottimizzazione SEO"]
+    },
+    technologies: ["React", "TypeScript", "Tailwind CSS", "Stripe", "Supabase", "Framer Motion"],
+    results: {
+      sr: ["250% rast online prodaje", "35% veća prosječna košarica", "4.8/5 korisničko iskustvo"],
+      en: ["250% growth in online sales", "35% higher average cart", "4.8/5 user experience"],
+      de: ["250% Wachstum im Online-Umsatz", "35% höherer durchschnittlicher Warenkorb", "4.8/5 Nutzererfahrung"],
+      it: ["250% crescita nelle vendite online", "35% carrello medio più alto", "4.8/5 esperienza utente"]
+    }
+  },
+  {
+    slug: "mediconnect-klinika",
+    title: "MediConnect Klinika",
+    image: portfolioMedical,
+    gallery: [portfolioMedical, portfolioRealestate, portfolioCorporate, portfolioSalon],
+    client: {
+      sr: "MediConnect Klinika",
+      en: "MediConnect Clinic",
+      de: "MediConnect Klinik",
+      it: "Clinica MediConnect"
+    },
+    category: {
+      sr: "Medicinska platforma",
+      en: "Medical platform",
+      de: "Medizinische Plattform",
+      it: "Piattaforma medica"
+    },
+    summary: {
+      sr: "Platforma za medicinsku ustanovu sa online zakazivanjem termina.",
+      en: "Platform for a medical institution with online appointment scheduling.",
+      de: "Plattform für eine medizinische Einrichtung mit Online-Terminbuchung.",
+      it: "Piattaforma per un istituto medico con prenotazione appuntamenti online."
+    },
+    description: {
+      sr: "Platforma za medicinsku ustanovu sa online zakazivanjem termina, profilima doktora i informacijama o uslugama.",
+      en: "Platform for a medical institution with online appointment scheduling, doctor profiles and service information.",
+      de: "Plattform für eine medizinische Einrichtung mit Online-Terminbuchung, Arztprofilen und Serviceinformationen.",
+      it: "Piattaforma per un istituto medico con prenotazione appuntamenti online, profili dei medici e informazioni sui servizi."
+    },
+    challenge: {
+      sr: "Klinika je trebala modernu web platformu koja će smanjiti broj telefonskih poziva i omogućiti pacijentima jednostavno zakazivanje termina.",
+      en: "The clinic needed a modern web platform to reduce phone calls and allow patients to easily schedule appointments.",
+      de: "Die Klinik benötigte eine moderne Web-Plattform, um Telefonanrufe zu reduzieren und Patienten eine einfache Terminbuchung zu ermöglichen.",
+      it: "La clinica aveva bisogno di una piattaforma web moderna per ridurre le telefonate e permettere ai pazienti di prenotare facilmente gli appuntamenti."
+    },
+    solution: {
+      sr: "Razvili smo platformu sa online zakazivanjem, profilima doktora, sekcijom za usluge i blogom sa medicinskim savjetima.",
+      en: "We developed a platform with online booking, doctor profiles, services section and a blog with medical advice.",
+      de: "Wir entwickelten eine Plattform mit Online-Buchung, Arztprofilen, Servicebereich und einem Blog mit medizinischen Ratschlägen.",
+      it: "Abbiamo sviluppato una piattaforma con prenotazione online, profili dei medici, sezione servizi e un blog con consigli medici."
+    },
+    features: {
+      sr: ["Online zakazivanje", "Profili doktora", "Blog sekcija", "Kontakt forme", "Responsive dizajn", "GDPR usklađenost"],
+      en: ["Online booking", "Doctor profiles", "Blog section", "Contact forms", "Responsive design", "GDPR compliance"],
+      de: ["Online-Buchung", "Arztprofile", "Blog-Bereich", "Kontaktformulare", "Responsives Design", "DSGVO-Konformität"],
+      it: ["Prenotazione online", "Profili medici", "Sezione blog", "Moduli di contatto", "Design responsive", "Conformità GDPR"]
+    },
+    technologies: ["React", "TypeScript", "Tailwind CSS", "Supabase", "Framer Motion", "React Hook Form"],
+    results: {
+      sr: ["60% manje telefonskih poziva", "3x više online zakazivanja", "92% zadovoljstvo pacijenata"],
+      en: ["60% fewer phone calls", "3x more online bookings", "92% patient satisfaction"],
+      de: ["60% weniger Telefonanrufe", "3x mehr Online-Buchungen", "92% Patientenzufriedenheit"],
+      it: ["60% meno telefonate", "3x più prenotazioni online", "92% soddisfazione dei pazienti"]
+    }
+  }
+];
+const labels = {
+  sr: {
+    back: "Nazad na portfolio",
+    client: "Klijent",
+    category: "Kategorija",
+    challenge: "Izazov",
+    solution: "Naše rješenje",
+    features: "Funkcionalnosti",
+    tech: "Tehnologije",
+    results: "Rezultati",
+    cta: "Želite sličan projekat?",
+    ctaDesc: "Kontaktirajte nas i razgovarajmo o vašem projektu.",
+    ctaBtn: "Kontaktirajte nas"
+  },
+  en: {
+    back: "Back to portfolio",
+    client: "Client",
+    category: "Category",
+    challenge: "Challenge",
+    solution: "Our solution",
+    features: "Features",
+    tech: "Technologies",
+    results: "Results",
+    cta: "Want a similar project?",
+    ctaDesc: "Contact us and let's discuss your project.",
+    ctaBtn: "Contact us"
+  },
+  de: {
+    back: "Zurück zum Portfolio",
+    client: "Kunde",
+    category: "Kategorie",
+    challenge: "Herausforderung",
+    solution: "Unsere Lösung",
+    features: "Funktionen",
+    tech: "Technologien",
+    results: "Ergebnisse",
+    cta: "Möchten Sie ein ähnliches Projekt?",
+    ctaDesc: "Kontaktieren Sie uns und lassen Sie uns über Ihr Projekt sprechen.",
+    ctaBtn: "Kontaktieren Sie uns"
+  },
+  it: {
+    back: "Torna al portfolio",
+    client: "Cliente",
+    category: "Categoria",
+    challenge: "Sfida",
+    solution: "La nostra soluzione",
+    features: "Funzionalità",
+    tech: "Tecnologie",
+    results: "Risultati",
+    cta: "Vuoi un progetto simile?",
+    ctaDesc: "Contattaci e discutiamo del tuo progetto.",
+    ctaBtn: "Contattaci"
+  }
+};
+const featureIcons = [Globe, Smartphone, Search, Zap, Code2, ShoppingCart];
+const GalleryCarousel = ({ images, title }) => {
+  const [emblaRef, emblaApi] = useEmblaCarousel({ loop: true, align: "start", slidesToScroll: 1 });
+  const [selectedIndex, setSelectedIndex] = useState(0);
+  const scrollPrev = useCallback(() => emblaApi == null ? void 0 : emblaApi.scrollPrev(), [emblaApi]);
+  const scrollNext = useCallback(() => emblaApi == null ? void 0 : emblaApi.scrollNext(), [emblaApi]);
+  useEffect(() => {
+    if (!emblaApi) return;
+    const onSelect = () => setSelectedIndex(emblaApi.selectedScrollSnap());
+    emblaApi.on("select", onSelect);
+    onSelect();
+    return () => {
+      emblaApi.off("select", onSelect);
+    };
+  }, [emblaApi]);
+  return /* @__PURE__ */ jsx("section", { className: "pb-16", children: /* @__PURE__ */ jsx("div", { className: "container mx-auto px-6", children: /* @__PURE__ */ jsxs(motion.div, { ...fadeUp$2, className: "relative", children: [
+    /* @__PURE__ */ jsx("div", { ref: emblaRef, className: "overflow-hidden rounded-xl", children: /* @__PURE__ */ jsx("div", { className: "flex", children: images.map((image, index) => /* @__PURE__ */ jsx(
+      "div",
+      {
+        className: "mr-4 min-w-0 flex-[0_0_48%] last:mr-0 max-md:flex-[0_0_85%]",
+        children: /* @__PURE__ */ jsx("div", { className: "overflow-hidden rounded-xl border border-border shadow-md", children: /* @__PURE__ */ jsx(
+          "img",
+          {
+            src: image,
+            alt: "".concat(title, " - ").concat(index + 1),
+            loading: "lazy",
+            decoding: "async",
+            sizes: "(max-width: 768px) 85vw, 48vw",
+            className: "aspect-video w-full object-cover"
+          }
+        ) })
+      },
+      image
+    )) }) }),
+    /* @__PURE__ */ jsx(
+      "button",
+      {
+        type: "button",
+        onClick: scrollPrev,
+        "aria-label": "Previous project image",
+        className: "absolute left-2 top-1/2 flex h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full border border-border bg-background/90 shadow-md transition-colors hover:bg-background",
+        children: /* @__PURE__ */ jsx(ChevronLeft, { className: "h-5 w-5" })
+      }
+    ),
+    /* @__PURE__ */ jsx(
+      "button",
+      {
+        type: "button",
+        onClick: scrollNext,
+        "aria-label": "Next project image",
+        className: "absolute right-2 top-1/2 flex h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full border border-border bg-background/90 shadow-md transition-colors hover:bg-background",
+        children: /* @__PURE__ */ jsx(ChevronRight, { className: "h-5 w-5" })
+      }
+    ),
+    /* @__PURE__ */ jsx("div", { className: "mt-4 flex justify-center gap-2", children: images.map((image, index) => /* @__PURE__ */ jsx(
+      "button",
+      {
+        type: "button",
+        onClick: () => emblaApi == null ? void 0 : emblaApi.scrollTo(index),
+        "aria-label": "Go to project image ".concat(index + 1),
+        className: "h-2.5 w-2.5 rounded-full transition-colors ".concat(index === selectedIndex ? "bg-primary" : "bg-border")
+      },
+      image
+    )) })
+  ] }) }) });
+};
+const ProjectDetail = () => {
+  var _a2;
+  const { slug } = useParams();
+  const { language } = useLanguage();
+  const lang = language || "sr";
+  const l = (_a2 = labels[lang]) != null ? _a2 : labels.sr;
+  const project = portfolioProjects.find((item) => item.slug === slug);
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [project]);
+  if (!project) {
+    return /* @__PURE__ */ jsx(Navigate, { to: "/usluge/izrada-web-stranica#portfolio", replace: true });
+  }
+  const seoTitle = "".concat(project.title, " | ").concat(project.category[lang], " | Wizionar");
+  const seoDescription = project.description[lang];
+  const projectPath = "/portfolio/".concat(project.slug);
+  return /* @__PURE__ */ jsxs("div", { className: "min-h-screen bg-background text-foreground", children: [
+    /* @__PURE__ */ jsx(
+      SEOHead,
+      {
+        title: seoTitle,
+        description: seoDescription,
+        keywords: [project.category[lang], ...project.technologies],
+        schema: [
+          createCreativeWorkSchema({
+            language: lang,
+            name: project.title,
+            description: seoDescription,
+            path: projectPath,
+            keywords: [project.category[lang], ...project.technologies]
+          }),
+          createWebPageSchema({
+            language: lang,
+            path: projectPath,
+            title: seoTitle,
+            description: seoDescription
+          }),
+          createBreadcrumbSchema(lang, [
+            { name: getSeoLabel(lang, "home"), path: SEO_PATHS.home },
+            { name: getSeoLabel(lang, "services"), path: SEO_PATHS.usluge },
+            { name: getSeoLabel(lang, "webDevelopment"), path: SEO_PATHS.webDevelopment },
+            { name: getSeoLabel(lang, "portfolio"), path: SEO_PATHS.webDevelopment },
+            { name: project.title, path: projectPath }
+          ])
+        ]
+      }
+    ),
+    /* @__PURE__ */ jsx(WizionarHeader, {}),
+    /* @__PURE__ */ jsx("section", { className: "pb-12 pt-28", children: /* @__PURE__ */ jsxs("div", { className: "container mx-auto px-6", children: [
+      /* @__PURE__ */ jsxs(
+        LocalizedLink,
+        {
+          to: "/usluge/izrada-web-stranica#portfolio",
+          className: "mb-8 inline-flex items-center gap-2 text-sm text-muted-foreground transition-colors hover:text-primary",
+          children: [
+            /* @__PURE__ */ jsx(ArrowLeft, { className: "h-4 w-4" }),
+            l.back
+          ]
+        }
+      ),
+      /* @__PURE__ */ jsxs(motion.div, { ...fadeUp$2, children: [
+        /* @__PURE__ */ jsx("div", { className: "mb-4 flex flex-wrap gap-3", children: /* @__PURE__ */ jsx("span", { className: "rounded-full bg-primary/10 px-3 py-1 text-xs font-semibold text-primary", children: project.category[lang] }) }),
+        /* @__PURE__ */ jsx("h1", { className: "mb-4 text-3xl font-bold md:text-5xl", children: project.title }),
+        /* @__PURE__ */ jsx("p", { className: "max-w-3xl text-lg text-muted-foreground", children: project.description[lang] })
+      ] })
+    ] }) }),
+    /* @__PURE__ */ jsx("section", { className: "pb-16", children: /* @__PURE__ */ jsx("div", { className: "container mx-auto px-6", children: /* @__PURE__ */ jsx(
+      motion.div,
+      {
+        ...fadeUp$2,
+        className: "overflow-hidden rounded-2xl border border-border shadow-lg",
+        children: /* @__PURE__ */ jsx(
+          "img",
+          {
+            src: project.image,
+            alt: project.title,
+            loading: "eager",
+            fetchpriority: "high",
+            decoding: "async",
+            sizes: "(max-width: 768px) 100vw, 1200px",
+            className: "aspect-video w-full object-cover"
+          }
+        )
+      }
+    ) }) }),
+    /* @__PURE__ */ jsx("section", { className: "pb-16", children: /* @__PURE__ */ jsx("div", { className: "container mx-auto px-6", children: /* @__PURE__ */ jsxs("div", { className: "grid max-w-4xl gap-4 md:grid-cols-2", children: [
+      /* @__PURE__ */ jsxs("div", { className: "rounded-xl border border-border bg-card p-5", children: [
+        /* @__PURE__ */ jsx("span", { className: "text-xs uppercase tracking-wider text-muted-foreground", children: l.client }),
+        /* @__PURE__ */ jsx("p", { className: "mt-1 font-semibold", children: project.client[lang] })
+      ] }),
+      /* @__PURE__ */ jsxs("div", { className: "rounded-xl border border-border bg-card p-5", children: [
+        /* @__PURE__ */ jsx("span", { className: "text-xs uppercase tracking-wider text-muted-foreground", children: l.category }),
+        /* @__PURE__ */ jsx("p", { className: "mt-1 font-semibold", children: project.category[lang] })
+      ] })
+    ] }) }) }),
+    project.gallery.length > 1 && /* @__PURE__ */ jsx(GalleryCarousel, { images: project.gallery, title: project.title }),
+    /* @__PURE__ */ jsx("section", { className: "pb-20", children: /* @__PURE__ */ jsx("div", { className: "container mx-auto px-6", children: /* @__PURE__ */ jsxs("div", { className: "grid max-w-5xl gap-8 md:grid-cols-2", children: [
+      /* @__PURE__ */ jsxs(motion.div, { ...fadeUp$2, className: "rounded-2xl border border-border bg-card p-8", children: [
+        /* @__PURE__ */ jsxs("h2", { className: "mb-4 flex items-center gap-2 text-xl font-bold", children: [
+          /* @__PURE__ */ jsx(Shield, { className: "h-5 w-5 text-primary" }),
+          l.challenge
+        ] }),
+        /* @__PURE__ */ jsx("p", { className: "leading-relaxed text-muted-foreground", children: project.challenge[lang] })
+      ] }),
+      /* @__PURE__ */ jsxs(
+        motion.div,
+        {
+          ...fadeUp$2,
+          transition: { delay: 0.1 },
+          className: "rounded-2xl border border-primary/20 bg-primary/5 p-8",
+          children: [
+            /* @__PURE__ */ jsxs("h2", { className: "mb-4 flex items-center gap-2 text-xl font-bold", children: [
+              /* @__PURE__ */ jsx(Zap, { className: "h-5 w-5 text-primary" }),
+              l.solution
+            ] }),
+            /* @__PURE__ */ jsx("p", { className: "leading-relaxed text-muted-foreground", children: project.solution[lang] })
+          ]
+        }
+      )
+    ] }) }) }),
+    /* @__PURE__ */ jsx("section", { className: "bg-secondary/30 py-20", children: /* @__PURE__ */ jsxs("div", { className: "container mx-auto px-6", children: [
+      /* @__PURE__ */ jsx(motion.div, { ...fadeUp$2, className: "mb-12 text-center", children: /* @__PURE__ */ jsx("h2", { className: "text-2xl font-bold md:text-3xl", children: l.features }) }),
+      /* @__PURE__ */ jsx("div", { className: "mx-auto grid max-w-4xl gap-4 sm:grid-cols-2 lg:grid-cols-3", children: project.features[lang].map((feature, index) => {
+        const Icon = featureIcons[index % featureIcons.length];
+        return /* @__PURE__ */ jsxs(
+          motion.div,
+          {
+            ...fadeUp$2,
+            transition: { delay: index * 0.05 },
+            className: "flex items-center gap-3 rounded-xl border border-border bg-card p-4",
+            children: [
+              /* @__PURE__ */ jsx(Icon, { className: "h-5 w-5 shrink-0 text-primary" }),
+              /* @__PURE__ */ jsx("span", { className: "text-sm font-medium", children: feature })
+            ]
+          },
+          feature
+        );
+      }) })
+    ] }) }),
+    /* @__PURE__ */ jsx("section", { className: "py-20", children: /* @__PURE__ */ jsxs("div", { className: "container mx-auto px-6", children: [
+      /* @__PURE__ */ jsx(motion.div, { ...fadeUp$2, className: "mb-12 text-center", children: /* @__PURE__ */ jsx("h2", { className: "text-2xl font-bold md:text-3xl", children: l.tech }) }),
+      /* @__PURE__ */ jsx("div", { className: "mx-auto flex max-w-3xl flex-wrap justify-center gap-3", children: project.technologies.map((technology, index) => /* @__PURE__ */ jsx(
+        motion.span,
+        {
+          ...fadeUp$2,
+          transition: { delay: index * 0.05 },
+          className: "rounded-full border border-border bg-card px-5 py-2.5 text-sm font-semibold",
+          children: technology
+        },
+        technology
+      )) })
+    ] }) }),
+    /* @__PURE__ */ jsx("section", { className: "bg-secondary/30 py-20", children: /* @__PURE__ */ jsxs("div", { className: "container mx-auto px-6", children: [
+      /* @__PURE__ */ jsx(motion.div, { ...fadeUp$2, className: "mb-12 text-center", children: /* @__PURE__ */ jsx("h2", { className: "text-2xl font-bold md:text-3xl", children: l.results }) }),
+      /* @__PURE__ */ jsx("div", { className: "mx-auto grid max-w-4xl gap-6 sm:grid-cols-3", children: project.results[lang].map((result, index) => /* @__PURE__ */ jsxs(
+        motion.div,
+        {
+          ...fadeUp$2,
+          transition: { delay: index * 0.1 },
+          className: "rounded-2xl border border-border bg-card p-6 text-center",
+          children: [
+            /* @__PURE__ */ jsx(CheckCircle2, { className: "mx-auto mb-3 h-8 w-8 text-primary" }),
+            /* @__PURE__ */ jsx("p", { className: "font-bold", children: result })
+          ]
+        },
+        result
+      )) })
+    ] }) }),
+    /* @__PURE__ */ jsx("section", { className: "py-24", children: /* @__PURE__ */ jsx("div", { className: "container mx-auto px-6 text-center", children: /* @__PURE__ */ jsxs(motion.div, { ...fadeUp$2, children: [
+      /* @__PURE__ */ jsx("h2", { className: "mb-4 text-2xl font-bold md:text-3xl", children: l.cta }),
+      /* @__PURE__ */ jsx("p", { className: "mx-auto mb-8 max-w-xl text-lg text-muted-foreground", children: l.ctaDesc }),
+      /* @__PURE__ */ jsxs(
+        "a",
+        {
+          href: "mailto:info@wizionar.com",
+          className: "inline-flex items-center gap-2 rounded-lg bg-primary px-8 py-3 font-semibold text-primary-foreground shadow-md transition-colors hover:bg-primary/90",
+          children: [
+            l.ctaBtn,
+            /* @__PURE__ */ jsx(ArrowLeft, { className: "h-4 w-4 rotate-180" })
+          ]
+        }
+      )
+    ] }) }) }),
+    /* @__PURE__ */ jsx(WizionarFooter, {})
+  ] });
+};
+const ProjectDetail$1 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
+  __proto__: null,
+  default: ProjectDetail,
+  portfolioProjects
+}, Symbol.toStringTag, { value: "Module" }));
+const fadeUp$1 = {
+  initial: { opacity: 0, y: 24 },
+  whileInView: { opacity: 1, y: 0 },
+  viewport: { once: true },
+  transition: { duration: 0.5 }
+};
 const siteTypeIcons = [Monitor, Layers, Target, FileText, ShoppingCart];
 const whyNeededIcons = [Globe, Star, TrendingUp];
 const whatYouGetIcons = [
@@ -11202,53 +11786,51 @@ const whatYouGetIcons = [
 const shopIcons = [LayoutGrid, Filter, ShoppingCart, CreditCard, Truck, Tag, Settings, ClipboardList];
 const resultIcons = [Phone, MessageSquare, ShoppingCart, Star, Users, TrendingUp];
 const advantageIcons = [Star, Target, Users, TrendingUp, Clock, Shield];
-const portfolioData = [
-  { image: portfolioBncWebshop, title: "BNC Shop", link: "/portfolio/bnc-shop", descKey: 0 },
-  { image: portfolioCorporate, title: "TechFlow Dashboard", link: "/portfolio/techflow-dashboard", descKey: 1 },
-  { image: portfolioEshop, title: "StyleOut Fashion Shop", link: "/portfolio/styleout-fashion-shop", descKey: 2 },
-  { image: portfolioMedical, title: "MediConnect Klinika", link: "/portfolio/mediconnect-klinika", descKey: 3 },
-  { image: portfolioRestaurant, title: "GastroPress Restoran", link: "#", descKey: 4 },
-  { image: portfolioSalon, title: "BeautyGlow Salon", link: "#", descKey: 5 },
-  { image: portfolioRealestate, title: "PropertyVista Nekretnine", link: "#", descKey: 6 }
+const placeholderPortfolio = [
+  {
+    image: portfolioRestaurant,
+    title: "GastroPress Restoran",
+    link: "#",
+    summary: {
+      sr: "Web sajt za restoran sa digitalnim menijem i online narudžbama.",
+      en: "Restaurant website with digital menu and online orders.",
+      de: "Restaurant-Website mit digitalem Menü und Online-Bestellungen.",
+      it: "Sito web per ristorante con menù digitale e ordini online."
+    }
+  },
+  {
+    image: portfolioSalon,
+    title: "BeautyGlow Salon",
+    link: "#",
+    summary: {
+      sr: "Elegantna prezentacija kozmetičkog salona sa sistemom rezervacija.",
+      en: "Elegant cosmetic salon presentation with a booking system.",
+      de: "Elegante Präsentation eines Kosmetiksalons mit Buchungssystem.",
+      it: "Elegante presentazione di un salone di bellezza con sistema di prenotazione."
+    }
+  },
+  {
+    image: portfolioRealestate,
+    title: "PropertyVista Nekretnine",
+    link: "#",
+    summary: {
+      sr: "Portal za nekretnine sa mapom, filterima i detaljnim listinzima.",
+      en: "Real estate portal with map, filters and detailed listings.",
+      de: "Immobilienportal mit Karte, Filtern und detaillierten Inseraten.",
+      it: "Portale immobiliare con mappa, filtri e inserzioni dettagliate."
+    }
+  }
 ];
-const portfolioDescs = {
-  sr: [
-    "Custom eCommerce platforma koja objedinjuje online prodaju, B2B poslovanje i interne procese.",
-    "Korporativni dashboard sa analitikom i izvještavanjem za finansijsku kompaniju.",
-    "Moderan fashion web shop sa naprednim filterima i online plaćanjem.",
-    "Platforma za medicinsku ustanovu sa online zakazivanjem termina.",
-    "Web sajt za restoran sa digitalnim menijem i online narudžbama.",
-    "Elegantna prezentacija kozmetičkog salona sa sistemom rezervacija.",
-    "Portal za nekretnine sa mapom, filterima i detaljnim listinzima."
-  ],
-  en: [
-    "Custom eCommerce platform unifying online sales, B2B operations and internal processes.",
-    "Corporate dashboard with analytics and reporting for a financial company.",
-    "Modern fashion web shop with advanced filters and online payment.",
-    "Platform for a medical institution with online appointment scheduling.",
-    "Restaurant website with digital menu and online orders.",
-    "Elegant cosmetic salon presentation with a booking system.",
-    "Real estate portal with map, filters and detailed listings."
-  ],
-  de: [
-    "Maßgeschneiderte E-Commerce-Plattform, die Online-Verkauf, B2B-Geschäft und interne Prozesse vereint.",
-    "Unternehmens-Dashboard mit Analytik und Reporting für ein Finanzunternehmen.",
-    "Moderner Fashion-Webshop mit erweiterten Filtern und Online-Zahlung.",
-    "Plattform für eine medizinische Einrichtung mit Online-Terminbuchung.",
-    "Restaurant-Website mit digitalem Menü und Online-Bestellungen.",
-    "Elegante Präsentation eines Kosmetiksalons mit Buchungssystem.",
-    "Immobilienportal mit Karte, Filtern und detaillierten Inseraten."
-  ],
-  it: [
-    "Piattaforma eCommerce personalizzata che unifica vendite online, operazioni B2B e processi interni.",
-    "Dashboard aziendale con analisi e reportistica per una società finanziaria.",
-    "Web shop di moda moderno con filtri avanzati e pagamento online.",
-    "Piattaforma per un istituto medico con prenotazione appuntamenti online.",
-    "Sito web per ristorante con menù digitale e ordini online.",
-    "Elegante presentazione di un salone di bellezza con sistema di prenotazione.",
-    "Portale immobiliare con mappa, filtri e inserzioni dettagliate."
-  ]
-};
+const toPortfolioCard = (project) => ({
+  image: project.image,
+  title: project.title,
+  link: "/portfolio/".concat(project.slug),
+  summary: project.summary
+});
+const portfolioData = [
+  ...portfolioProjects.map(toPortfolioCard),
+  ...placeholderPortfolio
+];
 const FaqItem$1 = ({ q, a }) => {
   const [open, setOpen] = useState(false);
   return /* @__PURE__ */ jsxs("div", { className: "overflow-hidden rounded-xl border border-border", children: [
@@ -11276,7 +11858,7 @@ const WebDevelopment = () => {
   const t = useWebdevTranslations();
   const { language } = useLanguage();
   const seo = getPageSeo("webDevelopment", language);
-  const descs = portfolioDescs[language] || portfolioDescs.sr;
+  const lang = language || "sr";
   return /* @__PURE__ */ jsxs("div", { className: "min-h-screen bg-background text-foreground", children: [
     /* @__PURE__ */ jsx(
       SEOHead,
@@ -11315,7 +11897,7 @@ const WebDevelopment = () => {
           /* @__PURE__ */ jsx(
             motion.span,
             {
-              ...fadeUp$2,
+              ...fadeUp$1,
               className: "mb-4 inline-block text-sm font-semibold uppercase tracking-wider text-primary",
               children: t.hero.badge
             }
@@ -11323,7 +11905,7 @@ const WebDevelopment = () => {
           /* @__PURE__ */ jsxs(
             motion.h1,
             {
-              ...fadeUp$2,
+              ...fadeUp$1,
               transition: { duration: 0.5, delay: 0.1 },
               className: "mb-6 text-4xl font-bold leading-tight md:text-5xl lg:text-6xl",
               children: [
@@ -11336,7 +11918,7 @@ const WebDevelopment = () => {
           /* @__PURE__ */ jsx(
             motion.p,
             {
-              ...fadeUp$2,
+              ...fadeUp$1,
               transition: { duration: 0.5, delay: 0.2 },
               className: "mx-auto mb-8 max-w-3xl text-lg leading-relaxed text-muted-foreground md:text-xl",
               children: t.hero.subtitle
@@ -11345,7 +11927,7 @@ const WebDevelopment = () => {
           /* @__PURE__ */ jsxs(
             motion.div,
             {
-              ...fadeUp$2,
+              ...fadeUp$1,
               transition: { duration: 0.5, delay: 0.3 },
               className: "flex flex-col justify-center gap-4 sm:flex-row",
               children: [
@@ -11377,7 +11959,7 @@ const WebDevelopment = () => {
           /* @__PURE__ */ jsx(
             motion.p,
             {
-              ...fadeUp$2,
+              ...fadeUp$1,
               transition: { duration: 0.5, delay: 0.4 },
               className: "mt-6 text-sm text-muted-foreground",
               children: t.hero.microcopy
@@ -11386,7 +11968,7 @@ const WebDevelopment = () => {
         ] }) })
       ] }),
       /* @__PURE__ */ jsx("section", { className: "bg-secondary/30 py-24", children: /* @__PURE__ */ jsxs("div", { className: "container mx-auto px-6", children: [
-        /* @__PURE__ */ jsxs(motion.div, { ...fadeUp$2, className: "mx-auto mb-16 max-w-3xl text-center", children: [
+        /* @__PURE__ */ jsxs(motion.div, { ...fadeUp$1, className: "mx-auto mb-16 max-w-3xl text-center", children: [
           /* @__PURE__ */ jsxs("h2", { className: "mb-6 text-3xl font-bold md:text-4xl", children: [
             t.whyNeeded.title,
             " ",
@@ -11401,7 +11983,7 @@ const WebDevelopment = () => {
           return /* @__PURE__ */ jsxs(
             motion.div,
             {
-              ...fadeUp$2,
+              ...fadeUp$1,
               transition: { duration: 0.5, delay: index * 0.1 },
               className: "rounded-2xl border border-border bg-card p-6",
               children: [
@@ -11417,7 +11999,7 @@ const WebDevelopment = () => {
         }) })
       ] }) }),
       /* @__PURE__ */ jsx("section", { className: "py-24", children: /* @__PURE__ */ jsxs("div", { className: "container mx-auto px-6", children: [
-        /* @__PURE__ */ jsxs(motion.div, { ...fadeUp$2, className: "mb-16 text-center", children: [
+        /* @__PURE__ */ jsxs(motion.div, { ...fadeUp$1, className: "mb-16 text-center", children: [
           /* @__PURE__ */ jsx("span", { className: "mb-4 inline-block text-sm font-semibold uppercase tracking-wider text-primary", children: t.siteTypes.badge }),
           /* @__PURE__ */ jsx("h2", { className: "mb-4 text-3xl font-bold md:text-4xl", children: t.siteTypes.title }),
           /* @__PURE__ */ jsx("p", { className: "mx-auto max-w-2xl text-lg text-muted-foreground", children: t.siteTypes.subtitle })
@@ -11427,7 +12009,7 @@ const WebDevelopment = () => {
           return /* @__PURE__ */ jsxs(
             motion.div,
             {
-              ...fadeUp$2,
+              ...fadeUp$1,
               transition: { duration: 0.5, delay: index * 0.08 },
               className: "group rounded-2xl border border-border bg-card p-6 transition-all duration-300 hover:border-primary/20 hover:shadow-lg",
               children: [
@@ -11443,7 +12025,7 @@ const WebDevelopment = () => {
         }) })
       ] }) }),
       /* @__PURE__ */ jsx("section", { className: "bg-secondary/30 py-24", children: /* @__PURE__ */ jsxs("div", { className: "container mx-auto px-6", children: [
-        /* @__PURE__ */ jsxs(motion.div, { ...fadeUp$2, className: "mb-16 text-center", children: [
+        /* @__PURE__ */ jsxs(motion.div, { ...fadeUp$1, className: "mb-16 text-center", children: [
           /* @__PURE__ */ jsx("h2", { className: "mb-4 text-3xl font-bold md:text-4xl", children: t.cmsVsCustom.title }),
           /* @__PURE__ */ jsx("p", { className: "mx-auto max-w-2xl text-lg text-muted-foreground", children: t.cmsVsCustom.subtitle })
         ] }),
@@ -11451,7 +12033,7 @@ const WebDevelopment = () => {
           /* @__PURE__ */ jsxs(
             motion.div,
             {
-              ...fadeUp$2,
+              ...fadeUp$1,
               transition: { delay: 0.1 },
               className: "rounded-2xl border border-border bg-card p-8",
               children: [
@@ -11471,7 +12053,7 @@ const WebDevelopment = () => {
           /* @__PURE__ */ jsxs(
             motion.div,
             {
-              ...fadeUp$2,
+              ...fadeUp$1,
               transition: { delay: 0.2 },
               className: "relative overflow-hidden rounded-2xl border border-primary/30 bg-card p-8",
               children: [
@@ -11492,7 +12074,7 @@ const WebDevelopment = () => {
         ] })
       ] }) }),
       /* @__PURE__ */ jsx("section", { className: "py-24", children: /* @__PURE__ */ jsxs("div", { className: "container mx-auto px-6", children: [
-        /* @__PURE__ */ jsxs(motion.div, { ...fadeUp$2, className: "mb-16 text-center", children: [
+        /* @__PURE__ */ jsxs(motion.div, { ...fadeUp$1, className: "mb-16 text-center", children: [
           /* @__PURE__ */ jsx("h2", { className: "mb-4 text-3xl font-bold md:text-4xl", children: t.whatYouGet.title }),
           /* @__PURE__ */ jsx("p", { className: "mx-auto max-w-2xl text-lg text-muted-foreground", children: t.whatYouGet.subtitle })
         ] }),
@@ -11501,7 +12083,7 @@ const WebDevelopment = () => {
           return /* @__PURE__ */ jsxs(
             motion.div,
             {
-              ...fadeUp$2,
+              ...fadeUp$1,
               transition: { duration: 0.4, delay: index * 0.04 },
               className: "flex items-center gap-3 rounded-xl border border-border bg-card p-4 transition-colors hover:border-primary/20",
               children: [
@@ -11514,7 +12096,7 @@ const WebDevelopment = () => {
         }) })
       ] }) }),
       /* @__PURE__ */ jsx("section", { className: "bg-secondary/30 py-24", children: /* @__PURE__ */ jsxs("div", { className: "container mx-auto px-6", children: [
-        /* @__PURE__ */ jsxs(motion.div, { ...fadeUp$2, className: "mb-16 text-center", children: [
+        /* @__PURE__ */ jsxs(motion.div, { ...fadeUp$1, className: "mb-16 text-center", children: [
           /* @__PURE__ */ jsx("span", { className: "mb-4 inline-block text-sm font-semibold uppercase tracking-wider text-primary", children: t.shop.badge }),
           /* @__PURE__ */ jsx("h2", { className: "mb-4 text-3xl font-bold md:text-4xl", children: t.shop.title }),
           /* @__PURE__ */ jsx("p", { className: "mx-auto max-w-2xl text-lg text-muted-foreground", children: t.shop.subtitle })
@@ -11524,7 +12106,7 @@ const WebDevelopment = () => {
           return /* @__PURE__ */ jsxs(
             motion.div,
             {
-              ...fadeUp$2,
+              ...fadeUp$1,
               transition: { duration: 0.4, delay: index * 0.06 },
               className: "rounded-2xl border border-border bg-card p-5 transition-all hover:border-primary/20 hover:shadow-md",
               children: [
@@ -11540,7 +12122,7 @@ const WebDevelopment = () => {
         }) })
       ] }) }),
       /* @__PURE__ */ jsx("section", { className: "py-24", children: /* @__PURE__ */ jsx("div", { className: "container mx-auto px-6", children: /* @__PURE__ */ jsxs("div", { className: "mx-auto max-w-4xl", children: [
-        /* @__PURE__ */ jsx(motion.div, { ...fadeUp$2, className: "mb-12 text-center", children: /* @__PURE__ */ jsxs("h2", { className: "mb-6 text-3xl font-bold md:text-4xl", children: [
+        /* @__PURE__ */ jsx(motion.div, { ...fadeUp$1, className: "mb-12 text-center", children: /* @__PURE__ */ jsxs("h2", { className: "mb-6 text-3xl font-bold md:text-4xl", children: [
           t.results.title1,
           " ",
           /* @__PURE__ */ jsx("br", {}),
@@ -11548,12 +12130,12 @@ const WebDevelopment = () => {
           " ",
           /* @__PURE__ */ jsx("span", { className: "text-gradient", children: t.results.titleHighlight })
         ] }) }),
-        /* @__PURE__ */ jsx(motion.div, { ...fadeUp$2, className: "grid gap-6 md:grid-cols-2", children: t.results.items.map((text, index) => {
+        /* @__PURE__ */ jsx(motion.div, { ...fadeUp$1, className: "grid gap-6 md:grid-cols-2", children: t.results.items.map((text, index) => {
           const Icon = resultIcons[index];
           return /* @__PURE__ */ jsxs(
             motion.div,
             {
-              ...fadeUp$2,
+              ...fadeUp$1,
               transition: { delay: index * 0.06 },
               className: "flex items-center gap-4 rounded-xl border border-border bg-card p-4",
               children: [
@@ -11566,7 +12148,7 @@ const WebDevelopment = () => {
         }) })
       ] }) }) }),
       /* @__PURE__ */ jsx("section", { className: "bg-secondary/30 py-24", children: /* @__PURE__ */ jsxs("div", { className: "container mx-auto px-6", children: [
-        /* @__PURE__ */ jsxs(motion.div, { ...fadeUp$2, className: "mb-16 text-center", children: [
+        /* @__PURE__ */ jsxs(motion.div, { ...fadeUp$1, className: "mb-16 text-center", children: [
           /* @__PURE__ */ jsx("span", { className: "mb-4 inline-block text-sm font-semibold uppercase tracking-wider text-primary", children: t.process.badge }),
           /* @__PURE__ */ jsx("h2", { className: "mb-4 text-3xl font-bold md:text-4xl", children: t.process.title }),
           /* @__PURE__ */ jsx("p", { className: "mx-auto max-w-2xl text-lg text-muted-foreground", children: t.process.subtitle })
@@ -11574,7 +12156,7 @@ const WebDevelopment = () => {
         /* @__PURE__ */ jsx("div", { className: "mx-auto max-w-4xl space-y-6", children: t.process.steps.map((step, index) => /* @__PURE__ */ jsxs(
           motion.div,
           {
-            ...fadeUp$2,
+            ...fadeUp$1,
             transition: { duration: 0.4, delay: index * 0.08 },
             className: "flex gap-6 rounded-2xl border border-border bg-card p-6 transition-colors hover:border-primary/20",
             children: [
@@ -11589,7 +12171,7 @@ const WebDevelopment = () => {
         )) })
       ] }) }),
       /* @__PURE__ */ jsx("section", { className: "py-24", children: /* @__PURE__ */ jsxs("div", { className: "container mx-auto px-6", children: [
-        /* @__PURE__ */ jsxs(motion.div, { ...fadeUp$2, className: "mb-16 text-center", children: [
+        /* @__PURE__ */ jsxs(motion.div, { ...fadeUp$1, className: "mb-16 text-center", children: [
           /* @__PURE__ */ jsx("h2", { className: "mb-4 text-3xl font-bold md:text-4xl", children: t.advantages.title }),
           /* @__PURE__ */ jsx("p", { className: "mx-auto max-w-2xl text-lg text-muted-foreground", children: t.advantages.subtitle })
         ] }),
@@ -11598,7 +12180,7 @@ const WebDevelopment = () => {
           return /* @__PURE__ */ jsxs(
             motion.div,
             {
-              ...fadeUp$2,
+              ...fadeUp$1,
               transition: { duration: 0.4, delay: index * 0.08 },
               className: "rounded-2xl border border-border bg-card p-6 transition-all hover:border-primary/20 hover:shadow-lg",
               children: [
@@ -11614,7 +12196,7 @@ const WebDevelopment = () => {
         }) })
       ] }) }),
       /* @__PURE__ */ jsx("section", { id: "portfolio", className: "bg-secondary/30 py-24", children: /* @__PURE__ */ jsxs("div", { className: "container mx-auto px-6", children: [
-        /* @__PURE__ */ jsxs(motion.div, { ...fadeUp$2, className: "mb-16 text-center", children: [
+        /* @__PURE__ */ jsxs(motion.div, { ...fadeUp$1, className: "mb-16 text-center", children: [
           /* @__PURE__ */ jsx("span", { className: "mb-4 inline-block text-sm font-semibold uppercase tracking-wider text-primary", children: t.portfolio.badge }),
           /* @__PURE__ */ jsx("h2", { className: "mb-4 text-3xl font-bold md:text-4xl", children: t.portfolio.title }),
           /* @__PURE__ */ jsx("p", { className: "mx-auto max-w-2xl text-lg text-muted-foreground", children: t.portfolio.subtitle })
@@ -11622,7 +12204,7 @@ const WebDevelopment = () => {
         /* @__PURE__ */ jsx("div", { className: "mx-auto grid max-w-6xl gap-6 md:grid-cols-2 lg:grid-cols-3", children: portfolioData.map((item, index) => /* @__PURE__ */ jsxs(
           motion.div,
           {
-            ...fadeUp$2,
+            ...fadeUp$1,
             transition: { duration: 0.4, delay: index * 0.08 },
             className: "group overflow-hidden rounded-2xl border border-border bg-card transition-all hover:border-primary/20 hover:shadow-lg",
             children: [
@@ -11641,7 +12223,7 @@ const WebDevelopment = () => {
               ) }),
               /* @__PURE__ */ jsxs("div", { className: "p-5", children: [
                 /* @__PURE__ */ jsx("h3", { className: "mb-1 font-bold", children: item.title }),
-                /* @__PURE__ */ jsx("p", { className: "mb-3 text-sm text-muted-foreground", children: descs[item.descKey] }),
+                /* @__PURE__ */ jsx("p", { className: "mb-3 text-sm text-muted-foreground", children: item.summary[lang] }),
                 item.link !== "#" && /* @__PURE__ */ jsxs(
                   LocalizedLink,
                   {
@@ -11660,13 +12242,13 @@ const WebDevelopment = () => {
         )) })
       ] }) }),
       /* @__PURE__ */ jsx("section", { className: "py-24", children: /* @__PURE__ */ jsxs("div", { className: "container mx-auto px-6", children: [
-        /* @__PURE__ */ jsxs(motion.div, { ...fadeUp$2, className: "mb-16 text-center", children: [
+        /* @__PURE__ */ jsxs(motion.div, { ...fadeUp$1, className: "mb-16 text-center", children: [
           /* @__PURE__ */ jsx("h2", { className: "mb-4 text-3xl font-bold md:text-4xl", children: t.faq.title }),
           /* @__PURE__ */ jsx("p", { className: "mx-auto max-w-2xl text-lg text-muted-foreground", children: t.faq.subtitle })
         ] }),
-        /* @__PURE__ */ jsx("div", { className: "mx-auto max-w-3xl space-y-3", children: t.faq.items.map((item, index) => /* @__PURE__ */ jsx(motion.div, { ...fadeUp$2, transition: { duration: 0.4, delay: index * 0.05 }, children: /* @__PURE__ */ jsx(FaqItem$1, { q: item.q, a: item.a }) }, item.q)) })
+        /* @__PURE__ */ jsx("div", { className: "mx-auto max-w-3xl space-y-3", children: t.faq.items.map((item, index) => /* @__PURE__ */ jsx(motion.div, { ...fadeUp$1, transition: { duration: 0.4, delay: index * 0.05 }, children: /* @__PURE__ */ jsx(FaqItem$1, { q: item.q, a: item.a }) }, item.q)) })
       ] }) }),
-      /* @__PURE__ */ jsx("section", { className: "bg-secondary/30 py-24", children: /* @__PURE__ */ jsx("div", { className: "container mx-auto px-6", children: /* @__PURE__ */ jsxs(motion.div, { ...fadeUp$2, className: "mx-auto max-w-3xl text-center", children: [
+      /* @__PURE__ */ jsx("section", { className: "bg-secondary/30 py-24", children: /* @__PURE__ */ jsx("div", { className: "container mx-auto px-6", children: /* @__PURE__ */ jsxs(motion.div, { ...fadeUp$1, className: "mx-auto max-w-3xl text-center", children: [
         /* @__PURE__ */ jsxs("h2", { className: "mb-6 text-3xl font-bold md:text-4xl", children: [
           t.cta.title,
           " ",
@@ -11752,7 +12334,7 @@ const branding1 = "/assets/branding-1-VJNjIUlR.jpg";
 const branding2 = "/assets/branding-2-DF7gcWF7.jpg";
 const branding3 = "/assets/branding-3-DKkW7lZu.jpg";
 const branding4 = "/assets/branding-4-BXTsWwIa.jpg";
-const fadeUp$1 = {
+const fadeUp = {
   initial: { opacity: 0, y: 20 },
   whileInView: { opacity: 1, y: 0 },
   viewport: { once: true },
@@ -11969,7 +12551,7 @@ const GrafickiDizajn = () => {
           /* @__PURE__ */ jsx(
             motion.span,
             {
-              ...fadeUp$1,
+              ...fadeUp,
               className: "mb-4 inline-block text-sm font-semibold uppercase tracking-wider text-primary",
               children: t.meta.badge
             }
@@ -11977,7 +12559,7 @@ const GrafickiDizajn = () => {
           /* @__PURE__ */ jsxs(
             motion.h1,
             {
-              ...fadeUp$1,
+              ...fadeUp,
               transition: { delay: 0.1 },
               className: "mb-6 text-4xl font-bold leading-tight md:text-6xl",
               children: [
@@ -11991,7 +12573,7 @@ const GrafickiDizajn = () => {
           /* @__PURE__ */ jsx(
             motion.p,
             {
-              ...fadeUp$1,
+              ...fadeUp,
               transition: { delay: 0.2 },
               className: "mx-auto mb-8 max-w-2xl text-lg text-muted-foreground",
               children: t.meta.subtitle
@@ -12000,7 +12582,7 @@ const GrafickiDizajn = () => {
           /* @__PURE__ */ jsxs(
             motion.a,
             {
-              ...fadeUp$1,
+              ...fadeUp,
               transition: { delay: 0.3 },
               href: "mailto:info@wizionar.com",
               className: "inline-flex items-center gap-2 font-semibold text-primary transition-all hover:gap-3",
@@ -12014,7 +12596,7 @@ const GrafickiDizajn = () => {
         ] })
       ] }),
       /* @__PURE__ */ jsx("section", { className: "pb-24", children: /* @__PURE__ */ jsxs("div", { className: "container mx-auto px-3 md:px-6", children: [
-        /* @__PURE__ */ jsxs(motion.div, { ...fadeUp$1, className: "mb-16 text-center", children: [
+        /* @__PURE__ */ jsxs(motion.div, { ...fadeUp, className: "mb-16 text-center", children: [
           /* @__PURE__ */ jsxs("h2", { className: "mb-4 text-3xl font-bold md:text-4xl", children: [
             t.servicesTitle,
             " ",
@@ -12063,7 +12645,7 @@ const GrafickiDizajn = () => {
         }) })
       ] }) }),
       /* @__PURE__ */ jsx("section", { className: "pb-24", children: /* @__PURE__ */ jsxs("div", { className: "container mx-auto px-3 md:px-6", children: [
-        /* @__PURE__ */ jsxs(motion.div, { ...fadeUp$1, className: "mb-16 text-center", children: [
+        /* @__PURE__ */ jsxs(motion.div, { ...fadeUp, className: "mb-16 text-center", children: [
           /* @__PURE__ */ jsxs("h2", { className: "mb-4 text-3xl font-bold md:text-4xl", children: [
             t.processTitle,
             " ",
@@ -12089,7 +12671,7 @@ const GrafickiDizajn = () => {
         )) })
       ] }) }),
       /* @__PURE__ */ jsx("section", { className: "pb-24", children: /* @__PURE__ */ jsxs("div", { className: "container mx-auto px-3 md:px-6", children: [
-        /* @__PURE__ */ jsx(motion.div, { ...fadeUp$1, className: "mb-12 text-center", children: /* @__PURE__ */ jsxs("h2", { className: "text-3xl font-bold md:text-4xl", children: [
+        /* @__PURE__ */ jsx(motion.div, { ...fadeUp, className: "mb-12 text-center", children: /* @__PURE__ */ jsxs("h2", { className: "text-3xl font-bold md:text-4xl", children: [
           t.faqTitle,
           " ",
           /* @__PURE__ */ jsx("span", { className: "text-gradient", children: t.faqTitleHighlight })
@@ -12099,7 +12681,7 @@ const GrafickiDizajn = () => {
       /* @__PURE__ */ jsx("section", { className: "pb-32", children: /* @__PURE__ */ jsx("div", { className: "container mx-auto px-3 md:px-6", children: /* @__PURE__ */ jsxs(
         motion.div,
         {
-          ...fadeUp$1,
+          ...fadeUp,
           className: "rounded-3xl border border-primary/10 bg-gradient-to-br from-primary/10 to-primary/5 p-12 text-center",
           children: [
             /* @__PURE__ */ jsx("h2", { className: "mb-4 text-3xl font-bold md:text-4xl", children: t.ctaTitle }),
@@ -12831,566 +13413,6 @@ const ProjectInquiry = () => {
 const ProjectInquiry$1 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
   default: ProjectInquiry
-}, Symbol.toStringTag, { value: "Module" }));
-const fadeUp = {
-  initial: { opacity: 0, y: 24 },
-  whileInView: { opacity: 1, y: 0 },
-  viewport: { once: true },
-  transition: { duration: 0.5 }
-};
-const portfolioProjects = [
-  {
-    slug: "bnc-shop",
-    title: "BNC Shop",
-    image: portfolioBncWebshop,
-    gallery: [portfolioBncWebshop],
-    liveUrl: "https://bnc.ba",
-    client: {
-      sr: "BNC",
-      en: "BNC",
-      de: "BNC",
-      it: "BNC"
-    },
-    category: {
-      sr: "Custom eCommerce platforma",
-      en: "Custom eCommerce platform",
-      de: "Maßgeschneiderte E-Commerce-Plattform",
-      it: "Piattaforma eCommerce personalizzata"
-    },
-    description: {
-      sr: "Razvoj custom eCommerce platforme koja objedinjuje online prodaju, B2B poslovanje i interne procese u jedinstven sistem. Moderna platforma za upravljanje proizvodima, narudžbama, marketing kampanjama, poslovnim kupcima i internim procesima, uz visok nivo automatizacije i mogućnost daljeg razvoja.",
-      en: "Development of a custom eCommerce platform that unifies online sales, B2B operations and internal processes into a single system. A modern platform for managing products, orders, marketing campaigns, business customers and internal processes, with a high level of automation and room to grow.",
-      de: "Entwicklung einer maßgeschneiderten E-Commerce-Plattform, die Online-Verkauf, B2B-Geschäft und interne Prozesse in einem System vereint. Eine moderne Plattform zur Verwaltung von Produkten, Bestellungen, Marketingkampagnen, Geschäftskunden und internen Prozessen mit hohem Automatisierungsgrad und Entwicklungspotenzial.",
-      it: "Sviluppo di una piattaforma eCommerce personalizzata che unifica vendite online, operazioni B2B e processi interni in un unico sistema. Una piattaforma moderna per la gestione di prodotti, ordini, campagne marketing, clienti business e processi interni, con alto livello di automazione e possibilità di crescita."
-    },
-    challenge: {
-      sr: "Kako je broj proizvoda, kupaca i prodajnih kanala rastao, postojeće rješenje više nije moglo pratiti razvoj poslovanja. Veliki dio procesa zahtijevao je ručne intervencije, podaci su dolazili iz različitih sistema, a administracija je postajala sve složenija.",
-      en: "As the number of products, customers and sales channels grew, the existing solution could no longer keep up with business development. Much of the process required manual intervention, data came from different systems, and administration was becoming increasingly complex.",
-      de: "Mit wachsender Anzahl an Produkten, Kunden und Vertriebskanälen konnte die bestehende Lösung die Geschäftsentwicklung nicht mehr mithalten. Viele Prozesse erforderten manuelle Eingriffe, Daten kamen aus verschiedenen Systemen und die Administration wurde zunehmend komplexer.",
-      it: "Con la crescita del numero di prodotti, clienti e canali di vendita, la soluzione esistente non riusciva più a tenere il passo con lo sviluppo del business. Gran parte dei processi richiedeva interventi manuali, i dati provenivano da sistemi diversi e l'amministrazione diventava sempre più complessa."
-    },
-    solution: {
-      sr: "Osmislili smo i razvili platformu koja ne rješava samo prodaju putem interneta, već povezuje kompletan poslovni ekosistem u jedno centralizovano rješenje — sa automatskom sinhronizacijom podataka, alatima za marketing tim i iskustvom prilagođenim različitim tipovima korisnika.",
-      en: "We designed and developed a platform that doesn't just handle online sales, but connects the entire business ecosystem into one centralized solution — with automatic data synchronization, tools for the marketing team and experiences tailored to different user types.",
-      de: "Wir konzipierten und entwickelten eine Plattform, die nicht nur den Online-Verkauf abwickelt, sondern das gesamte Geschäftsökosystem in einer zentralen Lösung verbindet — mit automatischer Datensynchronisation, Tools für das Marketing-Team und auf verschiedene Nutzertypen zugeschnittenen Erlebnissen.",
-      it: "Abbiamo progettato e sviluppato una piattaforma che non si limita alla vendita online, ma collega l'intero ecosistema aziendale in un'unica soluzione centralizzata — con sincronizzazione automatica dei dati, strumenti per il team marketing ed esperienze personalizzate per diversi tipi di utenti."
-    },
-    features: {
-      sr: [
-        "Automatska sinhronizacija proizvoda i zaliha",
-        "B2B portal sa prilagođenim cijenama",
-        "Napredna pretraga i filtriranje",
-        "Marketing alati (kuponi, promocije, akcije)",
-        "Administrativni panel",
-        "Sistem lojalnosti"
-      ],
-      en: [
-        "Automatic product and stock synchronization",
-        "B2B portal with custom pricing",
-        "Advanced search and filtering",
-        "Marketing tools (coupons, promotions, campaigns)",
-        "Admin panel",
-        "Loyalty system"
-      ],
-      de: [
-        "Automatische Produkt- und Bestandssynchronisation",
-        "B2B-Portal mit individuellen Preisen",
-        "Erweiterte Suche und Filterung",
-        "Marketing-Tools (Gutscheine, Aktionen, Kampagnen)",
-        "Administrationspanel",
-        "Treueprogramm"
-      ],
-      it: [
-        "Sincronizzazione automatica prodotti e scorte",
-        "Portale B2B con prezzi personalizzati",
-        "Ricerca e filtri avanzati",
-        "Strumenti marketing (coupon, promozioni, campagne)",
-        "Pannello amministrativo",
-        "Sistema fedeltà"
-      ]
-    },
-    technologies: ["Custom Backend", "REST API", "MySQL", "ERP integracija", "Responsive Design", "SEO optimizacija"],
-    results: {
-      sr: [
-        "Centralizovana digitalna platforma",
-        "Automatizacija svakodnevnih procesa",
-        "Platforma spremna za dalji rast"
-      ],
-      en: [
-        "Centralized digital platform",
-        "Automation of daily processes",
-        "Platform ready for further growth"
-      ],
-      de: [
-        "Zentralisierte digitale Plattform",
-        "Automatisierung täglicher Prozesse",
-        "Plattform bereit für weiteres Wachstum"
-      ],
-      it: [
-        "Piattaforma digitale centralizzata",
-        "Automazione dei processi quotidiani",
-        "Piattaforma pronta per ulteriore crescita"
-      ]
-    }
-  },
-  {
-    slug: "techflow-dashboard",
-    title: "TechFlow Dashboard",
-    image: portfolioCorporate,
-    gallery: [portfolioCorporate, portfolioEshop, portfolioMedical, portfolioRestaurant],
-    client: {
-      sr: "TechFlow Solutions",
-      en: "TechFlow Solutions",
-      de: "TechFlow Solutions",
-      it: "TechFlow Solutions"
-    },
-    category: {
-      sr: "Korporativni web sajt",
-      en: "Corporate website",
-      de: "Unternehmenswebsite",
-      it: "Sito web aziendale"
-    },
-    description: {
-      sr: "Korporativni dashboard sa analitikom i izvještavanjem za finansijsku kompaniju. Kompleksan projekat koji je zahtijevao integraciju višestrukih izvora podataka i prikaz u realnom vremenu.",
-      en: "Corporate dashboard with analytics and reporting for a financial company. A complex project requiring integration of multiple data sources and real-time display.",
-      de: "Unternehmens-Dashboard mit Analytik und Reporting für ein Finanzunternehmen. Ein komplexes Projekt mit Integration mehrerer Datenquellen und Echtzeitanzeige.",
-      it: "Dashboard aziendale con analisi e reportistica per una società finanziaria. Un progetto complesso che richiedeva l'integrazione di più fonti di dati e la visualizzazione in tempo reale."
-    },
-    challenge: {
-      sr: "Klijent je trebao centralizovanu platformu za praćenje svih finansijskih metrika u realnom vremenu, sa mogućnošću generisanja izvještaja i vizuelnog prikaza podataka za različite odjele.",
-      en: "The client needed a centralized platform to track all financial metrics in real time, with the ability to generate reports and visually present data for different departments.",
-      de: "Der Kunde benötigte eine zentrale Plattform zur Echtzeit-Verfolgung aller Finanzkennzahlen mit der Möglichkeit, Berichte zu erstellen und Daten für verschiedene Abteilungen visuell darzustellen.",
-      it: "Il cliente aveva bisogno di una piattaforma centralizzata per monitorare tutte le metriche finanziarie in tempo reale, con la possibilità di generare report e visualizzare i dati per diversi dipartimenti."
-    },
-    solution: {
-      sr: "Razvili smo custom dashboard sa interaktivnim grafikonima, automatizovanim izvještajima i pristupom po ulogama. Platforma se integriše sa postojećim ERP sistemom klijenta.",
-      en: "We developed a custom dashboard with interactive charts, automated reports and role-based access. The platform integrates with the client's existing ERP system.",
-      de: "Wir entwickelten ein maßgeschneidertes Dashboard mit interaktiven Diagrammen, automatisierten Berichten und rollenbasiertem Zugriff. Die Plattform integriert sich in das bestehende ERP-System des Kunden.",
-      it: "Abbiamo sviluppato una dashboard personalizzata con grafici interattivi, report automatizzati e accesso basato sui ruoli. La piattaforma si integra con il sistema ERP esistente del cliente."
-    },
-    features: {
-      sr: ["Real-time analitika", "Automatski izvještaji", "Pristup po ulogama", "ERP integracija", "Responsive dizajn", "Dark/Light mode"],
-      en: ["Real-time analytics", "Automated reports", "Role-based access", "ERP integration", "Responsive design", "Dark/Light mode"],
-      de: ["Echtzeit-Analytik", "Automatisierte Berichte", "Rollenbasierter Zugriff", "ERP-Integration", "Responsives Design", "Dark/Light-Modus"],
-      it: ["Analisi in tempo reale", "Report automatizzati", "Accesso basato sui ruoli", "Integrazione ERP", "Design responsive", "Modalità Dark/Light"]
-    },
-    technologies: ["React", "TypeScript", "Tailwind CSS", "Recharts", "Supabase", "Framer Motion"],
-    results: {
-      sr: ["40% brže donošenje odluka", "Ušteda 15h sedmično na izvještavanju", "98% uptime platforme"],
-      en: ["40% faster decision making", "Saving 15h weekly on reporting", "98% platform uptime"],
-      de: ["40% schnellere Entscheidungsfindung", "15h wöchentliche Einsparung bei Berichten", "98% Plattform-Uptime"],
-      it: ["40% più veloce u procesu donošenja odluka", "Risparmio di 15h settimanali nei report", "98% uptime della piattaforma"]
-    }
-  },
-  {
-    slug: "styleout-fashion-shop",
-    title: "StyleOut Fashion Shop",
-    image: portfolioEshop,
-    gallery: [portfolioEshop, portfolioCorporate, portfolioSalon, portfolioRealestate],
-    client: {
-      sr: "StyleOut d.o.o.",
-      en: "StyleOut Ltd.",
-      de: "StyleOut GmbH",
-      it: "StyleOut Srl"
-    },
-    category: {
-      sr: "Web shop",
-      en: "E-commerce",
-      de: "Webshop",
-      it: "E-commerce"
-    },
-    description: {
-      sr: "Moderan fashion web shop sa naprednim filterima, wishlist-om i online plaćanjem. Kompletan e-commerce sistem prilagođen modnoj industriji.",
-      en: "Modern fashion web shop with advanced filters, wishlist and online payment. A complete e-commerce system tailored for the fashion industry.",
-      de: "Moderner Fashion-Webshop mit erweiterten Filtern, Wunschliste und Online-Zahlung. Ein komplettes E-Commerce-System für die Modebranche.",
-      it: "Web shop di moda moderno con filtri avanzati, wishlist e pagamento online. Un sistema e-commerce completo per l'industria della moda."
-    },
-    challenge: {
-      sr: "Klijent je želio premium online iskustvo kupovine sa brzim pretraživanjem, pametnim filterima i besprijekornim checkout procesom.",
-      en: "The client wanted a premium online shopping experience with fast search, smart filters and a seamless checkout process.",
-      de: "Der Kunde wollte ein Premium-Online-Einkaufserlebnis mit schneller Suche, intelligenten Filtern und einem nahtlosen Checkout-Prozess.",
-      it: "Il cliente desiderava un'esperienza di acquisto online premium con ricerca veloce, filtri intelligenti e un processo di checkout impeccabile."
-    },
-    solution: {
-      sr: "Kreirali smo custom web shop sa intuitivnim UX dizajnom, naprednim filterima po kategorijama, veličinama i bojama, te integrisanim payment gateway-em.",
-      en: "We created a custom web shop with intuitive UX design, advanced filters by category, size and color, and an integrated payment gateway.",
-      de: "Wir erstellten einen maßgeschneiderten Webshop mit intuitivem UX-Design, erweiterten Filtern nach Kategorie, Größe und Farbe sowie einem integrierten Payment-Gateway.",
-      it: "Abbiamo creato un web shop personalizzato con design UX intuitivo, filtri avanzati per categoria, taglia e colore, e un gateway di pagamento integrato."
-    },
-    features: {
-      sr: ["Napredni filteri", "Wishlist", "Online plaćanje", "Praćenje narudžbi", "Responsive dizajn", "SEO optimizacija"],
-      en: ["Advanced filters", "Wishlist", "Online payment", "Order tracking", "Responsive design", "SEO optimization"],
-      de: ["Erweiterte Filter", "Wunschliste", "Online-Zahlung", "Auftragsverfolgung", "Responsives Design", "SEO-Optimierung"],
-      it: ["Filtri avanzati", "Wishlist", "Pagamento online", "Tracciamento ordini", "Design responsive", "Ottimizzazione SEO"]
-    },
-    technologies: ["React", "TypeScript", "Tailwind CSS", "Stripe", "Supabase", "Framer Motion"],
-    results: {
-      sr: ["250% rast online prodaje", "35% veća prosječna košarica", "4.8/5 korisničko iskustvo"],
-      en: ["250% growth in online sales", "35% higher average cart", "4.8/5 user experience"],
-      de: ["250% Wachstum im Online-Umsatz", "35% höherer durchschnittlicher Warenkorb", "4.8/5 Nutzererfahrung"],
-      it: ["250% crescita nelle vendite online", "35% carrello medio più alto", "4.8/5 esperienza utente"]
-    }
-  },
-  {
-    slug: "mediconnect-klinika",
-    title: "MediConnect Klinika",
-    image: portfolioMedical,
-    gallery: [portfolioMedical, portfolioRealestate, portfolioCorporate, portfolioSalon],
-    client: {
-      sr: "MediConnect Klinika",
-      en: "MediConnect Clinic",
-      de: "MediConnect Klinik",
-      it: "Clinica MediConnect"
-    },
-    category: {
-      sr: "Medicinska platforma",
-      en: "Medical platform",
-      de: "Medizinische Plattform",
-      it: "Piattaforma medica"
-    },
-    description: {
-      sr: "Platforma za medicinsku ustanovu sa online zakazivanjem termina, profilima doktora i informacijama o uslugama.",
-      en: "Platform for a medical institution with online appointment scheduling, doctor profiles and service information.",
-      de: "Plattform für eine medizinische Einrichtung mit Online-Terminbuchung, Arztprofilen und Serviceinformationen.",
-      it: "Piattaforma per un istituto medico con prenotazione appuntamenti online, profili dei medici e informazioni sui servizi."
-    },
-    challenge: {
-      sr: "Klinika je trebala modernu web platformu koja će smanjiti broj telefonskih poziva i omogućiti pacijentima jednostavno zakazivanje termina.",
-      en: "The clinic needed a modern web platform to reduce phone calls and allow patients to easily schedule appointments.",
-      de: "Die Klinik benötigte eine moderne Web-Plattform, um Telefonanrufe zu reduzieren und Patienten eine einfache Terminbuchung zu ermöglichen.",
-      it: "La clinica aveva bisogno di una piattaforma web moderna per ridurre le telefonate e permettere ai pazienti di prenotare facilmente gli appuntamenti."
-    },
-    solution: {
-      sr: "Razvili smo platformu sa online zakazivanjem, profilima doktora, sekcijom za usluge i blogom sa medicinskim savjetima.",
-      en: "We developed a platform with online booking, doctor profiles, services section and a blog with medical advice.",
-      de: "Wir entwickelten eine Plattform mit Online-Buchung, Arztprofilen, Servicebereich und einem Blog mit medizinischen Ratschlägen.",
-      it: "Abbiamo sviluppato una piattaforma con prenotazione online, profili dei medici, sezione servizi e un blog con consigli medici."
-    },
-    features: {
-      sr: ["Online zakazivanje", "Profili doktora", "Blog sekcija", "Kontakt forme", "Responsive dizajn", "GDPR usklađenost"],
-      en: ["Online booking", "Doctor profiles", "Blog section", "Contact forms", "Responsive design", "GDPR compliance"],
-      de: ["Online-Buchung", "Arztprofile", "Blog-Bereich", "Kontaktformulare", "Responsives Design", "DSGVO-Konformität"],
-      it: ["Prenotazione online", "Profili medici", "Sezione blog", "Moduli di contatto", "Design responsive", "Conformità GDPR"]
-    },
-    technologies: ["React", "TypeScript", "Tailwind CSS", "Supabase", "Framer Motion", "React Hook Form"],
-    results: {
-      sr: ["60% manje telefonskih poziva", "3x više online zakazivanja", "92% zadovoljstvo pacijenata"],
-      en: ["60% fewer phone calls", "3x more online bookings", "92% patient satisfaction"],
-      de: ["60% weniger Telefonanrufe", "3x mehr Online-Buchungen", "92% Patientenzufriedenheit"],
-      it: ["60% meno telefonate", "3x più prenotazioni online", "92% soddisfazione dei pazienti"]
-    }
-  }
-];
-const labels = {
-  sr: {
-    back: "Nazad na portfolio",
-    client: "Klijent",
-    category: "Kategorija",
-    challenge: "Izazov",
-    solution: "Naše rješenje",
-    features: "Funkcionalnosti",
-    tech: "Tehnologije",
-    results: "Rezultati",
-    cta: "Želite sličan projekat?",
-    ctaDesc: "Kontaktirajte nas i razgovarajmo o vašem projektu.",
-    ctaBtn: "Kontaktirajte nas"
-  },
-  en: {
-    back: "Back to portfolio",
-    client: "Client",
-    category: "Category",
-    challenge: "Challenge",
-    solution: "Our solution",
-    features: "Features",
-    tech: "Technologies",
-    results: "Results",
-    cta: "Want a similar project?",
-    ctaDesc: "Contact us and let's discuss your project.",
-    ctaBtn: "Contact us"
-  },
-  de: {
-    back: "Zurück zum Portfolio",
-    client: "Kunde",
-    category: "Kategorie",
-    challenge: "Herausforderung",
-    solution: "Unsere Lösung",
-    features: "Funktionen",
-    tech: "Technologien",
-    results: "Ergebnisse",
-    cta: "Möchten Sie ein ähnliches Projekt?",
-    ctaDesc: "Kontaktieren Sie uns und lassen Sie uns über Ihr Projekt sprechen.",
-    ctaBtn: "Kontaktieren Sie uns"
-  },
-  it: {
-    back: "Torna al portfolio",
-    client: "Cliente",
-    category: "Categoria",
-    challenge: "Sfida",
-    solution: "La nostra soluzione",
-    features: "Funzionalità",
-    tech: "Tecnologie",
-    results: "Risultati",
-    cta: "Vuoi un progetto simile?",
-    ctaDesc: "Contattaci e discutiamo del tuo progetto.",
-    ctaBtn: "Contattaci"
-  }
-};
-const featureIcons = [Globe, Smartphone, Search, Zap, Code2, ShoppingCart];
-const GalleryCarousel = ({ images, title }) => {
-  const [emblaRef, emblaApi] = useEmblaCarousel({ loop: true, align: "start", slidesToScroll: 1 });
-  const [selectedIndex, setSelectedIndex] = useState(0);
-  const scrollPrev = useCallback(() => emblaApi == null ? void 0 : emblaApi.scrollPrev(), [emblaApi]);
-  const scrollNext = useCallback(() => emblaApi == null ? void 0 : emblaApi.scrollNext(), [emblaApi]);
-  useEffect(() => {
-    if (!emblaApi) return;
-    const onSelect = () => setSelectedIndex(emblaApi.selectedScrollSnap());
-    emblaApi.on("select", onSelect);
-    onSelect();
-    return () => {
-      emblaApi.off("select", onSelect);
-    };
-  }, [emblaApi]);
-  return /* @__PURE__ */ jsx("section", { className: "pb-16", children: /* @__PURE__ */ jsx("div", { className: "container mx-auto px-6", children: /* @__PURE__ */ jsxs(motion.div, { ...fadeUp, className: "relative", children: [
-    /* @__PURE__ */ jsx("div", { ref: emblaRef, className: "overflow-hidden rounded-xl", children: /* @__PURE__ */ jsx("div", { className: "flex", children: images.map((image, index) => /* @__PURE__ */ jsx(
-      "div",
-      {
-        className: "mr-4 min-w-0 flex-[0_0_48%] last:mr-0 max-md:flex-[0_0_85%]",
-        children: /* @__PURE__ */ jsx("div", { className: "overflow-hidden rounded-xl border border-border shadow-md", children: /* @__PURE__ */ jsx(
-          "img",
-          {
-            src: image,
-            alt: "".concat(title, " - ").concat(index + 1),
-            loading: "lazy",
-            decoding: "async",
-            sizes: "(max-width: 768px) 85vw, 48vw",
-            className: "aspect-video w-full object-cover"
-          }
-        ) })
-      },
-      image
-    )) }) }),
-    /* @__PURE__ */ jsx(
-      "button",
-      {
-        type: "button",
-        onClick: scrollPrev,
-        "aria-label": "Previous project image",
-        className: "absolute left-2 top-1/2 flex h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full border border-border bg-background/90 shadow-md transition-colors hover:bg-background",
-        children: /* @__PURE__ */ jsx(ChevronLeft, { className: "h-5 w-5" })
-      }
-    ),
-    /* @__PURE__ */ jsx(
-      "button",
-      {
-        type: "button",
-        onClick: scrollNext,
-        "aria-label": "Next project image",
-        className: "absolute right-2 top-1/2 flex h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full border border-border bg-background/90 shadow-md transition-colors hover:bg-background",
-        children: /* @__PURE__ */ jsx(ChevronRight, { className: "h-5 w-5" })
-      }
-    ),
-    /* @__PURE__ */ jsx("div", { className: "mt-4 flex justify-center gap-2", children: images.map((image, index) => /* @__PURE__ */ jsx(
-      "button",
-      {
-        type: "button",
-        onClick: () => emblaApi == null ? void 0 : emblaApi.scrollTo(index),
-        "aria-label": "Go to project image ".concat(index + 1),
-        className: "h-2.5 w-2.5 rounded-full transition-colors ".concat(index === selectedIndex ? "bg-primary" : "bg-border")
-      },
-      image
-    )) })
-  ] }) }) });
-};
-const ProjectDetail = () => {
-  var _a2;
-  const { slug } = useParams();
-  const { language } = useLanguage();
-  const lang = language || "sr";
-  const l = (_a2 = labels[lang]) != null ? _a2 : labels.sr;
-  const project = portfolioProjects.find((item) => item.slug === slug);
-  useEffect(() => {
-    window.scrollTo(0, 0);
-  }, [project]);
-  if (!project) {
-    return /* @__PURE__ */ jsx(Navigate, { to: "/usluge/izrada-web-stranica#portfolio", replace: true });
-  }
-  const seoTitle = "".concat(project.title, " | ").concat(project.category[lang], " | Wizionar");
-  const seoDescription = project.description[lang];
-  const projectPath = "/portfolio/".concat(project.slug);
-  return /* @__PURE__ */ jsxs("div", { className: "min-h-screen bg-background text-foreground", children: [
-    /* @__PURE__ */ jsx(
-      SEOHead,
-      {
-        title: seoTitle,
-        description: seoDescription,
-        keywords: [project.category[lang], ...project.technologies],
-        schema: [
-          createCreativeWorkSchema({
-            language: lang,
-            name: project.title,
-            description: seoDescription,
-            path: projectPath,
-            keywords: [project.category[lang], ...project.technologies]
-          }),
-          createWebPageSchema({
-            language: lang,
-            path: projectPath,
-            title: seoTitle,
-            description: seoDescription
-          }),
-          createBreadcrumbSchema(lang, [
-            { name: getSeoLabel(lang, "home"), path: SEO_PATHS.home },
-            { name: getSeoLabel(lang, "services"), path: SEO_PATHS.usluge },
-            { name: getSeoLabel(lang, "webDevelopment"), path: SEO_PATHS.webDevelopment },
-            { name: getSeoLabel(lang, "portfolio"), path: SEO_PATHS.webDevelopment },
-            { name: project.title, path: projectPath }
-          ])
-        ]
-      }
-    ),
-    /* @__PURE__ */ jsx(WizionarHeader, {}),
-    /* @__PURE__ */ jsx("section", { className: "pb-12 pt-28", children: /* @__PURE__ */ jsxs("div", { className: "container mx-auto px-6", children: [
-      /* @__PURE__ */ jsxs(
-        LocalizedLink,
-        {
-          to: "/usluge/izrada-web-stranica#portfolio",
-          className: "mb-8 inline-flex items-center gap-2 text-sm text-muted-foreground transition-colors hover:text-primary",
-          children: [
-            /* @__PURE__ */ jsx(ArrowLeft, { className: "h-4 w-4" }),
-            l.back
-          ]
-        }
-      ),
-      /* @__PURE__ */ jsxs(motion.div, { ...fadeUp, children: [
-        /* @__PURE__ */ jsx("div", { className: "mb-4 flex flex-wrap gap-3", children: /* @__PURE__ */ jsx("span", { className: "rounded-full bg-primary/10 px-3 py-1 text-xs font-semibold text-primary", children: project.category[lang] }) }),
-        /* @__PURE__ */ jsx("h1", { className: "mb-4 text-3xl font-bold md:text-5xl", children: project.title }),
-        /* @__PURE__ */ jsx("p", { className: "max-w-3xl text-lg text-muted-foreground", children: project.description[lang] })
-      ] })
-    ] }) }),
-    /* @__PURE__ */ jsx("section", { className: "pb-16", children: /* @__PURE__ */ jsx("div", { className: "container mx-auto px-6", children: /* @__PURE__ */ jsx(
-      motion.div,
-      {
-        ...fadeUp,
-        className: "overflow-hidden rounded-2xl border border-border shadow-lg",
-        children: /* @__PURE__ */ jsx(
-          "img",
-          {
-            src: project.image,
-            alt: project.title,
-            loading: "eager",
-            fetchpriority: "high",
-            decoding: "async",
-            sizes: "(max-width: 768px) 100vw, 1200px",
-            className: "aspect-video w-full object-cover"
-          }
-        )
-      }
-    ) }) }),
-    /* @__PURE__ */ jsx("section", { className: "pb-16", children: /* @__PURE__ */ jsx("div", { className: "container mx-auto px-6", children: /* @__PURE__ */ jsxs("div", { className: "grid max-w-4xl gap-4 md:grid-cols-2", children: [
-      /* @__PURE__ */ jsxs("div", { className: "rounded-xl border border-border bg-card p-5", children: [
-        /* @__PURE__ */ jsx("span", { className: "text-xs uppercase tracking-wider text-muted-foreground", children: l.client }),
-        /* @__PURE__ */ jsx("p", { className: "mt-1 font-semibold", children: project.client[lang] })
-      ] }),
-      /* @__PURE__ */ jsxs("div", { className: "rounded-xl border border-border bg-card p-5", children: [
-        /* @__PURE__ */ jsx("span", { className: "text-xs uppercase tracking-wider text-muted-foreground", children: l.category }),
-        /* @__PURE__ */ jsx("p", { className: "mt-1 font-semibold", children: project.category[lang] })
-      ] })
-    ] }) }) }),
-    project.gallery.length > 1 && /* @__PURE__ */ jsx(GalleryCarousel, { images: project.gallery, title: project.title }),
-    /* @__PURE__ */ jsx("section", { className: "pb-20", children: /* @__PURE__ */ jsx("div", { className: "container mx-auto px-6", children: /* @__PURE__ */ jsxs("div", { className: "grid max-w-5xl gap-8 md:grid-cols-2", children: [
-      /* @__PURE__ */ jsxs(motion.div, { ...fadeUp, className: "rounded-2xl border border-border bg-card p-8", children: [
-        /* @__PURE__ */ jsxs("h2", { className: "mb-4 flex items-center gap-2 text-xl font-bold", children: [
-          /* @__PURE__ */ jsx(Shield, { className: "h-5 w-5 text-primary" }),
-          l.challenge
-        ] }),
-        /* @__PURE__ */ jsx("p", { className: "leading-relaxed text-muted-foreground", children: project.challenge[lang] })
-      ] }),
-      /* @__PURE__ */ jsxs(
-        motion.div,
-        {
-          ...fadeUp,
-          transition: { delay: 0.1 },
-          className: "rounded-2xl border border-primary/20 bg-primary/5 p-8",
-          children: [
-            /* @__PURE__ */ jsxs("h2", { className: "mb-4 flex items-center gap-2 text-xl font-bold", children: [
-              /* @__PURE__ */ jsx(Zap, { className: "h-5 w-5 text-primary" }),
-              l.solution
-            ] }),
-            /* @__PURE__ */ jsx("p", { className: "leading-relaxed text-muted-foreground", children: project.solution[lang] })
-          ]
-        }
-      )
-    ] }) }) }),
-    /* @__PURE__ */ jsx("section", { className: "bg-secondary/30 py-20", children: /* @__PURE__ */ jsxs("div", { className: "container mx-auto px-6", children: [
-      /* @__PURE__ */ jsx(motion.div, { ...fadeUp, className: "mb-12 text-center", children: /* @__PURE__ */ jsx("h2", { className: "text-2xl font-bold md:text-3xl", children: l.features }) }),
-      /* @__PURE__ */ jsx("div", { className: "mx-auto grid max-w-4xl gap-4 sm:grid-cols-2 lg:grid-cols-3", children: project.features[lang].map((feature, index) => {
-        const Icon = featureIcons[index % featureIcons.length];
-        return /* @__PURE__ */ jsxs(
-          motion.div,
-          {
-            ...fadeUp,
-            transition: { delay: index * 0.05 },
-            className: "flex items-center gap-3 rounded-xl border border-border bg-card p-4",
-            children: [
-              /* @__PURE__ */ jsx(Icon, { className: "h-5 w-5 shrink-0 text-primary" }),
-              /* @__PURE__ */ jsx("span", { className: "text-sm font-medium", children: feature })
-            ]
-          },
-          feature
-        );
-      }) })
-    ] }) }),
-    /* @__PURE__ */ jsx("section", { className: "py-20", children: /* @__PURE__ */ jsxs("div", { className: "container mx-auto px-6", children: [
-      /* @__PURE__ */ jsx(motion.div, { ...fadeUp, className: "mb-12 text-center", children: /* @__PURE__ */ jsx("h2", { className: "text-2xl font-bold md:text-3xl", children: l.tech }) }),
-      /* @__PURE__ */ jsx("div", { className: "mx-auto flex max-w-3xl flex-wrap justify-center gap-3", children: project.technologies.map((technology, index) => /* @__PURE__ */ jsx(
-        motion.span,
-        {
-          ...fadeUp,
-          transition: { delay: index * 0.05 },
-          className: "rounded-full border border-border bg-card px-5 py-2.5 text-sm font-semibold",
-          children: technology
-        },
-        technology
-      )) })
-    ] }) }),
-    /* @__PURE__ */ jsx("section", { className: "bg-secondary/30 py-20", children: /* @__PURE__ */ jsxs("div", { className: "container mx-auto px-6", children: [
-      /* @__PURE__ */ jsx(motion.div, { ...fadeUp, className: "mb-12 text-center", children: /* @__PURE__ */ jsx("h2", { className: "text-2xl font-bold md:text-3xl", children: l.results }) }),
-      /* @__PURE__ */ jsx("div", { className: "mx-auto grid max-w-4xl gap-6 sm:grid-cols-3", children: project.results[lang].map((result, index) => /* @__PURE__ */ jsxs(
-        motion.div,
-        {
-          ...fadeUp,
-          transition: { delay: index * 0.1 },
-          className: "rounded-2xl border border-border bg-card p-6 text-center",
-          children: [
-            /* @__PURE__ */ jsx(CheckCircle2, { className: "mx-auto mb-3 h-8 w-8 text-primary" }),
-            /* @__PURE__ */ jsx("p", { className: "font-bold", children: result })
-          ]
-        },
-        result
-      )) })
-    ] }) }),
-    /* @__PURE__ */ jsx("section", { className: "py-24", children: /* @__PURE__ */ jsx("div", { className: "container mx-auto px-6 text-center", children: /* @__PURE__ */ jsxs(motion.div, { ...fadeUp, children: [
-      /* @__PURE__ */ jsx("h2", { className: "mb-4 text-2xl font-bold md:text-3xl", children: l.cta }),
-      /* @__PURE__ */ jsx("p", { className: "mx-auto mb-8 max-w-xl text-lg text-muted-foreground", children: l.ctaDesc }),
-      /* @__PURE__ */ jsxs(
-        "a",
-        {
-          href: "mailto:info@wizionar.com",
-          className: "inline-flex items-center gap-2 rounded-lg bg-primary px-8 py-3 font-semibold text-primary-foreground shadow-md transition-colors hover:bg-primary/90",
-          children: [
-            l.ctaBtn,
-            /* @__PURE__ */ jsx(ArrowLeft, { className: "h-4 w-4 rotate-180" })
-          ]
-        }
-      )
-    ] }) }) }),
-    /* @__PURE__ */ jsx(WizionarFooter, {})
-  ] });
-};
-const ProjectDetail$1 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
-  __proto__: null,
-  default: ProjectDetail,
-  portfolioProjects
 }, Symbol.toStringTag, { value: "Module" }));
 const copy = {
   sr: {

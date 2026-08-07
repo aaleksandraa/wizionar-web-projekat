@@ -30,6 +30,7 @@ const ROUTES = [
   { path: "/usluge/seo-optimizacija", changefreq: "weekly", priority: "0.85" },
   { path: "/usluge/graficki-dizajn", changefreq: "weekly", priority: "0.8" },
   { path: "/projektni-upitnik", changefreq: "monthly", priority: "0.85" },
+  { path: "/portfolio/bnc-shop", changefreq: "monthly", priority: "0.72" },
   { path: "/portfolio/techflow-dashboard", changefreq: "monthly", priority: "0.72" },
   { path: "/portfolio/styleout-fashion-shop", changefreq: "monthly", priority: "0.72" },
   { path: "/portfolio/mediconnect-klinika", changefreq: "monthly", priority: "0.72" },

@@ -43,6 +43,7 @@ import SEOHead from "@/components/wizionar/SEOHead";
 import { useState } from "react";
 import { useWebdevTranslations } from "@/hooks/useWebdevTranslations";
 import { useLanguage } from "@/contexts/LanguageContext";
+import { portfolioProjects, type PortfolioProjectData } from "@/pages/ProjectDetail";
 import {
   SEO_PATHS,
   createBreadcrumbSchema,
@@ -53,13 +54,9 @@ import {
   getSeoLabel,
 } from "@/lib/seo";
 
-import portfolioCorporate from "@/assets/portfolio-corporate.jpg";
-import portfolioEshop from "@/assets/portfolio-eshop.jpg";
-import portfolioMedical from "@/assets/portfolio-medical.jpg";
 import portfolioRestaurant from "@/assets/portfolio-restaurant.jpg";
 import portfolioSalon from "@/assets/portfolio-salon.jpg";
 import portfolioRealestate from "@/assets/portfolio-realestate.jpg";
-import portfolioBncWebshop from "@/assets/portfolio-bnc-webshop.jpg";
 
 const fadeUp = {
   initial: { opacity: 0, y: 24 },
@@ -90,54 +87,60 @@ const shopIcons = [LayoutGrid, Filter, ShoppingCart, CreditCard, Truck, Tag, Set
 const resultIcons = [Phone, MessageSquare, ShoppingCart, Star, Users, TrendingUp];
 const advantageIcons = [Star, Target, Users, TrendingUp, Clock, Shield];
 
-const portfolioData = [
-  { image: portfolioBncWebshop, title: "BNC Shop", link: "/portfolio/bnc-shop", descKey: 0 },
-  { image: portfolioCorporate, title: "TechFlow Dashboard", link: "/portfolio/techflow-dashboard", descKey: 1 },
-  { image: portfolioEshop, title: "StyleOut Fashion Shop", link: "/portfolio/styleout-fashion-shop", descKey: 2 },
-  { image: portfolioMedical, title: "MediConnect Klinika", link: "/portfolio/mediconnect-klinika", descKey: 3 },
-  { image: portfolioRestaurant, title: "GastroPress Restoran", link: "#", descKey: 4 },
-  { image: portfolioSalon, title: "BeautyGlow Salon", link: "#", descKey: 5 },
-  { image: portfolioRealestate, title: "PropertyVista Nekretnine", link: "#", descKey: 6 },
+type PortfolioCard = {
+  image: string;
+  title: string;
+  link: string;
+  summary: Record<"sr" | "en" | "de" | "it", string>;
+};
+
+const placeholderPortfolio: PortfolioCard[] = [
+  {
+    image: portfolioRestaurant,
+    title: "GastroPress Restoran",
+    link: "#",
+    summary: {
+      sr: "Web sajt za restoran sa digitalnim menijem i online narudžbama.",
+      en: "Restaurant website with digital menu and online orders.",
+      de: "Restaurant-Website mit digitalem Menü und Online-Bestellungen.",
+      it: "Sito web per ristorante con menù digitale e ordini online.",
+    },
+  },
+  {
+    image: portfolioSalon,
+    title: "BeautyGlow Salon",
+    link: "#",
+    summary: {
+      sr: "Elegantna prezentacija kozmetičkog salona sa sistemom rezervacija.",
+      en: "Elegant cosmetic salon presentation with a booking system.",
+      de: "Elegante Präsentation eines Kosmetiksalons mit Buchungssystem.",
+      it: "Elegante presentazione di un salone di bellezza con sistema di prenotazione.",
+    },
+  },
+  {
+    image: portfolioRealestate,
+    title: "PropertyVista Nekretnine",
+    link: "#",
+    summary: {
+      sr: "Portal za nekretnine sa mapom, filterima i detaljnim listinzima.",
+      en: "Real estate portal with map, filters and detailed listings.",
+      de: "Immobilienportal mit Karte, Filtern und detaillierten Inseraten.",
+      it: "Portale immobiliare con mappa, filtri e inserzioni dettagliate.",
+    },
+  },
 ];
 
-const portfolioDescs = {
-  sr: [
-    "Custom eCommerce platforma koja objedinjuje online prodaju, B2B poslovanje i interne procese.",
-    "Korporativni dashboard sa analitikom i izvještavanjem za finansijsku kompaniju.",
-    "Moderan fashion web shop sa naprednim filterima i online plaćanjem.",
-    "Platforma za medicinsku ustanovu sa online zakazivanjem termina.",
-    "Web sajt za restoran sa digitalnim menijem i online narudžbama.",
-    "Elegantna prezentacija kozmetičkog salona sa sistemom rezervacija.",
-    "Portal za nekretnine sa mapom, filterima i detaljnim listinzima.",
-  ],
-  en: [
-    "Custom eCommerce platform unifying online sales, B2B operations and internal processes.",
-    "Corporate dashboard with analytics and reporting for a financial company.",
-    "Modern fashion web shop with advanced filters and online payment.",
-    "Platform for a medical institution with online appointment scheduling.",
-    "Restaurant website with digital menu and online orders.",
-    "Elegant cosmetic salon presentation with a booking system.",
-    "Real estate portal with map, filters and detailed listings.",
-  ],
-  de: [
-    "Maßgeschneiderte E-Commerce-Plattform, die Online-Verkauf, B2B-Geschäft und interne Prozesse vereint.",
-    "Unternehmens-Dashboard mit Analytik und Reporting für ein Finanzunternehmen.",
-    "Moderner Fashion-Webshop mit erweiterten Filtern und Online-Zahlung.",
-    "Plattform für eine medizinische Einrichtung mit Online-Terminbuchung.",
-    "Restaurant-Website mit digitalem Menü und Online-Bestellungen.",
-    "Elegante Präsentation eines Kosmetiksalons mit Buchungssystem.",
-    "Immobilienportal mit Karte, Filtern und detaillierten Inseraten.",
-  ],
-  it: [
-    "Piattaforma eCommerce personalizzata che unifica vendite online, operazioni B2B e processi interni.",
-    "Dashboard aziendale con analisi e reportistica per una società finanziaria.",
-    "Web shop di moda moderno con filtri avanzati e pagamento online.",
-    "Piattaforma per un istituto medico con prenotazione appuntamenti online.",
-    "Sito web per ristorante con menù digitale e ordini online.",
-    "Elegante presentazione di un salone di bellezza con sistema di prenotazione.",
-    "Portale immobiliare con mappa, filtri e inserzioni dettagliate.",
-  ],
-};
+const toPortfolioCard = (project: PortfolioProjectData): PortfolioCard => ({
+  image: project.image,
+  title: project.title,
+  link: `/portfolio/${project.slug}`,
+  summary: project.summary,
+});
+
+const portfolioData: PortfolioCard[] = [
+  ...portfolioProjects.map(toPortfolioCard),
+  ...placeholderPortfolio,
+];
 
 const FaqItem = ({ q, a }: { q: string; a: string }) => {
   const [open, setOpen] = useState(false);
@@ -166,7 +169,7 @@ const WebDevelopment = () => {
   const { language } = useLanguage();
   const seo = getPageSeo("webDevelopment", language);
 
-  const descs = portfolioDescs[language as keyof typeof portfolioDescs] || portfolioDescs.sr;
+  const lang = (language as "sr" | "en" | "de" | "it") || "sr";
 
   return (
     <div className="min-h-screen bg-background text-foreground">
@@ -566,7 +569,7 @@ const WebDevelopment = () => {
                   </div>
                   <div className="p-5">
                     <h3 className="mb-1 font-bold">{item.title}</h3>
-                    <p className="mb-3 text-sm text-muted-foreground">{descs[item.descKey]}</p>
+                    <p className="mb-3 text-sm text-muted-foreground">{item.summary[lang]}</p>
                     {item.link !== "#" && (
                       <LocalizedLink
                         to={item.link}

@@ -486,6 +486,50 @@
     <xhtml:link rel="alternate" hreflang="x-default" href="https://wizionar.app/projektni-upitnik" />
   </url>
   <url>
+    <loc>https://wizionar.app/portfolio/bnc-shop</loc>
+    <lastmod>2026-08-07</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.72</priority>
+    <xhtml:link rel="alternate" hreflang="bs-BA" href="https://wizionar.app/portfolio/bnc-shop" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://wizionar.app/en/portfolio/bnc-shop" />
+    <xhtml:link rel="alternate" hreflang="de-DE" href="https://wizionar.app/de/portfolio/bnc-shop" />
+    <xhtml:link rel="alternate" hreflang="it-IT" href="https://wizionar.app/it/portfolio/bnc-shop" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://wizionar.app/portfolio/bnc-shop" />
+  </url>
+  <url>
+    <loc>https://wizionar.app/en/portfolio/bnc-shop</loc>
+    <lastmod>2026-08-07</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.72</priority>
+    <xhtml:link rel="alternate" hreflang="bs-BA" href="https://wizionar.app/portfolio/bnc-shop" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://wizionar.app/en/portfolio/bnc-shop" />
+    <xhtml:link rel="alternate" hreflang="de-DE" href="https://wizionar.app/de/portfolio/bnc-shop" />
+    <xhtml:link rel="alternate" hreflang="it-IT" href="https://wizionar.app/it/portfolio/bnc-shop" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://wizionar.app/portfolio/bnc-shop" />
+  </url>
+  <url>
+    <loc>https://wizionar.app/de/portfolio/bnc-shop</loc>
+    <lastmod>2026-08-07</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.72</priority>
+    <xhtml:link rel="alternate" hreflang="bs-BA" href="https://wizionar.app/portfolio/bnc-shop" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://wizionar.app/en/portfolio/bnc-shop" />
+    <xhtml:link rel="alternate" hreflang="de-DE" href="https://wizionar.app/de/portfolio/bnc-shop" />
+    <xhtml:link rel="alternate" hreflang="it-IT" href="https://wizionar.app/it/portfolio/bnc-shop" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://wizionar.app/portfolio/bnc-shop" />
+  </url>
+  <url>
+    <loc>https://wizionar.app/it/portfolio/bnc-shop</loc>
+    <lastmod>2026-08-07</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.72</priority>
+    <xhtml:link rel="alternate" hreflang="bs-BA" href="https://wizionar.app/portfolio/bnc-shop" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://wizionar.app/en/portfolio/bnc-shop" />
+    <xhtml:link rel="alternate" hreflang="de-DE" href="https://wizionar.app/de/portfolio/bnc-shop" />
+    <xhtml:link rel="alternate" hreflang="it-IT" href="https://wizionar.app/it/portfolio/bnc-shop" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://wizionar.app/portfolio/bnc-shop" />
+  </url>
+  <url>
     <loc>https://wizionar.app/portfolio/techflow-dashboard</loc>
     <lastmod>2026-08-07</lastmod>
     <changefreq>monthly</changefreq>

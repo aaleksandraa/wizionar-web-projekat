@@ -53,6 +53,7 @@ export interface PortfolioProjectData {
   gallery: string[];
   client: Record<Lang, string>;
   category: Record<Lang, string>;
+  summary: Record<Lang, string>;
   description: Record<Lang, string>;
   challenge: Record<Lang, string>;
   solution: Record<Lang, string>;
@@ -76,10 +77,16 @@ export const portfolioProjects: PortfolioProjectData[] = [
       it: "BNC",
     },
     category: {
-      sr: "Custom eCommerce platforma",
-      en: "Custom eCommerce platform",
-      de: "Maßgeschneiderte E-Commerce-Plattform",
-      it: "Piattaforma eCommerce personalizzata",
+      sr: "Web shop",
+      en: "E-commerce",
+      de: "Webshop",
+      it: "E-commerce",
+    },
+    summary: {
+      sr: "Custom eCommerce platforma koja objedinjuje online prodaju, B2B poslovanje i interne procese.",
+      en: "Custom eCommerce platform unifying online sales, B2B operations and internal processes.",
+      de: "Maßgeschneiderte E-Commerce-Plattform, die Online-Verkauf, B2B-Geschäft und interne Prozesse vereint.",
+      it: "Piattaforma eCommerce personalizzata che unifica vendite online, operazioni B2B e processi interni.",
     },
     description: {
       sr: "Razvoj custom eCommerce platforme koja objedinjuje online prodaju, B2B poslovanje i interne procese u jedinstven sistem. Moderna platforma za upravljanje proizvodima, narudžbama, marketing kampanjama, poslovnim kupcima i internim procesima, uz visok nivo automatizacije i mogućnost daljeg razvoja.",
@@ -174,6 +181,12 @@ export const portfolioProjects: PortfolioProjectData[] = [
       de: "Unternehmenswebsite",
       it: "Sito web aziendale",
     },
+    summary: {
+      sr: "Korporativni dashboard sa analitikom i izvještavanjem za finansijsku kompaniju.",
+      en: "Corporate dashboard with analytics and reporting for a financial company.",
+      de: "Unternehmens-Dashboard mit Analytik und Reporting für ein Finanzunternehmen.",
+      it: "Dashboard aziendale con analisi e reportistica per una società finanziaria.",
+    },
     description: {
       sr: "Korporativni dashboard sa analitikom i izvještavanjem za finansijsku kompaniju. Kompleksan projekat koji je zahtijevao integraciju višestrukih izvora podataka i prikaz u realnom vremenu.",
       en: "Corporate dashboard with analytics and reporting for a financial company. A complex project requiring integration of multiple data sources and real-time display.",
@@ -223,6 +236,12 @@ export const portfolioProjects: PortfolioProjectData[] = [
       de: "Webshop",
       it: "E-commerce",
     },
+    summary: {
+      sr: "Moderan fashion web shop sa naprednim filterima i online plaćanjem.",
+      en: "Modern fashion web shop with advanced filters and online payment.",
+      de: "Moderner Fashion-Webshop mit erweiterten Filtern und Online-Zahlung.",
+      it: "Web shop di moda moderno con filtri avanzati e pagamento online.",
+    },
     description: {
       sr: "Moderan fashion web shop sa naprednim filterima, wishlist-om i online plaćanjem. Kompletan e-commerce sistem prilagođen modnoj industriji.",
       en: "Modern fashion web shop with advanced filters, wishlist and online payment. A complete e-commerce system tailored for the fashion industry.",
@@ -271,6 +290,12 @@ export const portfolioProjects: PortfolioProjectData[] = [
       en: "Medical platform",
       de: "Medizinische Plattform",
       it: "Piattaforma medica",
+    },
+    summary: {
+      sr: "Platforma za medicinsku ustanovu sa online zakazivanjem termina.",
+      en: "Platform for a medical institution with online appointment scheduling.",
+      de: "Plattform für eine medizinische Einrichtung mit Online-Terminbuchung.",
+      it: "Piattaforma per un istituto medico con prenotazione appuntamenti online.",
     },
     description: {
       sr: "Platforma za medicinsku ustanovu sa online zakazivanjem termina, profilima doktora i informacijama o uslugama.",
