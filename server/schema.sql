@@ -16,6 +16,8 @@ CREATE TABLE IF NOT EXISTS project_inquiries (
   budget_score ENUM('low_budget', 'standard', 'serious', 'enterprise', 'unknown') NOT NULL DEFAULT 'unknown',
   status ENUM('new', 'reviewed', 'needs_more_info', 'proposal_sent', 'accepted', 'rejected', 'archived') NOT NULL DEFAULT 'new',
   locale VARCHAR(10) NOT NULL DEFAULT 'sr',
+  ip_address VARCHAR(45) NULL,
+  user_agent VARCHAR(500) NULL,
   submitted_date_label VARCHAR(10) NOT NULL,
   raw_payload JSON NULL,
   created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,

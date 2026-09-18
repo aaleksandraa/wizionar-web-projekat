@@ -109,21 +109,21 @@ const formatValue = (field: InquiryField, value: InquiryValue) => {
 };
 
 const buildStructuredAnswers = (answers: InquiryAnswers, steps: InquiryStep[]) =>
-  getVisibleSteps(answers, steps)
-    .flatMap((step) =>
-      getVisibleFields(step, answers).map((field) => {
-        const value = sanitizeText(answers[field.key]);
-        return {
-          stepKey: step.key,
-          stepTitle: step.title,
-          key: field.key,
-          label: field.label,
-          value,
-          displayValue: formatValue(field, value),
-        };
-      }),
-    )
-    .filter((item) => !isEmptyValue(item.value));
+  getVisibleSteps(answers, steps).flatMap((step) =>
+    getVisibleFields(step, answers).map((field) => {
+      const value = sanitizeText(answers[field.key]);
+      const empty = isEmptyValue(value);
+
+      return {
+        stepKey: step.key,
+        stepTitle: step.title,
+        key: field.key,
+        label: field.label,
+        value: empty ? null : value,
+        displayValue: empty ? "-" : formatValue(field, value),
+      };
+    }),
+  );
 
 const buildEmailBody = (
   answers: InquiryAnswers,
@@ -142,7 +142,9 @@ const buildEmailBody = (
     `Datum: ${formatDateTime()}`,
     "",
     "Odgovori:",
-    ...buildStructuredAnswers(answers, steps).flatMap((item) => [``, `${item.label}:`, String(item.displayValue || "-")]),
+    ...buildStructuredAnswers(answers, steps)
+      .filter((item) => item.displayValue !== "-")
+      .flatMap((item) => [``, `${item.label}:`, String(item.displayValue || "-")]),
   ];
 
   return lines.join("\n");

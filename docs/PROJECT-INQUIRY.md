@@ -29,7 +29,7 @@ Endpoint radi:
 - honeypot i rate-limit zaštitu,
 - snimanje prijave u MySQL,
 - snimanje svih odgovora u posebnu tabelu,
-- email na `info@wizionar.com`,
+- email na `info@wizionar.com` sa svim poljima, IP adresom i User-Agent podacima,
 - email klijentu sa kopijom poslanog upita.
 
 ## MySQL
