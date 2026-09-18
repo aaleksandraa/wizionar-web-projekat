@@ -77,6 +77,7 @@ export type InquiryUiCopy = {
 };
 
 export const PROJECT_INQUIRY_PATH = "/projektni-upitnik";
+export const PROJECT_INQUIRY_ENDPOINT = "/api/project-inquiry";
 export const PROJECT_INQUIRY_ENDPOINT_ENV = "VITE_PROJECT_INQUIRY_ENDPOINT";
 
 export const projectInquiryCopy: Record<Language, InquiryUiCopy> = {

@@ -19,6 +19,7 @@ import { Progress } from "@/components/ui/progress";
 import { Textarea } from "@/components/ui/textarea";
 import { useLanguage } from "@/contexts/LanguageContext";
 import {
+  PROJECT_INQUIRY_ENDPOINT,
   PROJECT_INQUIRY_PATH,
   calculateBudgetScore,
   calculateComplexityScore,
@@ -159,7 +160,7 @@ const submitInquiry = async (
 ) => {
   const complexityScore = calculateComplexityScore(answers);
   const budgetScore = calculateBudgetScore(answers.budget_range);
-  const endpoint = import.meta.env.VITE_PROJECT_INQUIRY_ENDPOINT?.trim();
+  const endpoint = import.meta.env.VITE_PROJECT_INQUIRY_ENDPOINT?.trim() || PROJECT_INQUIRY_ENDPOINT;
   const structuredAnswers = buildStructuredAnswers(answers, steps);
   const clientEmail = String(sanitizeText(answers.email) || "");
   const adminBody = buildEmailBody(answers, language, steps, copy.adminSubject);
@@ -202,14 +203,6 @@ const submitInquiry = async (
     answers: structuredAnswers,
   };
 
-  if (!endpoint) {
-    const subject = encodeURIComponent(`Projektni upitnik - ${String(answers.full_name || "novi klijent")}`);
-    const body = encodeURIComponent(adminBody);
-    const cc = clientEmail ? `&cc=${encodeURIComponent(clientEmail)}` : "";
-    window.location.href = `mailto:${ADMIN_EMAIL}?subject=${subject}${cc}&body=${body}`;
-    return { fallbackMailto: true };
-  }
-
   const response = await fetch(endpoint, {
     method: "POST",
     headers: {
@@ -222,8 +215,6 @@ const submitInquiry = async (
   if (!response.ok) {
     throw new Error(`Endpoint returned ${response.status}`);
   }
-
-  return { fallbackMailto: false };
 };
 
 const getInputType = (type: InquiryField["type"]) => {
@@ -616,10 +607,10 @@ const ProjectInquiry = () => {
     setSubmitMessage("");
 
     try {
-      const result = await submitInquiry(answers, language, inquirySteps, copy, { honeypot, startedAt });
+      await submitInquiry(answers, language, inquirySteps, copy, { honeypot, startedAt });
       window.localStorage.setItem(LAST_SUBMIT_KEY, String(Date.now()));
       window.localStorage.removeItem(STORAGE_KEY);
-      setSubmitMessage(result.fallbackMailto ? copy.noEndpoint : "");
+      setSubmitMessage("");
       setSubmitState("success");
     } catch (error) {
       setSubmitState("error");
