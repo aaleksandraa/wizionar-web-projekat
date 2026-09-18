@@ -6,6 +6,17 @@ Javna forma je dostupna na:
 - `/project-inquiry`
 - lokalizovano kroz postojeće prefikse, npr. `/en/projektni-upitnik`
 
+## Sta mora biti ukljuceno da email radi
+
+`.env` sam po sebi nije dovoljan. Moraju biti sva 4 koraka:
+
+1. Node server pokrenut na `127.0.0.1:3000` (pm2)
+2. `.env` u **rootu git projekta**, pored `package.json` (ne u `dist` i ne u `public_html` HTML folderu)
+3. `npm run build` nakon `git pull`
+4. Apache/Nginx reverse proxy sa javnog domena na `http://127.0.0.1:3000`
+
+Provjera: `https://wizionar.com/api/health` mora vratiti JSON `{"ok":true,"db":true}`, ne Apache HTML 500.
+
 ## Backend, baza i email
 
 Za Hetzner server dodan je Node/Express backend u `server/index.js`.
@@ -17,16 +28,12 @@ POST /api/project-inquiry
 GET /api/health
 ```
 
-Frontend koristi:
-
-```env
-VITE_PROJECT_INQUIRY_ENDPOINT=/api/project-inquiry
-```
+Frontend uvijek salje na `/api/project-inquiry`.
 
 Endpoint radi:
 
 - server-side validaciju,
-- honeypot i rate-limit zaštitu,
+- honeypot i rate-limit zastitu,
 - snimanje prijave u MySQL,
 - snimanje svih odgovora u posebnu tabelu,
 - email na `info@wizionar.com` sa svim poljima, IP adresom i User-Agent podacima,
@@ -53,14 +60,30 @@ mysql -u wizionar -p wizionar < server/schema.sql
 
 ## Environment
 
-Na serveru podesite `.env`:
+Na serveru kreirajte `.env` **u rootu projekta**:
+
+```bash
+cd /var/www/wizionar
+cp .env.example .env
+nano .env
+```
+
+Putanja mora biti:
+
+```txt
+/var/www/wizionar/.env
+```
+
+(` /var/www/wizionar` zamijenite stvarnom putanjom gdje je `package.json`.)
+
+Ne stavljati `.env` u `dist/`, `public/` ili cisti `public_html` sa HTML fajlovima.
 
 ```env
 VITE_PROJECT_INQUIRY_ENDPOINT=/api/project-inquiry
 
 PORT=3000
 HOST=127.0.0.1
-CORS_ORIGIN=https://wizionar.com,https://www.wizionar.com
+CORS_ORIGIN=https://wizionar.com,https://www.wizionar.com,https://wizionar.app
 
 DB_HOST=127.0.0.1
 DB_PORT=3306
@@ -77,24 +100,77 @@ SMTP_PASS=mail-password-here
 SMTP_FROM="Wizionar <info@wizionar.com>"
 ```
 
+Server ucitava bas taj fajl: `server/index.js` trazi `.env` pored `package.json`.
+
 ## Pokretanje na Hetzneru
 
 ```bash
+cd /var/www/wizionar
+git pull
 npm install
 npm run build
-npm run server
 ```
 
-Za stalno pokretanje preporuka je `pm2`:
+Za stalno pokretanje koristite `pm2`:
 
 ```bash
 npm install -g pm2
-pm2 start server/index.js --name wizionar
+pm2 start ecosystem.config.cjs
 pm2 save
 pm2 startup
 ```
 
-Nginx primjer:
+Ili jednom:
+
+```bash
+bash scripts/deploy-hetzner.sh
+```
+
+Lokalna provjera na serveru:
+
+```bash
+curl -sS http://127.0.0.1:3000/api/health
+```
+
+Ocekivano:
+
+```json
+{"ok":true,"db":true}
+```
+
+Ako ovo radi, a `https://wizionar.com/api/health` i dalje daje Apache 500, proxy nije podesen.
+
+## Apache (trenutni live server)
+
+Datoteka: `deploy/apache-wizionar.conf`
+
+```bash
+sudo a2enmod proxy proxy_http headers rewrite ssl
+sudo cp deploy/apache-wizionar.conf /etc/apache2/sites-available/wizionar.conf
+# uredite ServerName ako treba
+sudo a2ensite wizionar
+sudo systemctl reload apache2
+```
+
+Preporuceni nacin: Apache sve salje na Node:
+
+```apache
+ProxyPreserveHost On
+RequestHeader set X-Forwarded-Proto "https"
+ProxyPass / http://127.0.0.1:3000/
+ProxyPassReverse / http://127.0.0.1:3000/
+```
+
+Ako Apache mora i dalje sluziti `dist/` staticki, onda bar API:
+
+```apache
+ProxyPass /api http://127.0.0.1:3000/api
+ProxyPassReverse /api http://127.0.0.1:3000/api
+```
+
+`public/.htaccess` se kopira u `dist/` pri buildu. On ne radi proxy; samo cuva `/api` od SPA fallback-a.
+
+## Nginx alternativa
 
 ```nginx
 server {
@@ -111,14 +187,14 @@ server {
 }
 ```
 
-## Zaštita od spama
+## Zastita od spama
 
 Frontend trenutno koristi:
 
 - honeypot polje `website_url`,
-- lokalni rate limit između slanja,
+- lokalni rate limit izmedju slanja,
 - minimalno vrijeme prije slanja,
-- matematičku provjeru,
+- matematicku provjeru,
 - osnovnu validaciju i sanitizaciju teksta.
 
 Na endpointu obavezno ponoviti:
@@ -134,7 +210,7 @@ Na endpointu obavezno ponoviti:
 
 Pitanja su u `src/lib/project-inquiry-schema.ts`.
 
-Za novo pitanje dodajte objekat u `fields` željenog koraka:
+Za novo pitanje dodajte objekat u `fields` zeljenog koraka:
 
 ```ts
 {
@@ -155,7 +231,7 @@ Za uslovno pitanje dodajte `showWhen`:
 showWhen: (answers) => answers.project_type === "ecommerce"
 ```
 
-Podržani tipovi polja su:
+Podrzani tipovi polja su:
 
 - `text`
 - `email`

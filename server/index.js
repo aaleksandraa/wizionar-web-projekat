@@ -1,9 +1,9 @@
-import "dotenv/config";
 import crypto from "node:crypto";
 import fs from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 import cors from "cors";
+import dotenv from "dotenv";
 import express from "express";
 import rateLimit from "express-rate-limit";
 import helmet from "helmet";
@@ -14,6 +14,8 @@ import { z } from "zod";
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const rootDir = path.resolve(__dirname, "..");
 const distDir = path.join(rootDir, "dist");
+
+dotenv.config({ path: path.join(rootDir, ".env") });
 
 const env = {
   port: Number(process.env.PORT || 3000),
@@ -405,8 +407,13 @@ app.use(
 app.use(express.json({ limit: "1mb" }));
 
 app.get("/api/health", async (_request, response) => {
-  await pool.query("SELECT 1");
-  response.json({ ok: true });
+  try {
+    await pool.query("SELECT 1");
+    response.json({ ok: true, db: true });
+  } catch (error) {
+    console.error(error);
+    response.status(503).json({ ok: false, db: false, message: "Database unavailable" });
+  }
 });
 
 app.post(
