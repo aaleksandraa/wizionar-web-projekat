@@ -1,15 +1,15 @@
 var _a;
 import { jsxs, Fragment, jsx } from "react/jsx-runtime";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { motion, AnimatePresence, MotionConfig } from "framer-motion";
+import { motion, AnimatePresence, useReducedMotion, useScroll, useSpring, MotionConfig } from "framer-motion";
 import { renderToString } from "react-dom/server";
 import { StaticRouter } from "react-router-dom/server.mjs";
 import { Route, Routes, useNavigate, useLocation, Link, useParams, Navigate } from "react-router-dom";
 import * as React from "react";
-import { createContext, useContext, useState, useEffect, useCallback, useMemo, lazy, forwardRef } from "react";
+import { createContext, useContext, useState, useEffect, useCallback, useMemo, lazy, forwardRef, useRef, Fragment as Fragment$1 } from "react";
 import * as ToastPrimitives from "@radix-ui/react-toast";
 import { cva } from "class-variance-authority";
-import { X, ArrowUpRight, Menu, ChevronRight, Mail, Facebook, Instagram, Phone, ArrowRight, Play, Briefcase, Database, Zap, Shield, FileDown, Layers, Eye, TrendingUp, CreditCard, Stethoscope, Wallet, Building2, Scissors, MessageCircle, Cat, Search, Monitor, Settings, TestTube, Rocket, FileCheck, Lock, Activity, CheckCircle, Calculator, Package, Palette, Handshake, BarChart3, Clock, FileSpreadsheet, AlertTriangle, CheckCircle2, LayoutDashboard, Users, CalendarClock, Globe, ShieldCheck, UserCheck, Key, Factory, Truck, Server, Gauge, Tag, FileText, DollarSign, Calendar, MapPin, FlaskConical, Heart, Home, MessageCircleQuestion, Star, Bell, Sparkles, Plug, ShoppingCart, MessageSquare, Smartphone, PenTool, Headphones, ChevronDown, Target, Link2, ArrowLeft, Code2, ChevronLeft, ClipboardList, Languages, Wrench, Image, LayoutGrid, Filter, ExternalLink, Share2, BookOpen, Check, Loader2 } from "lucide-react";
+import { X, ArrowUpRight, Menu, ChevronRight, Mail, Facebook, Instagram, Phone, ArrowRight, Play, Briefcase, Database, Zap, Shield, FileDown, Layers, Eye, TrendingUp, CreditCard, Stethoscope, Wallet, Building2, Scissors, MessageCircle, Cat, Search, Monitor, Settings, TestTube, Rocket, FileCheck, Lock, Activity, CheckCircle, Calculator, Package, Palette, Handshake, Sparkles, MousePointer2, ShieldCheck, Bot, Gauge, KeyRound, Check, Fingerprint, Landmark, HeartPulse, Building, MessageSquare, BarChart3, Clock, FileSpreadsheet, AlertTriangle, CheckCircle2, LayoutDashboard, Users, CalendarClock, Globe, UserCheck, Key, Factory, Truck, Server, Tag, FileText, DollarSign, Calendar, MapPin, FlaskConical, Heart, Home, MessageCircleQuestion, Star, Bell, Plug, ShoppingCart, Smartphone, PenTool, Headphones, ChevronDown, Target, Link2, ArrowLeft, Code2, ChevronLeft, ClipboardList, Languages, Wrench, Image, LayoutGrid, Filter, ExternalLink, Share2, BookOpen, Loader2 } from "lucide-react";
 import { clsx } from "clsx";
 import { twMerge } from "tailwind-merge";
 import { useTheme } from "next-themes";
@@ -27,6 +27,7 @@ const AppRoutes = ({
 }) => {
   const routeElements = /* @__PURE__ */ jsxs(Fragment, { children: [
     /* @__PURE__ */ jsx(Route, { index: true, element: wrapPage(/* @__PURE__ */ jsx(pages2.Index, {})) }),
+    /* @__PURE__ */ jsx(Route, { path: "v2", element: wrapPage(/* @__PURE__ */ jsx(pages2.IndexV2, {})) }),
     /* @__PURE__ */ jsx(Route, { path: "wizflussi", element: wrapPage(/* @__PURE__ */ jsx(pages2.WizFlussi, {})) }),
     /* @__PURE__ */ jsx(Route, { path: "wizmedik-reports", element: wrapPage(/* @__PURE__ */ jsx(pages2.WizMedikReports, {})) }),
     /* @__PURE__ */ jsx(Route, { path: "wizmedik", element: wrapPage(/* @__PURE__ */ jsx(pages2.WizMedik, {})) }),
@@ -2830,6 +2831,7 @@ const createLazyPage = (importer) => ({
   preload: importer
 });
 const indexPage = createLazyPage(() => Promise.resolve().then(() => Index$1));
+const indexV2Page = createLazyPage(() => Promise.resolve().then(() => IndexV2$1));
 const wizFlussiPage = createLazyPage(() => Promise.resolve().then(() => WizFlussi$1));
 const wizMedikReportsPage = createLazyPage(() => Promise.resolve().then(() => WizMedikReports$1));
 const wizMedikPage = createLazyPage(() => Promise.resolve().then(() => WizMedik$1));
@@ -2856,6 +2858,7 @@ const normalizeRoutePath = (path) => {
 };
 const routePrefetchers = [
   { matches: (path) => path === "/", importer: indexPage.preload },
+  { matches: (path) => path === "/v2", importer: indexV2Page.preload },
   { matches: (path) => path === "/wizflussi", importer: wizFlussiPage.preload },
   { matches: (path) => path === "/wizmedik-reports", importer: wizMedikReportsPage.preload },
   { matches: (path) => path === "/wizmedik", importer: wizMedikPage.preload },
@@ -2917,6 +2920,7 @@ const LocalizedLink = forwardRef(
 );
 LocalizedLink.displayName = "LocalizedLink";
 const defaultOgImage = "/assets/wizionar-logo-c0_-7f5K.png";
+const wizionarLogoLight = "/assets/wizionar-logo-light-Dq6Niued.png";
 const flags = [
   { code: "sr", label: "Srpski", flag: "🇷🇸" },
   { code: "it", label: "Italiano", flag: "🇮🇹" },
@@ -5168,7 +5172,8 @@ const calculateBudgetScore = (budgetRange) => {
   if (value.includes("15.000")) return "enterprise";
   return "unknown";
 };
-const WizionarHeader = () => {
+const WizionarHeader = ({ logo = "dark" }) => {
+  const logoSrc = logo === "light" ? wizionarLogoLight : defaultOgImage;
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const { t, language } = useLanguage();
@@ -5239,7 +5244,7 @@ const WizionarHeader = () => {
           /* @__PURE__ */ jsx(LocalizedLink, { to: "/", className: "flex items-center gap-3", children: /* @__PURE__ */ jsx(
             "img",
             {
-              src: defaultOgImage,
+              src: logoSrc,
               alt: "Wizionar",
               decoding: "async",
               fetchpriority: "high",
@@ -5299,7 +5304,7 @@ const WizionarHeader = () => {
           className: "fixed inset-y-0 right-0 z-[70] flex w-[86%] max-w-sm flex-col border-l border-border bg-background shadow-2xl md:hidden",
           children: [
             /* @__PURE__ */ jsxs("div", { className: "flex items-center justify-between border-b border-border/60 bg-background px-5 py-4", children: [
-              /* @__PURE__ */ jsx(LocalizedLink, { to: "/", className: "flex items-center", onClick: closeMobileMenu, children: /* @__PURE__ */ jsx("img", { src: defaultOgImage, alt: "Wizionar", decoding: "async", className: "h-10 w-auto" }) }),
+              /* @__PURE__ */ jsx(LocalizedLink, { to: "/", className: "flex items-center", onClick: closeMobileMenu, children: /* @__PURE__ */ jsx("img", { src: logoSrc, alt: "Wizionar", decoding: "async", className: "h-10 w-auto" }) }),
               /* @__PURE__ */ jsx(
                 "button",
                 {
@@ -6046,8 +6051,9 @@ const ContactSection = () => {
     )
   ] }) });
 };
-const WizionarFooter = () => {
+const WizionarFooter = ({ logo = "dark" }) => {
   const { t } = useLanguage();
+  const logoSrc = logo === "light" ? wizionarLogoLight : defaultOgImage;
   return /* @__PURE__ */ jsx("footer", { className: "border-t border-border bg-background", children: /* @__PURE__ */ jsxs("div", { className: "container mx-auto px-6 py-12 md:py-16 flex flex-col items-center text-center gap-6", children: [
     /* @__PURE__ */ jsx(
       "a",
@@ -6092,7 +6098,7 @@ const WizionarFooter = () => {
         }
       )
     ] }),
-    /* @__PURE__ */ jsx(LocalizedLink, { to: "/", className: "inline-block", children: /* @__PURE__ */ jsx("img", { src: defaultOgImage, alt: "Wizionar", loading: "lazy", decoding: "async", className: "h-16 w-auto" }) }),
+    /* @__PURE__ */ jsx(LocalizedLink, { to: "/", className: "inline-block", children: /* @__PURE__ */ jsx("img", { src: logoSrc, alt: "Wizionar", loading: "lazy", decoding: "async", className: "h-16 w-auto" }) }),
     /* @__PURE__ */ jsx("p", { className: "text-sm text-muted-foreground", children: t.footer.copyright })
   ] }) });
 };
@@ -6217,6 +6223,1394 @@ const Index = () => {
 const Index$1 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
   default: Index
+}, Symbol.toStringTag, { value: "Module" }));
+const v2Translations = {
+  sr: {
+    hero: {
+      badge: "Product studio · B2B softver · AI automatizacija",
+      titleTop: "Sistemi koji",
+      titleHighlight: "misle unaprijed",
+      titleBottom: "i rade dok vi spavate.",
+      subtitle: "Wizionar gradi B2B platforme za finansije, zdravstvo i uslužne djelatnosti — od evidencije i planiranja do potpune automatizacije, AI asistenata i izvještaja u realnom vremenu.",
+      primaryCta: "Pokreni projekat",
+      secondaryCta: "Vidi ekosistem",
+      tertiaryCta: "Usluge",
+      micro: "Odgovor u roku od 24h · Demo bez obaveze · Jasan obim i cijena prije starta",
+      consoleTitle: "wizionar · control center",
+      live: "UŽIVO",
+      scroll: "Skroluj"
+    },
+    marquee: {
+      items: [
+        "Automatizacija procesa",
+        "AI asistenti",
+        "Izvještaji u realnom vremenu",
+        "RBAC & Audit trail",
+        "Integracije i API",
+        "Multi-valuta",
+        "Cloud infrastruktura",
+        "Modularna arhitektura"
+      ]
+    },
+    value: {
+      label: "Zašto Wizionar",
+      title1: "Manje haosa.",
+      title2: "Više kontrole.",
+      beforeTitle: "Prije",
+      afterTitle: "Sa Wizionarom",
+      before: [
+        "Excel tabela u šest verzija",
+        "Podsjetnici zakopani u mailu",
+        "Izvještaji koji se sklapaju ručno",
+        "Niko ne zna ko je šta promijenio"
+      ],
+      after: [
+        "Jedan izvor istine",
+        "Automatski podsjetnici",
+        "Izvještaj u jednom kliku",
+        "Audit trail za svaku akciju"
+      ],
+      aiTitle: "AI ugrađen u proces",
+      aiDescription: "Ne AI radi ukrasa — asistenti koji odgovaraju klijentima, klasifikuju dokumente i pripremaju izvještaje.",
+      speedTitle: "Isporuka u sedmicama",
+      speedDescription: "Radimo u kratkim ciklusima. Prva upotrebljiva verzija je kod vas dok drugi još pišu specifikaciju.",
+      ownershipTitle: "Kod je vaš",
+      ownershipDescription: "Bez zaključavanja u platformu. Dobijate izvorni kod, dokumentaciju i pristup infrastrukturi."
+    },
+    impact: {
+      label: "Rezultat",
+      title: "Ono što se mjeri, to se popravlja",
+      items: [
+        { value: "70%", label: "manje ručnog unosa", description: "Ponavljajući koraci se izvršavaju sami." },
+        { value: "24/7", label: "sistem koji ne spava", description: "Podsjetnici, obrade i AI odgovori i van radnog vremena." },
+        { value: "1 klik", label: "do izvještaja", description: "Excel i PDF izvoz umjesto ručnog sklapanja." },
+        { value: "100%", label: "praćenih akcija", description: "Audit trail odgovara na pitanje ko, kada i šta." }
+      ]
+    },
+    products: {
+      explore: "Otvori",
+      inquiry: "Pitaj za demo"
+    },
+    process: {
+      note: "Svaka faza ima jasan rezultat i rok. Bez iznenađenja na kraju."
+    },
+    cta: {
+      label: "Sljedeći korak",
+      title: "Vaš sljedeći sistem počinje jednim razgovorom.",
+      subtitle: "Opišite nam proces koji vas usporava. Vraćamo se sa prijedlogom rješenja, obimom posla i procjenom — bez obaveze.",
+      primary: "Popuni upitnik",
+      secondary: "Piši na WhatsApp",
+      guarantees: ["Odgovor u roku od 24h", "Jasna ponuda prije starta", "Bez obaveze i skrivenih troškova"]
+    }
+  },
+  en: {
+    hero: {
+      badge: "Product studio · B2B software · AI automation",
+      titleTop: "Systems that",
+      titleHighlight: "think ahead",
+      titleBottom: "and work while you sleep.",
+      subtitle: "Wizionar builds B2B platforms for finance, healthcare and service industries — from records and planning to full automation, AI assistants and real-time reporting.",
+      primaryCta: "Start a project",
+      secondaryCta: "See the ecosystem",
+      tertiaryCta: "Services",
+      micro: "Reply within 24h · No-obligation demo · Clear scope and price before we start",
+      consoleTitle: "wizionar · control center",
+      live: "LIVE",
+      scroll: "Scroll"
+    },
+    marquee: {
+      items: [
+        "Process automation",
+        "AI assistants",
+        "Real-time reporting",
+        "RBAC & audit trail",
+        "Integrations and APIs",
+        "Multi-currency",
+        "Cloud infrastructure",
+        "Modular architecture"
+      ]
+    },
+    value: {
+      label: "Why Wizionar",
+      title1: "Less chaos.",
+      title2: "More control.",
+      beforeTitle: "Before",
+      afterTitle: "With Wizionar",
+      before: [
+        "Six versions of the same spreadsheet",
+        "Reminders buried in email",
+        "Reports assembled by hand",
+        "Nobody knows who changed what"
+      ],
+      after: [
+        "A single source of truth",
+        "Automatic reminders",
+        "Reports in one click",
+        "An audit trail for every action"
+      ],
+      aiTitle: "AI built into the process",
+      aiDescription: "Not AI for decoration — assistants that answer customers, classify documents and prepare reports.",
+      speedTitle: "Delivery in weeks",
+      speedDescription: "We work in short cycles. Your first usable version ships while others are still writing the spec.",
+      ownershipTitle: "The code is yours",
+      ownershipDescription: "No platform lock-in. You get the source code, documentation and access to the infrastructure."
+    },
+    impact: {
+      label: "Outcome",
+      title: "What gets measured gets fixed",
+      items: [
+        { value: "70%", label: "less manual entry", description: "Repetitive steps run on their own." },
+        { value: "24/7", label: "a system that never sleeps", description: "Reminders, jobs and AI replies outside office hours too." },
+        { value: "1 click", label: "to a report", description: "Excel and PDF export instead of manual assembly." },
+        { value: "100%", label: "of actions traced", description: "The audit trail answers who, when and what." }
+      ]
+    },
+    products: {
+      explore: "Open",
+      inquiry: "Ask for a demo"
+    },
+    process: {
+      note: "Every phase has a clear deliverable and deadline. No surprises at the end."
+    },
+    cta: {
+      label: "Next step",
+      title: "Your next system starts with one conversation.",
+      subtitle: "Tell us which process is slowing you down. We come back with a proposed solution, scope and estimate — no obligation.",
+      primary: "Start the inquiry",
+      secondary: "Message on WhatsApp",
+      guarantees: ["Reply within 24h", "Clear quote before we start", "No obligation, no hidden costs"]
+    }
+  },
+  de: {
+    hero: {
+      badge: "Product Studio · B2B-Software · KI-Automatisierung",
+      titleTop: "Systeme, die",
+      titleHighlight: "vorausdenken",
+      titleBottom: "und arbeiten, während Sie schlafen.",
+      subtitle: "Wizionar entwickelt B2B-Plattformen für Finanzen, Gesundheitswesen und Dienstleistungen — von Erfassung und Planung bis zu vollständiger Automatisierung, KI-Assistenten und Echtzeit-Reporting.",
+      primaryCta: "Projekt starten",
+      secondaryCta: "Ökosystem ansehen",
+      tertiaryCta: "Leistungen",
+      micro: "Antwort innerhalb von 24h · Demo unverbindlich · Klarer Umfang und Preis vor dem Start",
+      consoleTitle: "wizionar · control center",
+      live: "LIVE",
+      scroll: "Scrollen"
+    },
+    marquee: {
+      items: [
+        "Prozessautomatisierung",
+        "KI-Assistenten",
+        "Echtzeit-Reporting",
+        "RBAC & Audit-Trail",
+        "Integrationen und APIs",
+        "Multi-Währung",
+        "Cloud-Infrastruktur",
+        "Modulare Architektur"
+      ]
+    },
+    value: {
+      label: "Warum Wizionar",
+      title1: "Weniger Chaos.",
+      title2: "Mehr Kontrolle.",
+      beforeTitle: "Vorher",
+      afterTitle: "Mit Wizionar",
+      before: [
+        "Sechs Versionen derselben Tabelle",
+        "Erinnerungen im Postfach vergraben",
+        "Berichte von Hand erstellt",
+        "Niemand weiß, wer was geändert hat"
+      ],
+      after: [
+        "Eine einzige Datenquelle",
+        "Automatische Erinnerungen",
+        "Berichte mit einem Klick",
+        "Audit-Trail für jede Aktion"
+      ],
+      aiTitle: "KI im Prozess verankert",
+      aiDescription: "Keine KI zur Dekoration — Assistenten, die Kunden antworten, Dokumente klassifizieren und Berichte vorbereiten.",
+      speedTitle: "Lieferung in Wochen",
+      speedDescription: "Wir arbeiten in kurzen Zyklen. Ihre erste nutzbare Version steht, während andere noch das Lastenheft schreiben.",
+      ownershipTitle: "Der Code gehört Ihnen",
+      ownershipDescription: "Kein Plattform-Lock-in. Sie erhalten Quellcode, Dokumentation und Zugang zur Infrastruktur."
+    },
+    impact: {
+      label: "Ergebnis",
+      title: "Was gemessen wird, wird besser",
+      items: [
+        { value: "70%", label: "weniger manuelle Eingaben", description: "Wiederkehrende Schritte laufen von selbst." },
+        { value: "24/7", label: "ein System, das nie schläft", description: "Erinnerungen, Jobs und KI-Antworten auch außerhalb der Bürozeiten." },
+        { value: "1 Klick", label: "bis zum Bericht", description: "Excel- und PDF-Export statt Handarbeit." },
+        { value: "100%", label: "der Aktionen nachvollziehbar", description: "Der Audit-Trail beantwortet wer, wann und was." }
+      ]
+    },
+    products: {
+      explore: "Öffnen",
+      inquiry: "Demo anfragen"
+    },
+    process: {
+      note: "Jede Phase hat ein klares Ergebnis und einen Termin. Keine Überraschungen am Ende."
+    },
+    cta: {
+      label: "Nächster Schritt",
+      title: "Ihr nächstes System beginnt mit einem Gespräch.",
+      subtitle: "Sagen Sie uns, welcher Prozess Sie ausbremst. Wir melden uns mit Lösungsvorschlag, Umfang und Schätzung zurück — unverbindlich.",
+      primary: "Fragebogen ausfüllen",
+      secondary: "Per WhatsApp schreiben",
+      guarantees: ["Antwort innerhalb von 24h", "Klares Angebot vor dem Start", "Unverbindlich, ohne versteckte Kosten"]
+    }
+  },
+  it: {
+    hero: {
+      badge: "Product studio · Software B2B · Automazione AI",
+      titleTop: "Sistemi che",
+      titleHighlight: "pensano in anticipo",
+      titleBottom: "e lavorano mentre dormi.",
+      subtitle: "Wizionar costruisce piattaforme B2B per finanza, sanità e servizi — dalla registrazione e pianificazione fino alla piena automazione, agli assistenti AI e ai report in tempo reale.",
+      primaryCta: "Avvia il progetto",
+      secondaryCta: "Scopri l'ecosistema",
+      tertiaryCta: "Servizi",
+      micro: "Risposta entro 24h · Demo senza impegno · Ambito e prezzo chiari prima di iniziare",
+      consoleTitle: "wizionar · control center",
+      live: "LIVE",
+      scroll: "Scorri"
+    },
+    marquee: {
+      items: [
+        "Automazione dei processi",
+        "Assistenti AI",
+        "Report in tempo reale",
+        "RBAC e audit trail",
+        "Integrazioni e API",
+        "Multi-valuta",
+        "Infrastruttura cloud",
+        "Architettura modulare"
+      ]
+    },
+    value: {
+      label: "Perché Wizionar",
+      title1: "Meno caos.",
+      title2: "Più controllo.",
+      beforeTitle: "Prima",
+      afterTitle: "Con Wizionar",
+      before: [
+        "Sei versioni dello stesso foglio",
+        "Promemoria sepolti nelle email",
+        "Report compilati a mano",
+        "Nessuno sa chi ha cambiato cosa"
+      ],
+      after: [
+        "Una sola fonte di verità",
+        "Promemoria automatici",
+        "Report in un clic",
+        "Audit trail per ogni azione"
+      ],
+      aiTitle: "AI dentro il processo",
+      aiDescription: "Non AI decorativa — assistenti che rispondono ai clienti, classificano documenti e preparano report.",
+      speedTitle: "Consegna in settimane",
+      speedDescription: "Lavoriamo a cicli brevi. La prima versione utilizzabile è tua mentre altri scrivono ancora le specifiche.",
+      ownershipTitle: "Il codice è tuo",
+      ownershipDescription: "Nessun lock-in di piattaforma. Ricevi codice sorgente, documentazione e accesso all'infrastruttura."
+    },
+    impact: {
+      label: "Risultato",
+      title: "Ciò che si misura si migliora",
+      items: [
+        { value: "70%", label: "meno inserimenti manuali", description: "I passaggi ripetitivi si eseguono da soli." },
+        { value: "24/7", label: "un sistema che non dorme", description: "Promemoria, elaborazioni e risposte AI anche fuori orario." },
+        { value: "1 clic", label: "per un report", description: "Export Excel e PDF invece del lavoro manuale." },
+        { value: "100%", label: "delle azioni tracciate", description: "L'audit trail risponde a chi, quando e cosa." }
+      ]
+    },
+    products: {
+      explore: "Apri",
+      inquiry: "Chiedi una demo"
+    },
+    process: {
+      note: "Ogni fase ha un risultato e una scadenza chiari. Nessuna sorpresa alla fine."
+    },
+    cta: {
+      label: "Prossimo passo",
+      title: "Il tuo prossimo sistema inizia da una conversazione.",
+      subtitle: "Raccontaci quale processo ti rallenta. Torniamo con una proposta di soluzione, ambito e stima — senza impegno.",
+      primary: "Compila il questionario",
+      secondary: "Scrivi su WhatsApp",
+      guarantees: ["Risposta entro 24h", "Preventivo chiaro prima di iniziare", "Senza impegno né costi nascosti"]
+    }
+  }
+};
+const getV2Translations = (language) => v2Translations[language];
+const useSpotlight = () => {
+  return useCallback((event) => {
+    const element = event.currentTarget;
+    const rect = element.getBoundingClientRect();
+    element.style.setProperty("--mx", "".concat(event.clientX - rect.left, "px"));
+    element.style.setProperty("--my", "".concat(event.clientY - rect.top, "px"));
+  }, []);
+};
+const useCountUp = (target, duration = 1600) => {
+  const ref = useRef(null);
+  const [value, setValue] = useState(0);
+  const hasRun = useRef(false);
+  useEffect(() => {
+    var _a2;
+    const element = ref.current;
+    if (!element || hasRun.current) {
+      return;
+    }
+    const prefersReducedMotion = typeof window !== "undefined" && ((_a2 = window.matchMedia) == null ? void 0 : _a2.call(window, "(prefers-reduced-motion: reduce)").matches);
+    if (prefersReducedMotion) {
+      setValue(target);
+      hasRun.current = true;
+      return;
+    }
+    let frame = 0;
+    const observer = new IntersectionObserver(
+      (entries) => {
+        const [entry] = entries;
+        if (!(entry == null ? void 0 : entry.isIntersecting) || hasRun.current) {
+          return;
+        }
+        hasRun.current = true;
+        observer.disconnect();
+        const start = performance.now();
+        const tick = (now) => {
+          const progress = Math.min((now - start) / duration, 1);
+          const eased = progress === 1 ? 1 : 1 - Math.pow(2, -10 * progress);
+          setValue(Math.round(target * eased));
+          if (progress < 1) {
+            frame = requestAnimationFrame(tick);
+          }
+        };
+        frame = requestAnimationFrame(tick);
+      },
+      { threshold: 0.35 }
+    );
+    observer.observe(element);
+    return () => {
+      observer.disconnect();
+      cancelAnimationFrame(frame);
+    };
+  }, [duration, target]);
+  return { ref, value };
+};
+const BAR_HEIGHTS = [38, 62, 44, 78, 56, 88, 66, 82, 58, 94, 72, 86];
+const ORBIT_CHIPS = ["WizFlussi", "wizMedik", "Chatko", "Frizerino", "WizBank", "WizVet"];
+const HeroStat = ({ label, value, suffix = "", delta }) => {
+  const { ref, value: current } = useCountUp(value);
+  return /* @__PURE__ */ jsxs("div", { className: "rounded-2xl border border-border/70 bg-background/60 p-4 backdrop-blur-sm", children: [
+    /* @__PURE__ */ jsx("div", { className: "mb-1 text-[0.7rem] uppercase tracking-widest text-muted-foreground", children: label }),
+    /* @__PURE__ */ jsxs("div", { className: "flex items-end gap-2", children: [
+      /* @__PURE__ */ jsxs("span", { ref, className: "text-2xl font-bold tabular-nums text-foreground md:text-3xl", children: [
+        current,
+        suffix
+      ] }),
+      /* @__PURE__ */ jsx("span", { className: "mb-1 text-xs font-semibold text-primary", children: delta })
+    ] })
+  ] });
+};
+const V2Hero = () => {
+  const { t, language } = useLanguage();
+  const v2 = getV2Translations(language);
+  const reduceMotion = useReducedMotion();
+  const heroRef = useRef(null);
+  const [pointerEnabled, setPointerEnabled] = useState(false);
+  useEffect(() => {
+    var _a2;
+    const element = heroRef.current;
+    if (!element || typeof window === "undefined") {
+      return;
+    }
+    const finePointer = (_a2 = window.matchMedia) == null ? void 0 : _a2.call(window, "(pointer: fine)").matches;
+    if (!finePointer || reduceMotion) {
+      return;
+    }
+    setPointerEnabled(true);
+    const onMove = (event) => {
+      const rect = element.getBoundingClientRect();
+      element.style.setProperty("--hero-x", "".concat((event.clientX - rect.left) / rect.width * 100, "%"));
+      element.style.setProperty("--hero-y", "".concat((event.clientY - rect.top) / rect.height * 100, "%"));
+    };
+    element.addEventListener("pointermove", onMove);
+    return () => element.removeEventListener("pointermove", onMove);
+  }, [reduceMotion]);
+  const headlineWords = [
+    ...v2.hero.titleTop.split(" ").map((word) => ({ word, highlight: false })),
+    ...v2.hero.titleHighlight.split(" ").map((word) => ({ word, highlight: true })),
+    ...v2.hero.titleBottom.split(" ").map((word) => ({ word, highlight: false }))
+  ];
+  const stats = [
+    { label: t.hero.stats.projects, value: 12, delta: "+3" },
+    { label: t.hero.stats.clients, value: 48, delta: "+7" },
+    { label: t.hero.stats.automations, value: 156, delta: "+24" },
+    { label: t.hero.stats.savings, value: 340, suffix: "h", delta: "+45" }
+  ];
+  return /* @__PURE__ */ jsxs(
+    "section",
+    {
+      ref: heroRef,
+      className: "relative isolate flex min-h-[100svh] items-center overflow-hidden pb-20 pt-28 md:pt-32",
+      children: [
+        /* @__PURE__ */ jsx("div", { className: "v2-aurora absolute inset-0 -z-10", "aria-hidden": "true" }),
+        /* @__PURE__ */ jsx("div", { className: "v2-grid absolute inset-0 -z-10", "aria-hidden": "true" }),
+        /* @__PURE__ */ jsx(
+          "div",
+          {
+            className: "v2-orb absolute -left-40 top-[-10%] -z-10 h-64 w-64 bg-primary/20 md:h-[26rem] md:w-[26rem] md:bg-primary/25",
+            "aria-hidden": "true"
+          }
+        ),
+        /* @__PURE__ */ jsx(
+          "div",
+          {
+            className: "v2-orb absolute -right-32 top-1/3 -z-10 h-56 w-56 bg-[hsla(268,85%,60%,0.16)] md:h-[22rem] md:w-[22rem] md:bg-[hsla(268,85%,60%,0.28)]",
+            style: { animationDelay: "-8s" },
+            "aria-hidden": "true"
+          }
+        ),
+        /* @__PURE__ */ jsx(
+          "div",
+          {
+            className: "v2-grid-floor absolute inset-x-0 bottom-0 -z-10 h-72",
+            "aria-hidden": "true"
+          }
+        ),
+        pointerEnabled && /* @__PURE__ */ jsx(
+          "div",
+          {
+            className: "pointer-events-none absolute inset-0 -z-10 opacity-70 transition-opacity duration-500",
+            style: {
+              background: "radial-gradient(28rem circle at var(--hero-x, 50%) var(--hero-y, 35%), hsla(20, 95%, 60%, 0.12), transparent 65%)"
+            },
+            "aria-hidden": "true"
+          }
+        ),
+        /* @__PURE__ */ jsx("div", { className: "v2-noise pointer-events-none absolute inset-0 -z-10 opacity-[0.15]", "aria-hidden": "true" }),
+        /* @__PURE__ */ jsx("div", { className: "container relative mx-auto px-6", children: /* @__PURE__ */ jsxs("div", { className: "mx-auto max-w-6xl", children: [
+          /* @__PURE__ */ jsx(
+            motion.div,
+            {
+              initial: { opacity: 0, y: 16 },
+              animate: { opacity: 1, y: 0 },
+              transition: { duration: 0.5 },
+              className: "flex justify-center",
+              children: /* @__PURE__ */ jsxs("div", { className: "v2-frame v2-frame-static v2-glass inline-flex items-center gap-2.5 rounded-full px-4 py-2", children: [
+                /* @__PURE__ */ jsxs("span", { className: "relative flex h-2 w-2", children: [
+                  /* @__PURE__ */ jsx("span", { className: "v2-pulse-ring absolute inline-flex h-full w-full rounded-full bg-primary" }),
+                  /* @__PURE__ */ jsx("span", { className: "relative inline-flex h-2 w-2 rounded-full bg-primary" })
+                ] }),
+                /* @__PURE__ */ jsx("span", { className: "text-xs font-medium tracking-wide text-foreground/90 sm:text-sm", children: v2.hero.badge })
+              ] })
+            }
+          ),
+          /* @__PURE__ */ jsx("h1", { className: "mx-auto mt-8 max-w-5xl text-center text-[clamp(2.25rem,7vw,4.75rem)] font-bold leading-[1.05] tracking-tight", children: headlineWords.map((item, index) => /* @__PURE__ */ jsxs(Fragment$1, { children: [
+            /* @__PURE__ */ jsx(
+              motion.span,
+              {
+                initial: { opacity: 0, y: 26, filter: "blur(8px)" },
+                animate: { opacity: 1, y: 0, filter: "blur(0px)" },
+                transition: { duration: 0.6, delay: 0.15 + index * 0.05, ease: [0.22, 1, 0.36, 1] },
+                className: "inline-block ".concat(item.highlight ? "v2-text-gradient" : ""),
+                children: item.word
+              }
+            ),
+            " "
+          ] }, "".concat(item.word, "-").concat(index))) }),
+          /* @__PURE__ */ jsx(
+            motion.p,
+            {
+              initial: { opacity: 0, y: 16 },
+              animate: { opacity: 1, y: 0 },
+              transition: { duration: 0.6, delay: 0.5 },
+              className: "mx-auto mt-7 max-w-2xl text-center text-base leading-relaxed text-muted-foreground md:text-lg",
+              children: v2.hero.subtitle
+            }
+          ),
+          /* @__PURE__ */ jsxs(
+            motion.div,
+            {
+              initial: { opacity: 0, y: 16 },
+              animate: { opacity: 1, y: 0 },
+              transition: { duration: 0.6, delay: 0.6 },
+              className: "mt-10 flex flex-col items-stretch justify-center gap-3 sm:flex-row sm:items-center",
+              children: [
+                /* @__PURE__ */ jsx(
+                  Button,
+                  {
+                    size: "xl",
+                    className: "group rounded-full shadow-orange transition-transform duration-300 hover:-translate-y-0.5 hover:shadow-glow",
+                    asChild: true,
+                    children: /* @__PURE__ */ jsxs(LocalizedLink, { to: PROJECT_INQUIRY_PATH, children: [
+                      v2.hero.primaryCta,
+                      /* @__PURE__ */ jsx(ArrowRight, { className: "h-5 w-5 transition-transform group-hover:translate-x-1" })
+                    ] })
+                  }
+                ),
+                /* @__PURE__ */ jsx(
+                  Button,
+                  {
+                    variant: "outline",
+                    size: "xl",
+                    className: "v2-glass group rounded-full border-border/70 transition-transform duration-300 hover:-translate-y-0.5",
+                    asChild: true,
+                    children: /* @__PURE__ */ jsxs("a", { href: "#products", children: [
+                      /* @__PURE__ */ jsx(Sparkles, { className: "h-4 w-4 text-primary" }),
+                      v2.hero.secondaryCta
+                    ] })
+                  }
+                ),
+                /* @__PURE__ */ jsx(
+                  Button,
+                  {
+                    variant: "ghost",
+                    size: "xl",
+                    className: "group rounded-full text-muted-foreground hover:text-foreground",
+                    asChild: true,
+                    children: /* @__PURE__ */ jsxs(LocalizedLink, { to: "/usluge", children: [
+                      /* @__PURE__ */ jsx(Briefcase, { className: "h-4 w-4" }),
+                      v2.hero.tertiaryCta,
+                      /* @__PURE__ */ jsx(ArrowUpRight, { className: "h-4 w-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" })
+                    ] })
+                  }
+                )
+              ]
+            }
+          ),
+          /* @__PURE__ */ jsx(
+            motion.p,
+            {
+              initial: { opacity: 0 },
+              animate: { opacity: 1 },
+              transition: { duration: 0.6, delay: 0.75 },
+              className: "mt-6 text-center text-xs text-muted-foreground sm:text-sm",
+              children: v2.hero.micro
+            }
+          ),
+          /* @__PURE__ */ jsxs(
+            motion.div,
+            {
+              initial: { opacity: 0, y: 40, rotateX: 8 },
+              animate: { opacity: 1, y: 0, rotateX: 0 },
+              transition: { duration: 0.9, delay: 0.7, ease: [0.22, 1, 0.36, 1] },
+              className: "relative mx-auto mt-16 max-w-4xl",
+              style: { perspective: "1200px" },
+              children: [
+                /* @__PURE__ */ jsx(
+                  "div",
+                  {
+                    className: "pointer-events-none absolute inset-0 hidden lg:block",
+                    "aria-hidden": "true",
+                    children: /* @__PURE__ */ jsx("div", { className: "v2-orbit absolute inset-[-3.5rem]", children: ORBIT_CHIPS.map((chip, index) => {
+                      const angle = index / ORBIT_CHIPS.length * Math.PI * 2;
+                      return /* @__PURE__ */ jsx(
+                        "span",
+                        {
+                          className: "absolute left-1/2 top-1/2",
+                          style: {
+                            transform: "translate(-50%, -50%) translate(".concat(Math.cos(angle) * 52, "%, ").concat(Math.sin(angle) * 52, "%)")
+                          },
+                          children: /* @__PURE__ */ jsx("span", { className: "v2-orbit-counter inline-flex items-center rounded-full border border-border/70 bg-background/70 px-3 py-1 text-[0.65rem] font-medium tracking-wide text-muted-foreground backdrop-blur-sm", children: chip })
+                        },
+                        chip
+                      );
+                    }) })
+                  }
+                ),
+                /* @__PURE__ */ jsxs("div", { className: "v2-frame v2-frame-static v2-glass relative overflow-hidden rounded-[1.75rem] border border-border/60 p-2 shadow-2xl", children: [
+                  /* @__PURE__ */ jsx("div", { className: "v2-scanline pointer-events-none absolute inset-x-0 top-0 h-24", "aria-hidden": "true" }),
+                  /* @__PURE__ */ jsxs("div", { className: "rounded-[1.35rem] bg-background/70 p-5 md:p-7", children: [
+                    /* @__PURE__ */ jsxs("div", { className: "mb-6 flex items-center justify-between gap-4", children: [
+                      /* @__PURE__ */ jsxs("div", { className: "flex items-center gap-2", children: [
+                        /* @__PURE__ */ jsx("span", { className: "h-2.5 w-2.5 rounded-full bg-destructive/70" }),
+                        /* @__PURE__ */ jsx("span", { className: "h-2.5 w-2.5 rounded-full bg-accent/70" }),
+                        /* @__PURE__ */ jsx("span", { className: "h-2.5 w-2.5 rounded-full bg-emerald/70" })
+                      ] }),
+                      /* @__PURE__ */ jsx("div", { className: "truncate font-mono text-[0.7rem] text-muted-foreground", children: v2.hero.consoleTitle }),
+                      /* @__PURE__ */ jsxs("div", { className: "flex shrink-0 items-center gap-1.5 rounded-full border border-primary/30 bg-primary/10 px-2.5 py-1", children: [
+                        /* @__PURE__ */ jsx("span", { className: "h-1.5 w-1.5 animate-pulse rounded-full bg-primary" }),
+                        /* @__PURE__ */ jsx("span", { className: "text-[0.6rem] font-semibold tracking-widest text-primary", children: v2.hero.live })
+                      ] })
+                    ] }),
+                    /* @__PURE__ */ jsx("div", { className: "mb-6 grid grid-cols-2 gap-3 md:grid-cols-4", children: stats.map((stat) => /* @__PURE__ */ jsx(HeroStat, { ...stat }, stat.label)) }),
+                    /* @__PURE__ */ jsx("div", { className: "flex h-36 items-end gap-1.5 rounded-2xl border border-border/70 bg-background/50 p-4 md:gap-2", children: BAR_HEIGHTS.map((height, index) => /* @__PURE__ */ jsx(
+                      "div",
+                      {
+                        className: "v2-bar flex-1 rounded-t bg-gradient-to-t from-primary/25 to-primary/70",
+                        style: {
+                          height: "".concat(height, "%"),
+                          animationDelay: "".concat(index * 0.12, "s")
+                        }
+                      },
+                      index
+                    )) })
+                  ] })
+                ] })
+              ]
+            }
+          ),
+          /* @__PURE__ */ jsxs(
+            motion.div,
+            {
+              initial: { opacity: 0 },
+              animate: { opacity: 1 },
+              transition: { duration: 0.6, delay: 1 },
+              className: "mt-10 flex items-center justify-center gap-2 text-[0.7rem] uppercase tracking-[0.3em] text-muted-foreground",
+              children: [
+                /* @__PURE__ */ jsx(MousePointer2, { className: "h-3.5 w-3.5" }),
+                v2.hero.scroll
+              ]
+            }
+          )
+        ] }) })
+      ]
+    }
+  );
+};
+const V2Marquee = () => {
+  const { t, language } = useLanguage();
+  const v2 = getV2Translations(language);
+  const signals = [
+    { icon: Database, label: t.trust.centralization },
+    { icon: Zap, label: t.trust.automation },
+    { icon: Shield, label: t.trust.rbac },
+    { icon: FileDown, label: t.trust.export },
+    { icon: Layers, label: t.trust.modular }
+  ];
+  const items = [
+    ...signals.map((signal) => ({ icon: signal.icon, label: signal.label })),
+    ...v2.marquee.items.map((label) => ({ icon: null, label }))
+  ];
+  return /* @__PURE__ */ jsx(
+    "section",
+    {
+      id: "trust",
+      className: "v2-marquee relative overflow-hidden border-y border-border/60 bg-background/40 py-6",
+      children: /* @__PURE__ */ jsx("div", { className: "v2-mask-x flex w-full overflow-hidden", children: /* @__PURE__ */ jsx("div", { className: "v2-marquee-track flex shrink-0 items-center gap-3 pr-3", children: [0, 1].map((copy2) => /* @__PURE__ */ jsx("div", { className: "flex shrink-0 items-center gap-3 pr-3", "aria-hidden": copy2 === 1, children: items.map((item, index) => /* @__PURE__ */ jsxs(
+        "span",
+        {
+          className: "v2-glass inline-flex shrink-0 items-center gap-2 rounded-full border border-border/60 px-5 py-2.5 text-sm text-muted-foreground transition-colors hover:border-primary/40 hover:text-foreground",
+          children: [
+            item.icon ? /* @__PURE__ */ jsx(item.icon, { className: "h-4 w-4 text-primary" }) : /* @__PURE__ */ jsx("span", { className: "h-1.5 w-1.5 rounded-full bg-primary/70" }),
+            /* @__PURE__ */ jsx("span", { className: "whitespace-nowrap font-medium", children: item.label })
+          ]
+        },
+        "".concat(copy2, "-").concat(item.label, "-").concat(index)
+      )) }, copy2)) }) })
+    }
+  );
+};
+const V2Value = () => {
+  const { t, language } = useLanguage();
+  const v2 = getV2Translations(language);
+  const onSpotlightMove = useSpotlight();
+  const cards = [
+    {
+      icon: Zap,
+      title: t.whatWeDo.features.automation.title,
+      description: t.whatWeDo.features.automation.description
+    },
+    {
+      icon: ShieldCheck,
+      title: t.whatWeDo.features.control.title,
+      description: t.whatWeDo.features.control.description
+    },
+    {
+      icon: Layers,
+      title: t.whatWeDo.features.scalability.title,
+      description: t.whatWeDo.features.scalability.description
+    },
+    { icon: Bot, title: v2.value.aiTitle, description: v2.value.aiDescription },
+    { icon: Gauge, title: v2.value.speedTitle, description: v2.value.speedDescription },
+    { icon: KeyRound, title: v2.value.ownershipTitle, description: v2.value.ownershipDescription }
+  ];
+  return /* @__PURE__ */ jsxs("section", { id: "why", className: "relative overflow-hidden py-24 md:py-32", children: [
+    /* @__PURE__ */ jsx(
+      "div",
+      {
+        className: "v2-orb absolute -left-24 top-1/4 -z-10 h-80 w-80 bg-primary/10",
+        "aria-hidden": "true"
+      }
+    ),
+    /* @__PURE__ */ jsxs("div", { className: "container mx-auto px-6", children: [
+      /* @__PURE__ */ jsxs(
+        motion.div,
+        {
+          initial: { opacity: 0, y: 24 },
+          whileInView: { opacity: 1, y: 0 },
+          viewport: { once: true, margin: "-100px" },
+          transition: { duration: 0.6 },
+          className: "mx-auto max-w-3xl text-center",
+          children: [
+            /* @__PURE__ */ jsx("span", { className: "text-xs font-semibold uppercase tracking-[0.35em] text-primary", children: v2.value.label }),
+            /* @__PURE__ */ jsxs("h2", { className: "mt-5 text-[clamp(1.9rem,4.5vw,3.25rem)] font-bold leading-[1.1]", children: [
+              v2.value.title1,
+              " ",
+              /* @__PURE__ */ jsx("span", { className: "v2-text-gradient", children: v2.value.title2 })
+            ] }),
+            /* @__PURE__ */ jsx("p", { className: "mt-6 text-base leading-relaxed text-muted-foreground md:text-lg", children: t.whatWeDo.description })
+          ]
+        }
+      ),
+      /* @__PURE__ */ jsxs(
+        motion.div,
+        {
+          initial: { opacity: 0, y: 30 },
+          whileInView: { opacity: 1, y: 0 },
+          viewport: { once: true, margin: "-80px" },
+          transition: { duration: 0.6, delay: 0.1 },
+          className: "mx-auto mt-16 grid max-w-5xl items-stretch gap-4 md:grid-cols-[1fr_auto_1fr]",
+          children: [
+            /* @__PURE__ */ jsxs("div", { className: "rounded-3xl border border-border/60 bg-background/40 p-6 md:p-8", children: [
+              /* @__PURE__ */ jsx("div", { className: "mb-5 text-xs font-semibold uppercase tracking-[0.28em] text-muted-foreground", children: v2.value.beforeTitle }),
+              /* @__PURE__ */ jsx("ul", { className: "space-y-3", children: v2.value.before.map((item) => /* @__PURE__ */ jsxs("li", { className: "flex items-start gap-3 text-sm text-muted-foreground", children: [
+                /* @__PURE__ */ jsx("span", { className: "mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-destructive/15 text-destructive", children: /* @__PURE__ */ jsx(X, { className: "h-3 w-3" }) }),
+                /* @__PURE__ */ jsx("span", { className: "line-through decoration-muted-foreground/40", children: item })
+              ] }, item)) })
+            ] }),
+            /* @__PURE__ */ jsx("div", { className: "flex items-center justify-center", children: /* @__PURE__ */ jsx("div", { className: "flex h-11 w-11 items-center justify-center rounded-full border border-primary/40 bg-primary/10 text-primary md:rotate-0", children: /* @__PURE__ */ jsx(ArrowRight, { className: "h-5 w-5 rotate-90 md:rotate-0" }) }) }),
+            /* @__PURE__ */ jsxs("div", { className: "v2-frame v2-frame-static relative overflow-hidden rounded-3xl border border-primary/25 bg-primary/[0.06] p-6 md:p-8", children: [
+              /* @__PURE__ */ jsx("div", { className: "mb-5 text-xs font-semibold uppercase tracking-[0.28em] text-primary", children: v2.value.afterTitle }),
+              /* @__PURE__ */ jsx("ul", { className: "space-y-3", children: v2.value.after.map((item, index) => /* @__PURE__ */ jsxs(
+                motion.li,
+                {
+                  initial: { opacity: 0, x: -12 },
+                  whileInView: { opacity: 1, x: 0 },
+                  viewport: { once: true },
+                  transition: { duration: 0.4, delay: 0.15 + index * 0.1 },
+                  className: "flex items-start gap-3 text-sm font-medium text-foreground",
+                  children: [
+                    /* @__PURE__ */ jsx("span", { className: "mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-primary/20 text-primary", children: /* @__PURE__ */ jsx(Check, { className: "h-3 w-3" }) }),
+                    item
+                  ]
+                },
+                item
+              )) })
+            ] })
+          ]
+        }
+      ),
+      /* @__PURE__ */ jsx("div", { className: "mx-auto mt-6 grid max-w-5xl gap-4 sm:grid-cols-2 lg:grid-cols-3", children: cards.map((card, index) => /* @__PURE__ */ jsx(
+        motion.article,
+        {
+          initial: { opacity: 0, y: 24 },
+          whileInView: { opacity: 1, y: 0 },
+          viewport: { once: true, margin: "-60px" },
+          transition: { duration: 0.5, delay: index % 3 * 0.1 },
+          onMouseMove: onSpotlightMove,
+          className: "v2-frame v2-spotlight group relative overflow-hidden rounded-3xl border border-border/60 bg-background/40 p-6 transition-transform duration-300 hover:-translate-y-1",
+          children: /* @__PURE__ */ jsxs("div", { className: "relative z-10", children: [
+            /* @__PURE__ */ jsx("div", { className: "mb-5 inline-flex h-11 w-11 items-center justify-center rounded-2xl border border-primary/25 bg-primary/10 text-primary transition-colors group-hover:bg-primary/20", children: /* @__PURE__ */ jsx(card.icon, { className: "h-5 w-5" }) }),
+            /* @__PURE__ */ jsx("h3", { className: "mb-2 text-lg font-semibold", children: card.title }),
+            /* @__PURE__ */ jsx("p", { className: "text-sm leading-relaxed text-muted-foreground", children: card.description })
+          ] })
+        },
+        card.title
+      )) }),
+      /* @__PURE__ */ jsx(
+        motion.div,
+        {
+          initial: { opacity: 0 },
+          whileInView: { opacity: 1 },
+          viewport: { once: true },
+          transition: { duration: 0.5 },
+          className: "mt-12 text-center",
+          children: /* @__PURE__ */ jsxs(
+            LocalizedLink,
+            {
+              to: "/usluge",
+              className: "group inline-flex items-center gap-2 text-sm font-semibold text-primary transition-colors hover:text-accent",
+              children: [
+                t.whatWeDo.link,
+                /* @__PURE__ */ jsx(ArrowRight, { className: "h-4 w-4 transition-transform group-hover:translate-x-1" })
+              ]
+            }
+          )
+        }
+      )
+    ] })
+  ] });
+};
+const V2Impact = () => {
+  const { language } = useLanguage();
+  const v2 = getV2Translations(language);
+  return /* @__PURE__ */ jsxs("section", { className: "relative overflow-hidden border-y border-border/60 py-20 md:py-24", children: [
+    /* @__PURE__ */ jsx("div", { className: "v2-aurora absolute inset-0 -z-10 opacity-60", "aria-hidden": "true" }),
+    /* @__PURE__ */ jsxs("div", { className: "container mx-auto px-6", children: [
+      /* @__PURE__ */ jsxs(
+        motion.div,
+        {
+          initial: { opacity: 0, y: 20 },
+          whileInView: { opacity: 1, y: 0 },
+          viewport: { once: true, margin: "-80px" },
+          transition: { duration: 0.5 },
+          className: "mb-14 text-center",
+          children: [
+            /* @__PURE__ */ jsx("span", { className: "text-xs font-semibold uppercase tracking-[0.35em] text-primary", children: v2.impact.label }),
+            /* @__PURE__ */ jsx("h2", { className: "mt-4 text-[clamp(1.6rem,3.6vw,2.5rem)] font-bold", children: v2.impact.title })
+          ]
+        }
+      ),
+      /* @__PURE__ */ jsx("div", { className: "mx-auto grid max-w-6xl gap-4 sm:grid-cols-2 lg:grid-cols-4", children: v2.impact.items.map((item, index) => /* @__PURE__ */ jsxs(
+        motion.div,
+        {
+          initial: { opacity: 0, y: 24 },
+          whileInView: { opacity: 1, y: 0 },
+          viewport: { once: true, margin: "-60px" },
+          transition: { duration: 0.5, delay: index * 0.08 },
+          className: "v2-frame v2-shine group relative overflow-hidden rounded-3xl border border-border/60 bg-background/40 p-7 text-center transition-transform duration-300 hover:-translate-y-1",
+          children: [
+            /* @__PURE__ */ jsx("div", { className: "v2-text-gradient text-4xl font-bold md:text-5xl", children: item.value }),
+            /* @__PURE__ */ jsx("div", { className: "mt-3 text-sm font-semibold text-foreground", children: item.label }),
+            /* @__PURE__ */ jsx("p", { className: "mt-2 text-xs leading-relaxed text-muted-foreground", children: item.description })
+          ]
+        },
+        item.label
+      )) })
+    ] })
+  ] });
+};
+const V2Products = () => {
+  const { t, language } = useLanguage();
+  const v2 = getV2Translations(language);
+  const onSpotlightMove = useSpotlight();
+  const products = [
+    {
+      id: "wizflussi",
+      name: "WizFlussi",
+      icon: CreditCard,
+      tagline: t.products.items.wizflussi.tagline,
+      description: t.products.items.wizflussi.description,
+      features: t.products.items.wizflussi.features,
+      link: "/wizflussi",
+      available: true
+    },
+    {
+      id: "wizmedik-reports",
+      name: "WizMedikReports",
+      icon: Stethoscope,
+      tagline: "Izvještavanje za medicinske ustanove",
+      description: "Dnevni, sedmični i mjesečni izvještaji. Praćenje zarade, osoblja, radnih sati i normativa, sve na jednom mjestu.",
+      features: ["Praćenje zarade", "Upravljanje osobljem", "Automatski izvještaji"],
+      link: "/wizmedik-reports",
+      available: true
+    },
+    {
+      id: "wizmedik",
+      name: "wizMedik",
+      icon: Stethoscope,
+      tagline: "Zdravstvo na jednom mjestu u BiH",
+      description: "Platforma koja povezuje doktore, klinike, laboratorije, banje i domove za njegu. Online zakazivanje, stručni blog i anonimna pitanja.",
+      features: ["Pretraga doktora", "Online zakazivanje", "Stručni blog"],
+      link: "/wizmedik",
+      available: true
+    },
+    {
+      id: "frizerino",
+      name: "Frizerino",
+      icon: Scissors,
+      tagline: "Platforma za online zakazivanje salona",
+      description: "Pronađite i rezervišite frizerski ili kozmetički salon. Pretraga po gradu, usluzi i slobodnim terminima, bez poziva i čekanja.",
+      features: ["Pametna pretraga", "Online rezervacija", "Sistem za salone"],
+      link: "/frizerino",
+      available: true
+    },
+    {
+      id: "chatko",
+      name: "Chatko",
+      icon: MessageCircle,
+      tagline: t.products.items.chatko.tagline,
+      description: t.products.items.chatko.description,
+      features: t.products.items.chatko.features,
+      link: "/chatko",
+      available: true
+    },
+    {
+      id: "wizfin",
+      name: "WizFin",
+      icon: Wallet,
+      tagline: t.products.items.wizfin.tagline,
+      description: t.products.items.wizfin.description,
+      features: t.products.items.wizfin.features,
+      link: "/wizfin",
+      available: false
+    },
+    {
+      id: "wizbank",
+      name: "WizBank",
+      icon: Building2,
+      tagline: t.products.items.wizbank.tagline,
+      description: t.products.items.wizbank.description,
+      features: t.products.items.wizbank.features,
+      link: "/wizbank",
+      available: false
+    },
+    {
+      id: "wizvet",
+      name: "WizVet",
+      icon: Cat,
+      tagline: t.products.items.wizvet.tagline,
+      description: t.products.items.wizvet.description,
+      features: t.products.items.wizvet.features,
+      link: "/wizvet",
+      available: false
+    }
+  ];
+  return /* @__PURE__ */ jsxs("section", { id: "products", className: "relative overflow-hidden py-24 md:py-32", children: [
+    /* @__PURE__ */ jsx("div", { className: "v2-grid absolute inset-0 -z-10 opacity-40", "aria-hidden": "true" }),
+    /* @__PURE__ */ jsx(
+      "div",
+      {
+        className: "v2-orb absolute -right-32 top-10 -z-10 h-96 w-96 bg-[hsla(268,85%,60%,0.16)]",
+        "aria-hidden": "true"
+      }
+    ),
+    /* @__PURE__ */ jsxs("div", { className: "container mx-auto px-6", children: [
+      /* @__PURE__ */ jsxs(
+        motion.div,
+        {
+          initial: { opacity: 0, y: 24 },
+          whileInView: { opacity: 1, y: 0 },
+          viewport: { once: true, margin: "-100px" },
+          transition: { duration: 0.6 },
+          className: "mx-auto mb-16 max-w-3xl text-center",
+          children: [
+            /* @__PURE__ */ jsx("span", { className: "text-xs font-semibold uppercase tracking-[0.35em] text-primary", children: t.products.label }),
+            /* @__PURE__ */ jsx("h2", { className: "mt-5 text-[clamp(1.9rem,4.5vw,3.25rem)] font-bold leading-[1.1]", children: /* @__PURE__ */ jsx("span", { className: "v2-text-gradient", children: t.products.title }) }),
+            /* @__PURE__ */ jsx("p", { className: "mt-6 text-base leading-relaxed text-muted-foreground md:text-lg", children: t.products.subtitle })
+          ]
+        }
+      ),
+      /* @__PURE__ */ jsx("div", { className: "mx-auto grid max-w-7xl gap-4 md:grid-cols-2 lg:grid-cols-3", children: products.map((product, index) => /* @__PURE__ */ jsx(
+        motion.article,
+        {
+          initial: { opacity: 0, y: 28 },
+          whileInView: { opacity: 1, y: 0 },
+          viewport: { once: true, margin: "-60px" },
+          transition: { duration: 0.5, delay: index % 3 * 0.08 },
+          onMouseMove: onSpotlightMove,
+          className: "v2-frame v2-spotlight group relative flex flex-col overflow-hidden rounded-3xl border border-border/60 bg-background/45 p-6 transition-transform duration-300 hover:-translate-y-1.5",
+          children: /* @__PURE__ */ jsxs("div", { className: "relative z-10 flex h-full flex-col", children: [
+            /* @__PURE__ */ jsxs("div", { className: "mb-5 flex items-start justify-between gap-3", children: [
+              /* @__PURE__ */ jsxs("div", { className: "flex items-center gap-3", children: [
+                /* @__PURE__ */ jsx("div", { className: "flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl border border-primary/25 bg-primary/10 text-primary transition-all duration-300 group-hover:scale-105 group-hover:bg-primary/20", children: /* @__PURE__ */ jsx(product.icon, { className: "h-6 w-6" }) }),
+                /* @__PURE__ */ jsxs("div", { children: [
+                  /* @__PURE__ */ jsx("h3", { className: "text-lg font-bold leading-tight", children: product.name }),
+                  /* @__PURE__ */ jsx("p", { className: "text-xs font-medium text-primary", children: product.tagline })
+                ] })
+              ] }),
+              /* @__PURE__ */ jsx(
+                "span",
+                {
+                  className: "shrink-0 rounded-full border px-2.5 py-1 text-[0.6rem] font-semibold uppercase tracking-wider ".concat(product.available ? "border-emerald/40 bg-emerald/10 text-emerald" : "border-border/70 bg-secondary/60 text-muted-foreground"),
+                  children: product.available ? t.products.available : t.products.soon
+                }
+              )
+            ] }),
+            /* @__PURE__ */ jsx("p", { className: "mb-5 flex-grow text-sm leading-relaxed text-muted-foreground", children: product.description }),
+            /* @__PURE__ */ jsx("div", { className: "mb-6 flex flex-wrap gap-2", children: product.features.map((feature) => /* @__PURE__ */ jsx(
+              "span",
+              {
+                className: "rounded-full border border-border/60 bg-secondary/50 px-3 py-1 text-[0.7rem] font-medium text-muted-foreground",
+                children: feature
+              },
+              feature
+            )) }),
+            /* @__PURE__ */ jsxs("div", { className: "mt-auto flex items-center justify-between border-t border-border/50 pt-4", children: [
+              /* @__PURE__ */ jsx(
+                LocalizedLink,
+                {
+                  to: PROJECT_INQUIRY_PATH,
+                  className: "text-xs font-medium text-muted-foreground transition-colors hover:text-foreground",
+                  children: v2.products.inquiry
+                }
+              ),
+              product.available && /* @__PURE__ */ jsxs(
+                LocalizedLink,
+                {
+                  to: product.link,
+                  className: "group/link inline-flex items-center gap-1.5 text-sm font-semibold text-primary transition-colors hover:text-accent",
+                  children: [
+                    v2.products.explore,
+                    /* @__PURE__ */ jsx(ArrowUpRight, { className: "h-4 w-4 transition-transform group-hover/link:translate-x-0.5 group-hover/link:-translate-y-0.5" })
+                  ]
+                }
+              )
+            ] })
+          ] })
+        },
+        product.id
+      )) })
+    ] })
+  ] });
+};
+const V2Process = () => {
+  const { t, language } = useLanguage();
+  const v2 = getV2Translations(language);
+  const trackRef = useRef(null);
+  const { scrollYProgress } = useScroll({
+    target: trackRef,
+    offset: ["start 75%", "end 60%"]
+  });
+  const progress = useSpring(scrollYProgress, { stiffness: 120, damping: 30, mass: 0.4 });
+  const steps = [
+    { icon: Search, step: "01", ...t.process.steps.discovery },
+    { icon: Monitor, step: "02", ...t.process.steps.demo },
+    { icon: Settings, step: "03", ...t.process.steps.setup },
+    { icon: TestTube, step: "04", ...t.process.steps.testing },
+    { icon: Rocket, step: "05", ...t.process.steps.golive }
+  ];
+  return /* @__PURE__ */ jsxs("section", { id: "process", className: "relative overflow-hidden py-24 md:py-32", children: [
+    /* @__PURE__ */ jsx(
+      "div",
+      {
+        className: "v2-orb absolute left-1/2 top-0 -z-10 h-96 w-96 -translate-x-1/2 bg-primary/10",
+        "aria-hidden": "true"
+      }
+    ),
+    /* @__PURE__ */ jsxs("div", { className: "container mx-auto px-6", children: [
+      /* @__PURE__ */ jsxs(
+        motion.div,
+        {
+          initial: { opacity: 0, y: 24 },
+          whileInView: { opacity: 1, y: 0 },
+          viewport: { once: true, margin: "-100px" },
+          transition: { duration: 0.6 },
+          className: "mx-auto mb-16 max-w-3xl text-center",
+          children: [
+            /* @__PURE__ */ jsx("span", { className: "text-xs font-semibold uppercase tracking-[0.35em] text-primary", children: t.process.label }),
+            /* @__PURE__ */ jsx("h2", { className: "mt-5 text-[clamp(1.9rem,4.5vw,3.25rem)] font-bold leading-[1.1]", children: t.process.title }),
+            /* @__PURE__ */ jsx("p", { className: "mt-6 text-base leading-relaxed text-muted-foreground md:text-lg", children: t.process.subtitle })
+          ]
+        }
+      ),
+      /* @__PURE__ */ jsxs("div", { ref: trackRef, className: "relative mx-auto max-w-3xl", children: [
+        /* @__PURE__ */ jsx("div", { className: "absolute bottom-4 left-[1.4rem] top-4 w-px bg-border/70 md:left-1/2 md:-translate-x-1/2" }),
+        /* @__PURE__ */ jsx(
+          motion.div,
+          {
+            style: { scaleY: progress },
+            className: "absolute bottom-4 left-[1.4rem] top-4 w-px origin-top bg-gradient-to-b from-primary via-accent to-primary md:left-1/2 md:-translate-x-1/2"
+          }
+        ),
+        /* @__PURE__ */ jsx("ol", { className: "space-y-8 md:space-y-12", children: steps.map((item, index) => /* @__PURE__ */ jsxs(
+          motion.li,
+          {
+            initial: { opacity: 0, y: 24 },
+            whileInView: { opacity: 1, y: 0 },
+            viewport: { once: true, margin: "-80px" },
+            transition: { duration: 0.5 },
+            className: "relative flex items-start gap-5 pl-0 md:w-[calc(50%-2.5rem)] ".concat(index % 2 === 0 ? "md:mr-auto md:flex-row-reverse md:text-right" : "md:ml-auto"),
+            children: [
+              /* @__PURE__ */ jsx(
+                "span",
+                {
+                  className: "absolute left-0 top-1 flex h-11 w-11 items-center justify-center rounded-2xl border border-primary/30 bg-background text-primary shadow-[0_0_25px_hsla(20,95%,55%,0.25)] md:static md:shrink-0",
+                  children: /* @__PURE__ */ jsx(item.icon, { className: "h-5 w-5" })
+                }
+              ),
+              /* @__PURE__ */ jsxs("div", { className: "v2-frame v2-frame-static ml-16 flex-1 rounded-3xl border border-border/60 bg-background/45 p-5 md:ml-0 md:p-6", children: [
+                /* @__PURE__ */ jsx("div", { className: "mb-1.5 font-mono text-xs tracking-widest text-primary", children: item.step }),
+                /* @__PURE__ */ jsx("h3", { className: "mb-1.5 text-lg font-semibold", children: item.title }),
+                /* @__PURE__ */ jsx("p", { className: "text-sm leading-relaxed text-muted-foreground", children: item.description })
+              ] })
+            ]
+          },
+          item.step
+        )) })
+      ] }),
+      /* @__PURE__ */ jsx(
+        motion.p,
+        {
+          initial: { opacity: 0 },
+          whileInView: { opacity: 1 },
+          viewport: { once: true },
+          transition: { duration: 0.5 },
+          className: "mx-auto mt-14 max-w-xl text-center text-sm text-muted-foreground",
+          children: v2.process.note
+        }
+      )
+    ] })
+  ] });
+};
+const V2Security = () => {
+  const { t } = useLanguage();
+  const features = [
+    t.security.features.rbac,
+    t.security.features.audit,
+    t.security.features.protection,
+    t.security.features.backup,
+    t.security.features.gdpr,
+    t.security.features.encryption
+  ];
+  return /* @__PURE__ */ jsx("section", { id: "security", className: "relative overflow-hidden py-24 md:py-32", children: /* @__PURE__ */ jsx("div", { className: "container mx-auto px-6", children: /* @__PURE__ */ jsxs("div", { className: "mx-auto grid max-w-6xl items-center gap-12 lg:grid-cols-[0.9fr_1.1fr]", children: [
+    /* @__PURE__ */ jsxs(
+      motion.div,
+      {
+        initial: { opacity: 0, scale: 0.92 },
+        whileInView: { opacity: 1, scale: 1 },
+        viewport: { once: true, margin: "-80px" },
+        transition: { duration: 0.7 },
+        className: "relative mx-auto flex aspect-square w-full max-w-sm items-center justify-center",
+        children: [
+          /* @__PURE__ */ jsx("div", { className: "absolute inset-0 rounded-full bg-primary/10 blur-3xl", "aria-hidden": "true" }),
+          [0, 1, 2].map((ring) => /* @__PURE__ */ jsx(
+            "span",
+            {
+              className: "absolute rounded-full border border-primary/20",
+              style: {
+                inset: "".concat(ring * 14, "%"),
+                animation: "v2-orbit ".concat(28 + ring * 10, "s linear infinite ").concat(ring % 2 ? "reverse" : "normal")
+              },
+              "aria-hidden": "true",
+              children: /* @__PURE__ */ jsx("span", { className: "absolute left-1/2 top-0 h-2 w-2 -translate-x-1/2 -translate-y-1/2 rounded-full bg-primary/70" })
+            },
+            ring
+          )),
+          /* @__PURE__ */ jsx("div", { className: "v2-glass relative flex h-28 w-28 items-center justify-center rounded-3xl border border-primary/30 text-primary shadow-glow", children: /* @__PURE__ */ jsx(ShieldCheck, { className: "h-12 w-12" }) }),
+          /* @__PURE__ */ jsxs("span", { className: "absolute left-2 top-8 flex items-center gap-2 rounded-full border border-border/60 bg-background/70 px-3 py-1.5 text-[0.65rem] font-medium text-muted-foreground backdrop-blur-sm", children: [
+            /* @__PURE__ */ jsx(Lock, { className: "h-3 w-3 text-primary" }),
+            " TLS · encryption at rest"
+          ] }),
+          /* @__PURE__ */ jsxs("span", { className: "absolute bottom-10 right-0 flex items-center gap-2 rounded-full border border-border/60 bg-background/70 px-3 py-1.5 text-[0.65rem] font-medium text-muted-foreground backdrop-blur-sm", children: [
+            /* @__PURE__ */ jsx(Fingerprint, { className: "h-3 w-3 text-primary" }),
+            " RBAC · audit trail"
+          ] })
+        ]
+      }
+    ),
+    /* @__PURE__ */ jsxs("div", { children: [
+      /* @__PURE__ */ jsxs(
+        motion.div,
+        {
+          initial: { opacity: 0, y: 24 },
+          whileInView: { opacity: 1, y: 0 },
+          viewport: { once: true, margin: "-80px" },
+          transition: { duration: 0.6 },
+          children: [
+            /* @__PURE__ */ jsx("span", { className: "text-xs font-semibold uppercase tracking-[0.35em] text-primary", children: t.security.label }),
+            /* @__PURE__ */ jsx("h2", { className: "mt-5 text-[clamp(1.9rem,4.5vw,3rem)] font-bold leading-[1.1]", children: t.security.title }),
+            /* @__PURE__ */ jsx("p", { className: "mt-5 text-base leading-relaxed text-muted-foreground md:text-lg", children: t.security.subtitle })
+          ]
+        }
+      ),
+      /* @__PURE__ */ jsx("ul", { className: "mt-9 grid gap-3 sm:grid-cols-2", children: features.map((feature, index) => /* @__PURE__ */ jsxs(
+        motion.li,
+        {
+          initial: { opacity: 0, y: 16 },
+          whileInView: { opacity: 1, y: 0 },
+          viewport: { once: true, margin: "-40px" },
+          transition: { duration: 0.4, delay: index * 0.07 },
+          className: "v2-frame flex items-center gap-3 rounded-2xl border border-border/60 bg-background/45 px-4 py-3.5 transition-colors hover:border-primary/30",
+          children: [
+            /* @__PURE__ */ jsx("span", { className: "flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-primary/15 text-primary", children: /* @__PURE__ */ jsx(Check, { className: "h-3.5 w-3.5" }) }),
+            /* @__PURE__ */ jsx("span", { className: "text-sm font-medium text-foreground", children: feature })
+          ]
+        },
+        feature
+      )) })
+    ] })
+  ] }) }) });
+};
+const V2Audience = () => {
+  const { t } = useLanguage();
+  const onSpotlightMove = useSpotlight();
+  const audiences = [
+    { icon: Landmark, ...t.forWho.audiences.finance },
+    { icon: HeartPulse, ...t.forWho.audiences.health },
+    { icon: Sparkles, ...t.forWho.audiences.services },
+    { icon: Cat, ...t.forWho.audiences.vet },
+    { icon: Building, ...t.forWho.audiences.companies }
+  ];
+  return /* @__PURE__ */ jsxs("section", { id: "for-who", className: "relative overflow-hidden border-y border-border/60 py-24 md:py-32", children: [
+    /* @__PURE__ */ jsx("div", { className: "v2-grid absolute inset-0 -z-10 opacity-40", "aria-hidden": "true" }),
+    /* @__PURE__ */ jsxs("div", { className: "container mx-auto px-6", children: [
+      /* @__PURE__ */ jsxs(
+        motion.div,
+        {
+          initial: { opacity: 0, y: 24 },
+          whileInView: { opacity: 1, y: 0 },
+          viewport: { once: true, margin: "-100px" },
+          transition: { duration: 0.6 },
+          className: "mx-auto mb-14 max-w-3xl text-center",
+          children: [
+            /* @__PURE__ */ jsx("span", { className: "text-xs font-semibold uppercase tracking-[0.35em] text-primary", children: t.forWho.label }),
+            /* @__PURE__ */ jsx("h2", { className: "mt-5 text-[clamp(1.9rem,4.5vw,3rem)] font-bold leading-[1.1]", children: t.forWho.title }),
+            /* @__PURE__ */ jsx("p", { className: "mt-6 text-base leading-relaxed text-muted-foreground md:text-lg", children: t.forWho.subtitle })
+          ]
+        }
+      ),
+      /* @__PURE__ */ jsxs("div", { className: "mx-auto grid max-w-6xl gap-4 sm:grid-cols-2 lg:grid-cols-3", children: [
+        audiences.map((audience, index) => /* @__PURE__ */ jsx(
+          motion.div,
+          {
+            initial: { opacity: 0, y: 24 },
+            whileInView: { opacity: 1, y: 0 },
+            viewport: { once: true, margin: "-60px" },
+            transition: { duration: 0.5, delay: index % 3 * 0.08 },
+            onMouseMove: onSpotlightMove,
+            className: "v2-frame v2-spotlight group relative overflow-hidden rounded-3xl border border-border/60 bg-background/45 p-6 transition-transform duration-300 hover:-translate-y-1",
+            children: /* @__PURE__ */ jsxs("div", { className: "relative z-10 flex items-start gap-4", children: [
+              /* @__PURE__ */ jsx("div", { className: "flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl border border-primary/25 bg-primary/10 text-primary transition-colors group-hover:bg-primary/20", children: /* @__PURE__ */ jsx(audience.icon, { className: "h-5 w-5" }) }),
+              /* @__PURE__ */ jsxs("div", { children: [
+                /* @__PURE__ */ jsx("h3", { className: "text-base font-semibold leading-snug", children: audience.label }),
+                /* @__PURE__ */ jsx("p", { className: "mt-1 text-sm text-muted-foreground", children: audience.description })
+              ] })
+            ] })
+          },
+          audience.label
+        )),
+        /* @__PURE__ */ jsxs(
+          motion.div,
+          {
+            initial: { opacity: 0, y: 24 },
+            whileInView: { opacity: 1, y: 0 },
+            viewport: { once: true, margin: "-60px" },
+            transition: { duration: 0.5, delay: 0.24 },
+            className: "v2-frame v2-frame-static group relative flex flex-col justify-between overflow-hidden rounded-3xl border border-primary/30 bg-primary/[0.08] p-6",
+            children: [
+              /* @__PURE__ */ jsx("p", { className: "text-base font-semibold leading-snug", children: t.forWho.link }),
+              /* @__PURE__ */ jsxs(
+                LocalizedLink,
+                {
+                  to: PROJECT_INQUIRY_PATH,
+                  className: "mt-6 inline-flex items-center gap-2 text-sm font-semibold text-primary transition-colors hover:text-accent",
+                  children: [
+                    t.nav.requestDemo,
+                    /* @__PURE__ */ jsx(ArrowRight, { className: "h-4 w-4 transition-transform group-hover:translate-x-1" })
+                  ]
+                }
+              )
+            ]
+          }
+        )
+      ] })
+    ] })
+  ] });
+};
+const V2CTA = () => {
+  const { t, language } = useLanguage();
+  const v2 = getV2Translations(language);
+  return /* @__PURE__ */ jsxs("section", { id: "contact", className: "relative overflow-hidden py-24 md:py-32", children: [
+    /* @__PURE__ */ jsx("div", { className: "v2-aurora absolute inset-0 -z-10", "aria-hidden": "true" }),
+    /* @__PURE__ */ jsx(
+      "div",
+      {
+        className: "v2-orb absolute left-1/2 top-1/4 -z-10 h-[28rem] w-[28rem] -translate-x-1/2 bg-primary/20",
+        "aria-hidden": "true"
+      }
+    ),
+    /* @__PURE__ */ jsx("div", { className: "v2-noise pointer-events-none absolute inset-0 -z-10 opacity-[0.12]", "aria-hidden": "true" }),
+    /* @__PURE__ */ jsx("div", { className: "container mx-auto px-6", children: /* @__PURE__ */ jsxs(
+      motion.div,
+      {
+        initial: { opacity: 0, y: 30 },
+        whileInView: { opacity: 1, y: 0 },
+        viewport: { once: true, margin: "-100px" },
+        transition: { duration: 0.65 },
+        className: "v2-frame v2-frame-static v2-glass relative mx-auto max-w-5xl overflow-hidden rounded-[2rem] border border-border/60 p-8 text-center md:p-14",
+        children: [
+          /* @__PURE__ */ jsx("span", { className: "text-xs font-semibold uppercase tracking-[0.35em] text-primary", children: v2.cta.label }),
+          /* @__PURE__ */ jsx("h2", { className: "mx-auto mt-5 max-w-3xl text-[clamp(1.9rem,4.5vw,3.25rem)] font-bold leading-[1.1]", children: v2.cta.title }),
+          /* @__PURE__ */ jsx("p", { className: "mx-auto mt-6 max-w-2xl text-base leading-relaxed text-muted-foreground md:text-lg", children: v2.cta.subtitle }),
+          /* @__PURE__ */ jsxs("div", { className: "mt-9 flex flex-col items-stretch justify-center gap-3 sm:flex-row sm:items-center", children: [
+            /* @__PURE__ */ jsx(
+              Button,
+              {
+                size: "xl",
+                className: "group rounded-full shadow-orange transition-transform duration-300 hover:-translate-y-0.5 hover:shadow-glow",
+                asChild: true,
+                children: /* @__PURE__ */ jsxs(LocalizedLink, { to: PROJECT_INQUIRY_PATH, children: [
+                  v2.cta.primary,
+                  /* @__PURE__ */ jsx(ArrowRight, { className: "h-5 w-5 transition-transform group-hover:translate-x-1" })
+                ] })
+              }
+            ),
+            /* @__PURE__ */ jsx(
+              Button,
+              {
+                variant: "outline",
+                size: "xl",
+                className: "v2-glass rounded-full border-border/70 transition-transform duration-300 hover:-translate-y-0.5",
+                asChild: true,
+                children: /* @__PURE__ */ jsxs("a", { href: "https://wa.me/38766882702", target: "_blank", rel: "noopener noreferrer", children: [
+                  /* @__PURE__ */ jsx(MessageSquare, { className: "h-4 w-4 text-primary" }),
+                  v2.cta.secondary
+                ] })
+              }
+            )
+          ] }),
+          /* @__PURE__ */ jsx("ul", { className: "mt-8 flex flex-wrap items-center justify-center gap-x-6 gap-y-2", children: v2.cta.guarantees.map((guarantee) => /* @__PURE__ */ jsxs("li", { className: "flex items-center gap-2 text-xs text-muted-foreground sm:text-sm", children: [
+            /* @__PURE__ */ jsx(Check, { className: "h-3.5 w-3.5 text-primary" }),
+            guarantee
+          ] }, guarantee)) }),
+          /* @__PURE__ */ jsxs("div", { className: "mt-12 grid gap-4 sm:grid-cols-2", children: [
+            /* @__PURE__ */ jsxs(
+              "a",
+              {
+                href: "mailto:info@wizionar.com",
+                className: "v2-frame group rounded-2xl border border-border/60 bg-background/40 p-5 text-left transition-transform duration-300 hover:-translate-y-1",
+                children: [
+                  /* @__PURE__ */ jsx("div", { className: "mb-3 flex h-10 w-10 items-center justify-center rounded-xl border border-primary/25 bg-primary/10 text-primary", children: /* @__PURE__ */ jsx(Mail, { className: "h-5 w-5" }) }),
+                  /* @__PURE__ */ jsx("p", { className: "text-xs text-muted-foreground", children: t.contact.emailLabel }),
+                  /* @__PURE__ */ jsx("p", { className: "mt-1 text-base font-semibold text-foreground transition-colors group-hover:text-primary", children: t.contact.email })
+                ]
+              }
+            ),
+            /* @__PURE__ */ jsxs(
+              "a",
+              {
+                href: "https://wa.me/38766882702",
+                target: "_blank",
+                rel: "noopener noreferrer",
+                className: "v2-frame group rounded-2xl border border-border/60 bg-background/40 p-5 text-left transition-transform duration-300 hover:-translate-y-1",
+                children: [
+                  /* @__PURE__ */ jsx("div", { className: "mb-3 flex h-10 w-10 items-center justify-center rounded-xl border border-accent/25 bg-accent/10 text-accent", children: /* @__PURE__ */ jsx(Phone, { className: "h-5 w-5" }) }),
+                  /* @__PURE__ */ jsx("p", { className: "text-xs text-muted-foreground", children: t.contact.phoneLabel }),
+                  /* @__PURE__ */ jsx("p", { className: "mt-1 text-base font-semibold text-foreground transition-colors group-hover:text-accent", children: t.contact.phone })
+                ]
+              }
+            )
+          ] })
+        ]
+      }
+    ) })
+  ] });
+};
+const IndexV2 = () => {
+  const { language } = useLanguage();
+  const seo = getPageSeo("home", language);
+  useEffect(() => {
+    const root = document.documentElement;
+    const previousBackground = root.style.backgroundColor;
+    const previousColorScheme = root.style.colorScheme;
+    root.style.backgroundColor = "hsl(240, 16%, 4%)";
+    root.style.colorScheme = "dark";
+    return () => {
+      root.style.backgroundColor = previousBackground;
+      root.style.colorScheme = previousColorScheme;
+    };
+  }, []);
+  return /* @__PURE__ */ jsxs(Fragment, { children: [
+    /* @__PURE__ */ jsx(SEOHead, { title: "".concat(seo.title, " · v2"), description: seo.description, keywords: seo.keywords, noIndex: true }),
+    /* @__PURE__ */ jsxs("div", { className: "wizionar-v2-theme min-h-screen bg-background text-foreground", children: [
+      /* @__PURE__ */ jsx(WizionarHeader, { logo: "light" }),
+      /* @__PURE__ */ jsxs("main", { children: [
+        /* @__PURE__ */ jsx(V2Hero, {}),
+        /* @__PURE__ */ jsx(V2Marquee, {}),
+        /* @__PURE__ */ jsx(V2Value, {}),
+        /* @__PURE__ */ jsx(V2Impact, {}),
+        /* @__PURE__ */ jsx(V2Products, {}),
+        /* @__PURE__ */ jsx(V2Process, {}),
+        /* @__PURE__ */ jsx(V2Security, {}),
+        /* @__PURE__ */ jsx(V2Audience, {}),
+        /* @__PURE__ */ jsx(V2CTA, {})
+      ] }),
+      /* @__PURE__ */ jsx(WizionarFooter, { logo: "light" })
+    ] })
+  ] });
+};
+const IndexV2$1 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
+  __proto__: null,
+  default: IndexV2
 }, Symbol.toStringTag, { value: "Module" }));
 const wizflussiTranslations = {
   sr: {
@@ -13875,6 +15269,7 @@ const prerenderRoutes = prerenderBasePaths.flatMap(
 );
 const pages = {
   Index,
+  IndexV2,
   WizFlussi,
   WizMedikReports,
   WizMedik,

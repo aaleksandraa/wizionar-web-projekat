@@ -5,12 +5,15 @@ import LocalizedLink from "@/components/LocalizedLink";
 import { Menu, X, ChevronRight, ArrowUpRight, Mail, Facebook, Instagram, Phone } from "lucide-react";
 import { useEffect, useState } from "react";
 import wizionarLogo from "@/assets/wizionar-logo.png";
+import wizionarLogoLight from "@/assets/wizionar-logo-light.png";
 import LanguageSwitcher from "./LanguageSwitcher";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { useLocalizedPath } from "@/hooks/useLocalizedPath";
 import { PROJECT_INQUIRY_PATH } from "@/lib/project-inquiry-schema";
 
-const WizionarHeader = () => {
+/** `logo="light"` swaps in the light-ink wordmark for dark backgrounds (homepage v2). */
+const WizionarHeader = ({ logo = "dark" }: { logo?: "dark" | "light" }) => {
+  const logoSrc = logo === "light" ? wizionarLogoLight : wizionarLogo;
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const { t, language } = useLanguage();
@@ -96,7 +99,7 @@ const WizionarHeader = () => {
         <div className="container mx-auto flex items-center justify-between px-6 py-3">
           <LocalizedLink to="/" className="flex items-center gap-3">
             <img
-              src={wizionarLogo}
+              src={logoSrc}
               alt="Wizionar"
               decoding="async"
               fetchpriority="high"
@@ -176,7 +179,7 @@ const WizionarHeader = () => {
             >
               <div className="flex items-center justify-between border-b border-border/60 bg-background px-5 py-4">
                 <LocalizedLink to="/" className="flex items-center" onClick={closeMobileMenu}>
-                  <img src={wizionarLogo} alt="Wizionar" decoding="async" className="h-10 w-auto" />
+                  <img src={logoSrc} alt="Wizionar" decoding="async" className="h-10 w-auto" />
                 </LocalizedLink>
 
                 <button

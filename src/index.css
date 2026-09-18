@@ -447,3 +447,243 @@
 }
 
 
+
+/* ==========================================================================
+   Homepage v2 – futuristic dark theme, scoped to .wizionar-v2-theme
+   ========================================================================== */
+
+@layer utilities {
+  .wizionar-v2-theme {
+    --background: 240, 16%, 4%;
+    --foreground: 240, 20%, 98%;
+    --card: 240, 14%, 7%;
+    --card-foreground: 240, 20%, 98%;
+    --popover: 240, 14%, 8%;
+    --popover-foreground: 240, 20%, 98%;
+    --secondary: 240, 12%, 11%;
+    --secondary-foreground: 240, 20%, 98%;
+    --muted: 240, 12%, 11%;
+    --muted-foreground: 240, 10%, 66%;
+    --border: 240, 12%, 17%;
+    --input: 240, 12%, 17%;
+    --primary: 20, 95%, 58%;
+    --primary-foreground: 240, 16%, 5%;
+    --accent: 36, 96%, 60%;
+    --accent-foreground: 240, 16%, 5%;
+    --ring: 20, 95%, 58%;
+
+    --gradient-accent: linear-gradient(115deg, hsl(14, 89%, 56%) 0%, hsl(28, 96%, 60%) 45%, hsl(42, 96%, 64%) 100%);
+    --shadow-orange: 0 10px 40px hsla(20, 95%, 55%, 0.35);
+    --shadow-glow: 0 0 80px hsla(20, 95%, 55%, 0.28);
+
+    color-scheme: dark;
+  }
+
+  /* Layered space background: aurora + deep radial vignette */
+  .v2-aurora {
+    background:
+      radial-gradient(60rem 40rem at 12% -10%, hsla(20, 95%, 55%, 0.18), transparent 62%),
+      radial-gradient(48rem 34rem at 88% 4%, hsla(268, 85%, 60%, 0.16), transparent 60%),
+      radial-gradient(52rem 40rem at 50% 108%, hsla(36, 96%, 58%, 0.12), transparent 62%);
+  }
+
+  .v2-orb {
+    border-radius: 9999px;
+    filter: blur(90px);
+    will-change: transform;
+    animation: v2-drift 22s ease-in-out infinite;
+  }
+
+  /* Fine engineering grid that fades toward the horizon */
+  .v2-grid {
+    background-image:
+      linear-gradient(to right, hsla(0, 0%, 100%, 0.055) 1px, transparent 1px),
+      linear-gradient(to bottom, hsla(0, 0%, 100%, 0.055) 1px, transparent 1px);
+    background-size: 3.5rem 3.5rem;
+    -webkit-mask-image: radial-gradient(ellipse 90% 70% at 50% 30%, #000 25%, transparent 75%);
+    mask-image: radial-gradient(ellipse 90% 70% at 50% 30%, #000 25%, transparent 75%);
+  }
+
+  .v2-grid-floor {
+    background-image:
+      linear-gradient(to right, hsla(20, 95%, 62%, 0.18) 1px, transparent 1px),
+      linear-gradient(to bottom, hsla(20, 95%, 62%, 0.18) 1px, transparent 1px);
+    background-size: 3rem 3rem;
+    transform: perspective(28rem) rotateX(68deg);
+    transform-origin: bottom center;
+    -webkit-mask-image: linear-gradient(to top, #000 0%, transparent 78%);
+    mask-image: linear-gradient(to top, #000 0%, transparent 78%);
+  }
+
+  .v2-noise {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23n)' opacity='0.35'/%3E%3C/svg%3E");
+    mix-blend-mode: overlay;
+  }
+
+  /* Pointer-tracked spotlight (set --mx / --my on the element) */
+  .v2-spotlight::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    opacity: 0;
+    transition: opacity 0.35s ease;
+    background: radial-gradient(22rem circle at var(--mx, 50%) var(--my, 50%), hsla(20, 95%, 60%, 0.16), transparent 70%);
+    pointer-events: none;
+  }
+
+  .v2-spotlight:hover::before,
+  .v2-spotlight:focus-within::before {
+    opacity: 1;
+  }
+
+  /* Gradient hairline border that lights up on hover */
+  .v2-frame {
+    position: relative;
+  }
+
+  .v2-frame::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    padding: 1px;
+    background: linear-gradient(140deg, hsla(20, 95%, 60%, 0.75), hsla(268, 85%, 65%, 0.35) 45%, transparent 72%);
+    -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+    -webkit-mask-composite: xor;
+    mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+    mask-composite: exclude;
+    opacity: 0;
+    transition: opacity 0.35s ease;
+    pointer-events: none;
+  }
+
+  .v2-frame:hover::after,
+  .v2-frame:focus-within::after {
+    opacity: 1;
+  }
+
+  .v2-frame-static::after {
+    opacity: 0.55;
+  }
+
+  /* Glass surface */
+  .v2-glass {
+    background: linear-gradient(165deg, hsla(0, 0%, 100%, 0.055), hsla(0, 0%, 100%, 0.015));
+    -webkit-backdrop-filter: blur(14px);
+    backdrop-filter: blur(14px);
+  }
+
+  /* Light sweep across a surface */
+  .v2-shine {
+    position: relative;
+    overflow: hidden;
+  }
+
+  .v2-shine::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 45%;
+    left: -60%;
+    background: linear-gradient(100deg, transparent, hsla(0, 0%, 100%, 0.14), transparent);
+    transform: skewX(-18deg);
+    pointer-events: none;
+  }
+
+  .v2-shine:hover::before {
+    animation: v2-sweep 0.9s ease-out;
+  }
+
+  .v2-marquee-track {
+    animation: v2-marquee 42s linear infinite;
+  }
+
+  .v2-marquee:hover .v2-marquee-track {
+    animation-play-state: paused;
+  }
+
+  .v2-mask-x {
+    -webkit-mask-image: linear-gradient(to right, transparent, #000 12%, #000 88%, transparent);
+    mask-image: linear-gradient(to right, transparent, #000 12%, #000 88%, transparent);
+  }
+
+  .v2-text-gradient {
+    background-image: var(--gradient-accent);
+    background-size: 220% 100%;
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    animation: v2-pan 9s ease-in-out infinite;
+  }
+
+  .v2-scanline {
+    background: linear-gradient(to bottom, transparent, hsla(20, 95%, 62%, 0.55), transparent);
+    animation: v2-scan 6s ease-in-out infinite;
+  }
+
+  .v2-orbit {
+    animation: v2-orbit 26s linear infinite;
+  }
+
+  .v2-orbit-counter {
+    animation: v2-orbit-counter 26s linear infinite;
+  }
+
+  .v2-pulse-ring {
+    animation: v2-pulse-ring 2.8s ease-out infinite;
+  }
+
+  .v2-bar {
+    animation: v2-bar 3.2s ease-in-out infinite;
+    transform-origin: bottom;
+  }
+}
+
+@keyframes v2-drift {
+  0%, 100% { transform: translate3d(0, 0, 0) scale(1); }
+  33% { transform: translate3d(4%, -6%, 0) scale(1.08); }
+  66% { transform: translate3d(-5%, 4%, 0) scale(0.95); }
+}
+
+@keyframes v2-marquee {
+  from { transform: translate3d(0, 0, 0); }
+  to { transform: translate3d(-50%, 0, 0); }
+}
+
+@keyframes v2-sweep {
+  from { left: -60%; }
+  to { left: 130%; }
+}
+
+@keyframes v2-pan {
+  0%, 100% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+}
+
+@keyframes v2-scan {
+  0%, 100% { transform: translateY(-100%); opacity: 0; }
+  40% { opacity: 1; }
+  100% { transform: translateY(1200%); }
+}
+
+@keyframes v2-orbit {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+@keyframes v2-orbit-counter {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(-360deg); }
+}
+
+@keyframes v2-pulse-ring {
+  0% { transform: scale(0.85); opacity: 0.7; }
+  100% { transform: scale(1.7); opacity: 0; }
+}
+
+@keyframes v2-bar {
+  0%, 100% { transform: scaleY(0.55); }
+  50% { transform: scaleY(1); }
+}

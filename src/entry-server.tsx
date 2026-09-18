@@ -32,6 +32,7 @@ import { seoTranslations } from "@/lib/seo-translations";
 import { grafickiDizajnTranslations } from "@/lib/graficki-dizajn-translations";
 import { webdevTranslations } from "@/lib/webdev-translations";
 import Index from "@/pages/Index";
+import IndexV2 from "@/pages/IndexV2";
 import WizFlussi from "@/pages/WizFlussi";
 import WizMedikReports from "@/pages/WizMedikReports";
 import WizMedik from "@/pages/WizMedik";
@@ -66,6 +67,7 @@ export const prerenderRoutes = prerenderBasePaths.flatMap((path) =>
 
 const pages = {
   Index,
+  IndexV2,
   WizFlussi,
   WizMedikReports,
   WizMedik,

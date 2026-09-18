@@ -12,6 +12,7 @@ const createLazyPage = (importer: PageImporter) => ({
 });
 
 const indexPage = createLazyPage(() => import("@/pages/Index"));
+const indexV2Page = createLazyPage(() => import("@/pages/IndexV2"));
 const wizFlussiPage = createLazyPage(() => import("@/pages/WizFlussi"));
 const wizMedikReportsPage = createLazyPage(() => import("@/pages/WizMedikReports"));
 const wizMedikPage = createLazyPage(() => import("@/pages/WizMedik"));
@@ -27,6 +28,7 @@ const notFoundPage = createLazyPage(() => import("@/pages/NotFound"));
 
 export const lazyPages = {
   Index: indexPage.Component,
+  IndexV2: indexV2Page.Component,
   WizFlussi: wizFlussiPage.Component,
   WizMedikReports: wizMedikReportsPage.Component,
   WizMedik: wizMedikPage.Component,
@@ -64,6 +66,7 @@ const normalizeRoutePath = (path: string) => {
 
 const routePrefetchers: Array<{ matches: (path: string) => boolean; importer: PageImporter }> = [
   { matches: (path) => path === "/", importer: indexPage.preload },
+  { matches: (path) => path === "/v2", importer: indexV2Page.preload },
   { matches: (path) => path === "/wizflussi", importer: wizFlussiPage.preload },
   { matches: (path) => path === "/wizmedik-reports", importer: wizMedikReportsPage.preload },
   { matches: (path) => path === "/wizmedik", importer: wizMedikPage.preload },

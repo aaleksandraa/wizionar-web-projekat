@@ -1,10 +1,13 @@
 import LocalizedLink from "@/components/LocalizedLink";
 import wizionarLogo from "@/assets/wizionar-logo.png";
+import wizionarLogoLight from "@/assets/wizionar-logo-light.png";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { Mail, Facebook, Instagram, Phone } from "lucide-react";
 
-const WizionarFooter = () => {
+/** `logo="light"` swaps in the light-ink wordmark for dark backgrounds (homepage v2). */
+const WizionarFooter = ({ logo = "dark" }: { logo?: "dark" | "light" }) => {
   const { t } = useLanguage();
+  const logoSrc = logo === "light" ? wizionarLogoLight : wizionarLogo;
 
   return (
     <footer className="border-t border-border bg-background">
@@ -50,7 +53,7 @@ const WizionarFooter = () => {
 
         {/* Logo */}
         <LocalizedLink to="/" className="inline-block">
-          <img src={wizionarLogo} alt="Wizionar" loading="lazy" decoding="async" className="h-16 w-auto" />
+          <img src={logoSrc} alt="Wizionar" loading="lazy" decoding="async" className="h-16 w-auto" />
         </LocalizedLink>
 
         {/* Copyright */}

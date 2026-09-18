@@ -3,6 +3,7 @@ import { Route, Routes } from "react-router-dom";
 
 export type AppPages = {
   Index: ComponentType;
+  IndexV2: ComponentType;
   WizFlussi: ComponentType;
   WizMedikReports: ComponentType;
   WizMedik: ComponentType;
@@ -29,6 +30,7 @@ export const AppRoutes = ({
   const routeElements = (
     <>
       <Route index element={wrapPage(<pages.Index />)} />
+      <Route path="v2" element={wrapPage(<pages.IndexV2 />)} />
       <Route path="wizflussi" element={wrapPage(<pages.WizFlussi />)} />
       <Route path="wizmedik-reports" element={wrapPage(<pages.WizMedikReports />)} />
       <Route path="wizmedik" element={wrapPage(<pages.WizMedik />)} />
